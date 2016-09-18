@@ -9,7 +9,8 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: './views/about_us.html'
 	})
 	.when('/about_members', {
-		templateUrl: './views/about_members.html'
+		templateUrl: './views/about_members.html',
+		controller: 'aboutMembersCtrl'
 	})
 	.otherwise({ 
 		redirectTo: '/' 
