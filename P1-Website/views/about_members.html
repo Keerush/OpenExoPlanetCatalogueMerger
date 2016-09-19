@@ -2,6 +2,7 @@
 	<div>Here are our members: </div>
 	<ul>
 		<li ng-repeat="bios in groupBios">
+			<img ng-src="bios.imgLoc" class="bioPic">
 			Name: {{ bios.name }} : {{ bios.bio }}
 		</li>
 	</ul>
