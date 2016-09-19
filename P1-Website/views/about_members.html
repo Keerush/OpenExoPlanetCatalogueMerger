@@ -1,9 +1,15 @@
 <div class="container">
-	<div>Here are our members: </div>
-	<ul>
-		<li ng-repeat="bios in groupBios">
-			<img ng-src="bios.imgLoc" class="bioPic">
-			Name: {{ bios.name }} : {{ bios.bio }}
-		</li>
-	</ul>
+	<h3>Here are our members: </h3>
+		<div ng-repeat="bios in groupBios" class="row">
+			<div class="row col-sm-4">
+				<img ng-src={{bios.imageLoc}} class="bioPic">
+			</div>
+			<h4>
+				<b>{{bios.name}}</b>
+			</h4>
+			<span>
+				<p>{{ bios.bio }}</p>
+			</span>
+		</div>
+		<hr>
 </div>
