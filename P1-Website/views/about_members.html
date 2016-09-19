@@ -1,15 +1,17 @@
 <div class="container">
 	<h3>Here are our members: </h3>
 		<div ng-repeat="bios in groupBios" class="row">
-			<div class="row col-sm-4">
+			<div class="col-sm-4">
 				<img ng-src={{bios.imageLoc}} class="bioPic" width="350px">
 			</div>
-			<h4>
-				<b>{{bios.name}}</b>
-			</h4>
-			<span>
-				<p>{{ bios.bio }}</p>
-			</span>
+			<div class="col-sm-8">
+				<h4>
+					<b>{{bios.name}}</b>
+				</h4>
+				<span>
+					<p>{{ bios.bio }}</p>
+				</span>
+			</div>
 			<br>
 		</div>
 		<hr>

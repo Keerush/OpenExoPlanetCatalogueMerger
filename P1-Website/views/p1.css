@@ -1,4 +1,8 @@
-
+.bioPic {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+}
 
 .group {
 	max-width: 75%;
