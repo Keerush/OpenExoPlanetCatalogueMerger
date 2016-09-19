@@ -15,7 +15,7 @@ app.controller('aboutMembersCtrl', function($scope) {
 	}, {
 		name: "Brandon Ramoudith",
 		bio: "Brandon is a ",
-		imageLoc: ""
+		imageLoc: "images/brandon.jpg"
 	}, {
 		name: "Chelina Sharma",
 		bio: "Chelina Sharma is a third year computer science student at the University of Toronto, Scarborough Campus. Through various course projects at the University, she has gained extensive experience in object-oriented programming languages, including Java, C, and Python, database management language SQL, scripting language Bash, and mark-up languages HTML/XML. She has worked on both Windows and Linux platforms. In 2014, she worked as a software developer for Champions Capital Inc. where she was involved in automating data extraction of websites using the company's software extraction program. This had her involved in activities such as processing data inside XML documents using Xpath/RegEx expressions, and writing user-defined function and stored procedures to insert and update data in MySQL. Chelina continued onto D+H as a BuildMaster where, for 8 months, she was involved in automating the deployment of software applications for the company. She developed her communication and team-work skills extensively learning to worked under the agile software development cycle.",
