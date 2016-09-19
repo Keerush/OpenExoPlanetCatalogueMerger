@@ -3,3 +3,9 @@
 	width: 200px;
 	height: auto;
 }
+
+.group {
+	max-width: 75%;
+	width: auto;
+	height: auto;
+}
