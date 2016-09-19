@@ -12,6 +12,9 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'views/about_members.html',
 		controller: 'aboutMembersCtrl'
 	})
+	.when('/team_agreement', {
+		templateUrl: 'views/team_agreement.html'
+	})
 	.otherwise({ 
 		redirectTo: '/' 
 	});
