@@ -1,0 +1,20 @@
+<div class="container">
+	<h3>Personas:</h3>
+	<div ng-repeat="persona in personas">
+		<div class="row well">
+			<b> {{persona.name}}: </b>
+			<ul ng-repeat="info in persona.bio">
+				<li> {{info}} </li>
+			</ul>	
+		</div>
+	</div>
+	<hr>
+	<h3>User Stories:</h3>
+	<div class="well">
+		<ol>
+			<li ng-repeat="story in userStories"> 
+				{{story}} 
+			</li>
+		</ol>
+	</div>
+</div>
