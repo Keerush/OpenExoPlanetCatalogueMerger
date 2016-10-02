@@ -15,6 +15,10 @@ app.config(function($routeProvider, $locationProvider) {
 	.when('/team_agreement', {
 		templateUrl: 'views/team_agreement.html'
 	})
+	.when('/personas_user-stories', {
+		templateUrl: 'views/personas_user-stories.html',
+		controller: 'personasUserStoriesCtrl'
+	})
 	.otherwise({ 
 		redirectTo: '/' 
 	});
