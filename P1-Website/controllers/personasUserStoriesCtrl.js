@@ -2,27 +2,25 @@ app.controller('personasUserStoriesCtrl', function($scope) {
 	$scope.personas = [{
 		name: "Professor X",
 		bio: [
-				"35 year old Male, Astronomy Professor",
-				"Fluent in English, German",
-				"Works at the University of Toronto St. George, researching and teaching",
-				"Excellent Computer Skills: Has written many high level computer programs, is knowledgeable with the Linux operating system (To be confirmed)",
-				"Carries an Iphone and constantly checks his emails when on the go (To be confirmed)",
-				"Is constantly busy with teaching, research, and projects",
-				"Constantly has to travel between his offices: one at UTSC, one at UTSG so time is constrained",
-				"Created the Open Exo-Planet Catalogue and has a perfect understanding of how the software should work",
-				"Friendly, approachable and loves to stop and chat with people"
+                "35 year old Male, Astronomy Professor",
+                "Fluent in English, German",
+                "Works at the University of Toronto as an assistant professor and researcher",
+                "Excellent computer skills: has written many high level computer programs, comfortable with command line interfaces",
+                "Frequently checks emails",
+                "Is constantly busy with teaching, research, and projects",
+                "Travels between his offices: one at UTSC, one at UTSG",
+                "Created the Open Exo-Planet Catalogue and has perfect understanding of how the site and backend should work"
 			]
 	}, {
 		name: "Student Y",
 		bio: [
-				"6 year old Male, Middle School Teacher",
-				"Fluent in Polish, knows basic English",
-				"Completed Bachelor’s degree in Astronomy at UofT",
-				"Lifelong passion for Astronomy and Outer Space",
-				"Spends his spare time looking up new Astronomy news & following current space missions",
-				"Basic Computer Skills: Knows how to surf the internet, check email, use Microsoft Office",
-				"Finds it difficult to learn new software/technology",
-				"Joe is keen on helping out the space community, but does not know how and is concerned that his limited knowledge on technology will only hinder progress"
+                "25 year old Female, Astronomy graduate student",
+                "Fluent in English",
+                "Completed Bachelor’s degree in Astronomy",
+                "Good computer skills: can check emails, understands what GitHub is used for, used command line interfaces before, has very little programming experience",
+                "Recently introduced to the Open Exo-Planet Catalogue. Understands basic structure of system database, but needs guidance when entering new data",
+                "Generally meticulous with work but sometimes forget to double-check things when busy"
+
 		]
 	}];
 
