@@ -5,3 +5,13 @@ You can view our website by hosting it on your own computer! One way is to set u
 3. Change current directory to our website directory  
 4. Start up the http server by running: **http-server**  
 5. View your [localhost](http://localhost:8080/) in a browser
+
+
+### Contents of Website inculde:
+Deliverable 1:
+- About team Loopy Loop
+- About the members of the team
+- Our team agreement
+
+Deliverable 2:
+- Personas and User stories
