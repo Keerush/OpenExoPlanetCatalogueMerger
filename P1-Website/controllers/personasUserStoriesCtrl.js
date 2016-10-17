@@ -25,18 +25,28 @@ app.controller('personasUserStoriesCtrl', function($scope) {
 	}];
 
 	$scope.userStories = [
+       "As Professor X, I want to view all differences in the Open Exo-Planet Catalogue database to exoplanet.eu and NASA Exoplanet Archive at any time, even if I had rejected previous updates.",
        "As Professor X, I want to choose which data gets updated and have them automatically be added into the Open Exo-Planet Catalogue database after I have confirmed them.",
-       "As Professor X, I want to be able to run this software on an Unix environment.",
-       "As Professor X, I want to view all differences in the Open Exo-Planet Catalogue database to other catalogues such as exoplanet.eu and NASA Exoplanet Archieve at any time, even if I had rejected previous updates.",
-       "As Professor X, I want to be notified daily by email of any new changes in the Open Exo-Planet Catalogue compared to other catalogues.",
-       "As Professor X, I want the application to be able to accurately compare databases even if there are human typos in other catalogues.",
        "As Professor X or Student Y I want to be able to login using my Github.",
-       "As Student Y, I want the system to guide me when editing new information, and updating the Open Exo-Planet Catalogue.",
-       "As Professor X, I want to give this application to other people who have write permissions on the Open Exo-Planet Catalogue database, such as Student Y.",
+       "As Professor X, I want the application to be able to omit differences caused by human typos, such as missing capitalizations in system names, misspelled system names, and any data that is determined to be an outlier.",
+       "As Professor X, I want references, such as scientific publications, to be automatically added onto the generated git messages before I confirm changes to the Open Exo-Planet Catalogue database.",
+       "As Professor X, I want to be able to view all differences between our database and other databases, grouped by a given planet, star, or star system in ascending or descending order, along with which catalogue the changes are coming from.",
+       "As Professor X or Student Y, I want the data that the application adds to the the Open Exo-Planet Catalogue database to use the same units as the units used for pre-existing data in our database.",
+       "As Professor X, I want to be able to run this webserver on an Unix environment.",
+       "As Professor X, I want to be notified daily by email a summary of all the differences between the Open Exo-Planet Catalogue and both exoplanet.eu and NASA Exoplanet Archive, excluding differences that I disapproved in the past.",
        "As Professor X, I want to be able to configure automatic update checks, by frequency and time of checks.",
-       "As Professor X, I want to be able to view catalogue differences sorted alphabetically by planet, star, or star system names in either ascending or descending order.",
-       "As Professor X, I want to be able to view catalogue differences in a given planet, star, or star system, along with which catalogue the changes are coming from.",
-       "As Professor X, I want references to be automatically added onto the generated git messages before I confirm changes to the Open Exo-Planet Catalogue database.",
-       "As Professor X or Student Y, I want to be able to set standard units for the data being added or updated into the the Open Exo-Planet Catalogue database from other catalogues."
+       "As Professor X, I want to allow other people, such as Student Y, who I have given write permissions on the Open Exo-Planet Catalogue database, to use the application to update the database.",
+       "As Student Y, I want the application to provide a software wizard that guides me step-by-step on how to edit information and update the Open Exo-Planet Catalogue."
 	];
 });
+
+
+
+
+
+
+
+
+
+
+
