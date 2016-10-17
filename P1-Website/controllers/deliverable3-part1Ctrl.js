@@ -1,4 +1,4 @@
-app.controller('deliveriable3-part1Ctrl', function($scope) {
+app.controller('deliverable3-part1Ctrl', function($scope) {
 	$scope.questions = [{
 		question: "What tools, if any, will you use for your task board?",
 		answer: ["Zenhub, b/c it's da bes"]

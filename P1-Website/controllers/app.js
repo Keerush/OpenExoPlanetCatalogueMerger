@@ -19,9 +19,9 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'views/personas_user-stories.html',
 		controller: 'personasUserStoriesCtrl'
 	})
-	.when('/deliveriable3-part1', {
-		templateUrl: 'views/deliveriable3-part1.html',
-		controller: 'deliveriable3-part1Ctrl'
+	.when('/deliverable3', {
+		templateUrl: 'views/deliverable3.html',
+		controller: 'deliverable3-part1Ctrl'
 	})
 	.otherwise({ 
 		redirectTo: '/' 
