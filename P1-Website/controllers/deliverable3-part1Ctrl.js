@@ -1,10 +1,10 @@
 app.controller('deliverable3-part1Ctrl', function($scope) {
 	$scope.questions = [{
 		question: "What tools, if any, will you use for your task board?",
-		answer: ["Zenhub, b/c it's da bes"]
+		answer: ["Zenhub"]
 	},{
 		question: "What tools, if any, will you use for your burn-down chart?",
-		answer: ["Zenhub b/c it's da bes"]
+		answer: ["Zenhub"]
 	},{
 		question: "Who will maintain the burn-down chart? How?",
 		answer: ["Chelina will maintain the burn-down chart by organizing daily scrum meetings. During such meetings, she will log the hours we have completed or any tasks we have began/finished. Afterwards she will input the logs into the burn-down chart, in which Zenhub will automatically update the burn-down chart for us."]
