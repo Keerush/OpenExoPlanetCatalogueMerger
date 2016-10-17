@@ -1,19 +1,32 @@
 <div class="container">
-	<h3>Part 1 Questions:</h3>
-	<div class="well">
-		<ol>
-			<div ng-repeat="part1Question in questions">
-				<h4>
-					<li>
-						{{part1Question.question}}
-						<ul>
-							<div ng-repeat="part1Answer in part1Question.answer">
-								<li>{{part1Answer}}</li>
-							</div>
-						</ul>	
-					</li>
-				</h4>
-			</div>
-		</ol>
-	</div>
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Questions">
+            <div class="well">
+                <ol>
+                    <div ng-repeat="part1Question in questions">
+                        <h4>
+						<li>
+							{{part1Question.question}}
+							<ul>
+								<div ng-repeat="part1Answer in part1Question.answer">
+									<li>{{part1Answer}}</li>
+								</div>
+							</ul>	
+						</li>
+					</h4>
+                    </div>
+                </ol>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Product Backlog">
+            Some Tab Content
+        </uib-tab>
+        <uib-tab index="2" heading="Release Plan">
+            More Tab Content
+        </uib-tab>
+        <uib-tab index="3" heading="Sprint Plan">
+            <h4>Snapshot of taskboard from Zen-Hub</h4>
+            <img src="images/task_board_snapshot.png">
+        </uib-tab>
+    </uib-tabset>
 </div>
