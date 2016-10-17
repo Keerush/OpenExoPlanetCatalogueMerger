@@ -1,0 +1,19 @@
+<div class="container">
+	<h3>Part 1 Questions:</h3>
+	<div class="well">
+		<ol>
+			<div ng-repeat="part1Question in questions">
+				<h4>
+					<li>
+						{{part1Question.question}}
+						<ul>
+							<div ng-repeat="part1Answer in part1Question.answer">
+								<li>{{part1Answer}}</li>
+							</div>
+						</ul>	
+					</li>
+				</h4>
+			</div>
+		</ol>
+	</div>
+</div>
