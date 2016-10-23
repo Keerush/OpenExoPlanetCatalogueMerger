@@ -1,0 +1,3 @@
+Project Ideas
+Back-end = Python
+Front-end = Javascript
