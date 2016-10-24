@@ -4,7 +4,7 @@ app.controller('demoCtrl', function($scope, $http) {
 
 	$http({
 		method: 'GET',
-		url: 'http://127.0.0.1:8080/api/nasaData'
+		url: '/api'
 	}).then(function successCallBack(res) {
 		$scope.nasaData = res.data;
 	}, function errorCallBack(res) {
