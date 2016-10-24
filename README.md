@@ -17,5 +17,7 @@ Deliverable 2:
 - Personas and User stories
 
 Deliverable 3:  
-- You can find our website under APP/public  
-- If you want to view our demo app, cd into the APP folder and run: **node server.js**
+You can find our website under APP/public  
+1. If you want to view our demo app, cd into the APP folder and make sure to install dependencies by running: **npm install**  
+2. Next run: **node server.js**  
+3. View your [localhost](http://localhost:8080/) in a browser and click on our demo app
