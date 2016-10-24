@@ -7,7 +7,7 @@ You can view our website by hosting it on your own computer! One way is to set u
 5. View your [localhost](http://localhost:8080/) in a browser
 
 
-### Contents of Website inculde:
+### Contents of Website include:
 Deliverable 1:
 - About team Loopy Loop
 - About the members of the team
@@ -15,3 +15,7 @@ Deliverable 1:
 
 Deliverable 2:
 - Personas and User stories
+
+Deliverable 3:  
+- You can find our website under APP/public  
+- If you want to view our demo app, cd into the APP folder and run: **node server.js**
