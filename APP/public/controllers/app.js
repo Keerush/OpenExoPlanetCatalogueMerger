@@ -23,6 +23,10 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'views/deliverable3.html',
 		controller: 'deliverable3-part1Ctrl'
 	})
+	.when('/demo', {
+		templateUrl: 'views/demo.html',
+		controller: 'demoCtrl'
+	})
 	.otherwise({ 
 		redirectTo: '/' 
 	});
