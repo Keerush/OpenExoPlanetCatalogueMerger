@@ -1,9 +1,10 @@
 {
-  "name": "api",
+  "name": "app-server",
   "version": "1.0.0",
   "description": "Api for our web app ",
-  "main": "server.js",
+  "private": true,
   "scripts": {
+    "start": "supervisor ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +13,7 @@
     "express": "^4.14.0",
     "pg": "^6.1.0",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "supervisor": "^0.11.0"
   }
 }

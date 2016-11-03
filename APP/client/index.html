@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+
+<head>
+	<meta charset="UTF-8">
+    <base href="/">
+    <title> CSCC01 - Team Website </title>
+    <!-- Angular Script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/p1.css">
+</head>
+
+<body>
+	<header>
+		<nav ng-include src="'views/nav.html'"></nav>
+	</header>
+	
+	<div ng-view>
+	</div>
+</body>
+
+<!-- Additional angular scripts-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+
+<!-- Controllers -->
+<script src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
+<script src="controllers/app.js"></script>
+<script src="controllers/aboutMembersCtrl.js"></script>
+<script src="controllers/personasUserStoriesCtrl.js"></script>
+<script src="controllers/deliverable3-part1Ctrl.js"></script>
+<script src="controllers/deliverable3-part2Ctrl.js"></script>
+<script src="controllers/demoCtrl.js"></script>
+</html>
