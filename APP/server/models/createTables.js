@@ -15,14 +15,13 @@ var tNames = 'Names(' +
 	')';
 
 var tSystem = 'System(' +
-	'id INT NOT NULL PRIMARY KEY,' +
+	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
 	'name VARCHAR(255) NOT NULL,' +
-	'planet VARCHAR(255),' +
-	'star VARCHAR(255),' +
-	'V_binary VARCHAR(255),' +
 	'declination VARCHAR(255),' +
-	'right_ascension VARCHAR(255),' +
+	'rightascension VARCHAR(255),' +
 	'distance FLOAT,' +
+	'distanceminus FLOAT,' +
+	'distanceplus FLOAT,' +
 	'videolink VARCHAR(255)' +
 	')';
 
@@ -32,24 +31,51 @@ var tStarSystem = 'StarSystem(' +
 	')';
 
 var tPlanet = 'Planet(' +
-	'id INT NOT NULL PRIMARY KEY,' +
+	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
 	'name VARCHAR(255) NOT NULL,' +
 	'semimajoraxis FLOAT,' +
+	'semimajoraxisminus FLOAT,' +
+	'semimajoraxisplus FLOAT,' +
 	'separation FLOAT,' +
 	'eccentricity FLOAT,' +
+	'eccentricityminus FLOAT,' +
+	'eccentricityplus FLOAT,' +
 	'periastron FLOAT,' +
+	'periastronminus FLOAT,' +
+	'periastronplus FLOAT,' +
 	'longitude FLOAT,' +
 	'meananomaly FLOAT,' +
 	'ascendingnode FLOAT,' +
 	'inclination FLOAT,' +
+	'inclinationminus FLOAT,' +
+	'inclinationplus FLOAT,' +
 	'impactparameter FLOAT,' +
+	'impactparameterminus FLOAT,' +
+	'impactparameterplus FLOAT,' +
 	'period FLOAT,' +
+	'periodminus FLOAT,' +
+	'periodplus FLOAT,' +
 	'transittime FLOAT,' +
+	'transittimeminus FLOAT,' +
+	'transittimeplus FLOAT,' +
 	'periastrontime FLOAT,' +
+	'periastrontimeminus FLOAT,' +
+	'periastrontimeplus FLOAT,' +
 	'maximumrvtime FLOAT,' +
-	'mass FLOAT,' +
+	'maximumrvtimeminus FLOAT,' +
+	'maximumrvtimeplus FLOAT,' +
+	'massjupiter FLOAT,' +
+	'massjupiterminus FLOAT,' +
+	'massjupiterplus FLOAT,' +
+	'massmsini FLOAT,' +
+	'massmsiniminus FLOAT,' +
+	'massmsiniplus FLOAT,' +
 	'radius FLOAT,' +
+	'radiusminus FLOAT,' +
+	'radiusplus FLOAT,' +
 	'temperature FLOAT,' +
+	'temperatureminus FLOAT,' +
+	'temperatureplus FLOAT,' +
 	'age FLOAT,' +
 	'spectraltype VARCHAR(255),' +
 	'magB VARCHAR(255),' +
@@ -63,12 +89,12 @@ var tPlanet = 'Planet(' +
 	'istransiting INT,' +
 	'description VARCHAR(255),' +
 	'discoveryyear INT,' +
-	'lastupdate	DATE,' +
+	'lastupdate	VARCHAR(255),' +
 	'spinorbitalignment FLOAT' +
 	')';
 
 var tStar = 'Star(' +
-	'id INT NOT NULL PRIMARY KEY,' +
+	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
 	'name VARCHAR(255) NOT NULL,' +
 	'mass FLOAT,' +
 	'radius FLOAT,' +
@@ -91,6 +117,7 @@ var tPlanetStar = 'PlanetStar(' +
 	')';
 
 var tBinary = 'tBinary(' +
+	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
 	'name VARCHAR(255) NOT NULL,' +
 	'semimajoraxis FLOAT,' +
 	'separation FLOAT,' +
@@ -166,7 +193,7 @@ var promises = tables.map(function(obj) {
 	var promise = db.query('SELECT COUNT(*) AS tableCount FROM information_schema.tables WHERE table_schema="sql9142844" AND table_name="' + obj.key + '";')
 		.then(function(res) {
 			if (res[0][0].tableCount == 0) {
-				var promise = db.query('CREATE TABLE ' + obj.value)
+				var promise = db.query('CREATE TABLE ' + obj.value + ';')
 					.then(function(res) {
 						console.log('Created table ' + obj.key + '.');
 					}, function(err) {
