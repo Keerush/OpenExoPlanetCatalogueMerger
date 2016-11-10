@@ -78,13 +78,27 @@ var tPlanet = 'Planet(' +
 	'temperatureplus FLOAT,' +
 	'age FLOAT,' +
 	'spectraltype VARCHAR(255),' +
-	'magB VARCHAR(255),' +
-	'magV VARCHAR(255),' +
-	'magR VARCHAR(255),' +
-	'magI VARCHAR(255),' +
-	'magJ VARCHAR(255),' +
-	'magH VARCHAR(255),' +
-	'magK VARCHAR(255),' +
+	'magB FLOAT,' +
+	'magBminus FLOAT,' +
+	'magBplus FLOAT,' +
+	'magV FLOAT,' +
+	'magVminus FLOAT,' +
+	'magVplus FLOAT,' +
+	'magR FLOAT,' +
+	'magRminus FLOAT,' +
+	'magRplus FLOAT,' +
+	'magI FLOAT,' +
+	'magIminus FLOAT,' +
+	'magIplus FLOAT,' +
+	'magJ FLOAT,' +
+	'magJminus FLOAT,' +
+	'magJplus FLOAT,' +
+	'magH FLOAT,' +
+	'magHminus FLOAT,' +
+	'magHplus FLOAT,' +
+	'magK FLOAT,' +
+	'magKminus FLOAT,' +
+	'magKplus FLOAT,' +
 	'discoverymethod VARCHAR(255),' +
 	'istransiting INT,' +
 	'description VARCHAR(255),' +
@@ -97,18 +111,42 @@ var tStar = 'Star(' +
 	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
 	'name VARCHAR(255) NOT NULL,' +
 	'mass FLOAT,' +
+	'massminus FLOAT,' +
+	'massplus FLOAT,' +
 	'radius FLOAT,' +
+	'radiusminus FLOAT,' +
+	'radiusplus FLOAT,' +
 	'temperature FLOAT,' +
+	'temperatureminus FLOAT,' +
+	'temperatureplus FLOAT,' +
 	'age FLOAT,' +
+	'ageminus FLOAT,' +
+	'ageplus FLOAT,' +
 	'metallicity FLOAT,' +
+	'metallicityminus FLOAT,' +
+	'metallicityplus FLOAT,' +
 	'spectraltype VARCHAR(255),' +
-	'magB VARCHAR(255),' +
-	'magV VARCHAR(255),' +
-	'magR VARCHAR(255),' +
-	'magI VARCHAR(255),' +
-	'magJ VARCHAR(255),' +
-	'magH VARCHAR(255),' +
-	'magK VARCHAR(255)' +
+	'magB FLOAT,' +
+	'magBminus FLOAT,' +
+	'magBplus FLOAT,' +
+	'magV FLOAT,' +
+	'magVminus FLOAT,' +
+	'magVplus FLOAT,' +
+	'magR FLOAT,' +
+	'magRminus FLOAT,' +
+	'magRplus FLOAT,' +
+	'magI FLOAT,' +
+	'magIminus FLOAT,' +
+	'magIplus FLOAT,' +
+	'magJ FLOAT,' +
+	'magJminus FLOAT,' +
+	'magJplus FLOAT,' +
+	'magH FLOAT,' +
+	'magHminus FLOAT,' +
+	'magHplus FLOAT,' +
+	'magK FLOAT,' +
+	'magKminus FLOAT,' +
+	'magKplus FLOAT' +
 	')';
 
 var tPlanetStar = 'PlanetStar(' +
