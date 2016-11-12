@@ -3,9 +3,11 @@ const router = express.Router();
 const pg = require('pg');
 const path = require('path');
 const http = require('request-promise');
+const droptables = require('../models/dropTables.js');
+const createtables = require('../models/createTables.js');
 
 router.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'index.html'));
+	res.sendFile(path.join(__dirname, '..', '..', 'client', 'index.html'));
 });
 
 router.get('/nasaData', function(req, res) {
@@ -22,7 +24,7 @@ router.get('/nasaData', function(req, res) {
 router.get('/euData', function(req, res) {
 	var options = {
 		uri: 'http://exoplanet.eu/catalog/csv',
-		json: true // Automatically parses the JSON string in the response 
+		json: true // Automatically parses the JSON string in the response
 	};
 	http(options).then(function(result) {
 		// Do stuff with response
@@ -30,4 +32,27 @@ router.get('/euData', function(req, res) {
 	});
 });
 
+router.get('/dropTables/:password', function(req, res) {
+	var password = 'test';
+	if (req.params.password != password) {
+		res.statusCode = 404;
+		return res.send('Error 404: Invalid password.');
+	}
+
+	droptables.dropTable();
+	res.statusCode = 200;
+	res.send('confirmed');
+});
+
+router.get('/createTables/:password', function(req, res) {
+	var password = 'test';
+	if (req.params.password != password) {
+		res.statusCode = 404;
+		return res.send('Error 404: Invalid password.');
+	}
+
+	createtables.createTables();
+	res.statusCode = 200;
+	res.send('confirmed');
+});
 module.exports = router;
