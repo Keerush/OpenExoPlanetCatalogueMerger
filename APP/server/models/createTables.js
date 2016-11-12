@@ -10,13 +10,12 @@ var pool = mysql.createPool({
 
 // Create tables.
 var tNames = 'Names(' +
-	'id INT NOT NULL PRIMARY KEY,' +
-	'name VARCHAR(255) NOT NULL' +
+	'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
+	'otherName VARCHAR(255) NOT NULL' +
 	')';
 
 var tSystem = 'System(' +
-	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
-	'name VARCHAR(255) NOT NULL,' +
+	'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 	'declination VARCHAR(255),' +
 	'rightascension VARCHAR(255),' +
 	'distance FLOAT,' +
@@ -26,13 +25,12 @@ var tSystem = 'System(' +
 	')';
 
 var tStarSystem = 'StarSystem(' +
-	'star_ID INT NOT NULL PRIMARY KEY,' +
-	'system_ID INT NOT NULL' +
+	'starName VARCHAR(255) NOT NULL PRIMARY KEY,' +
+	'systemName VARCHAR(255) NOT NULL' +
 	')';
 
 var tPlanet = 'Planet(' +
-	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
-	'name VARCHAR(255) NOT NULL,' +
+	'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 	'semimajoraxis FLOAT,' +
 	'semimajoraxisminus FLOAT,' +
 	'semimajoraxisplus FLOAT,' +
@@ -108,8 +106,7 @@ var tPlanet = 'Planet(' +
 	')';
 
 var tStar = 'Star(' +
-	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
-	'name VARCHAR(255) NOT NULL,' +
+	'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 	'mass FLOAT,' +
 	'massminus FLOAT,' +
 	'massplus FLOAT,' +
@@ -150,13 +147,12 @@ var tStar = 'Star(' +
 	')';
 
 var tPlanetStar = 'PlanetStar(' +
-	'planet_ID INT NOT NULL PRIMARY KEY,' +
-	'star_ID INT NOT NULL' +
+	'planetName VARCHAR(255) NOT NULL PRIMARY KEY,' +
+	'starName VARCHAR(255) NOT NULL' +
 	')';
 
 var tBinary = 'tBinary(' +
-	'id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,' +
-	'name VARCHAR(255) NOT NULL,' +
+	'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 	'semimajoraxis FLOAT,' +
 	'separation FLOAT,' +
 	'positionangle FLOAT,' +
@@ -180,13 +176,13 @@ var tBinary = 'tBinary(' +
 	')';
 
 var tBinaryBinary = 'BinaryBinary(' +
-	'binary_ID INT NOT NULL PRIMARY KEY,' +
-	'other_binary_ID INT NOT NULL' +
+	'binaryName VARCHAR(255) NOT NULL PRIMARY KEY,' +
+	'otherBinaryName VARCHAR(255) NOT NULL' +
 	')';
 
 var tStarBinary = 'StarBinary(' +
-	'star_ID INT NOT NULL PRIMARY KEY,' +
-	'binary_ID INT NOT NULL' +
+	'starName VARCHAR(255) NOT NULL PRIMARY KEY,' +
+	'binaryName VARCHAR(255) NOT NULL' +
 	')';
 
 var tables = [{
