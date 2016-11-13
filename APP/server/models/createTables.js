@@ -188,31 +188,31 @@ exports.createTables = function() {
 			')';
 
 		var tables = [{
-			key: 'Names',
+			key: 'NasaNames',
 			value: tNames
 		}, {
-			key: 'System',
+			key: 'NasaSystem',
 			value: tSystem
 		}, {
-			key: 'StarSystem',
+			key: 'NasaStarSystem',
 			value: tStarSystem
 		}, {
-			key: 'Planet',
+			key: 'NasaPlanet',
 			value: tPlanet
 		}, {
-			key: 'Star',
+			key: 'NasaStar',
 			value: tStar
 		}, {
-			key: 'PlanetStar',
+			key: 'NasaPlanetStar',
 			value: tPlanetStar
 		}, {
-			key: 'tBinary',
+			key: 'NasaBinary',
 			value: tBinary
 		}, {
-			key: 'BinaryBinary',
+			key: 'NasaBinaryBinary',
 			value: tBinaryBinary
 		}, {
-			key: 'StarBinary',
+			key: 'NasaStarBinary',
 			value: tStarBinary
 		}];
 
