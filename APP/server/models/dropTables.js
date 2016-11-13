@@ -18,17 +18,18 @@ exports.dropTable = function() {
 		}
 	};
 
-	var tables = [
-		'Names',
-		'System',
-		'StarSystem',
-		'Planet',
-		'Star',
-		'PlanetStar',
-		'tBinary',
-		'BinaryBinary',
-		'StarBinary'
-	];
+
+var tables = [
+	'NasaNames',
+	'NasaSystem',
+	'NasaStarSystem',
+	'NasaPlanet',
+	'NasaStar',
+	'NasaPlanetStar',
+	'NasaBinary',
+	'NasaBinaryBinary',
+	'NasaStarBinary'
+];
 
 	var promises = tables.map(function(table) {
 		var promise = db.query('SELECT COUNT(*) AS tableCount FROM information_schema.tables WHERE table_schema="sql9142844" AND table_name="' + table + '";')
