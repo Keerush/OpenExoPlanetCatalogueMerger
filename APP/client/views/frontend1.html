@@ -4,8 +4,11 @@
 	</head>
 	<style>
 		body {
-			background-image: url("team20-Project/APP/client/images/spacebackground.jpg");
+			background-image: url("/cmshome/wongsi11/cscc01f16_space/team20-Project/APP/client/images/spacebackground.jpg");
+			background-repeat: no-repeat;
 			background-size: cover;
+			background-position: center center;
+			background-attachment: fixed;
 			text-align: center;
 			font-family: sans-serif;
 		}
@@ -17,16 +20,11 @@
 		}
 
 		.btn {
-			top: 42%;
-			right: 42%;
 			line-height: 50px;
 			height: 50px;
 			text-align: center;
 			width: 250px;
 			cursor: pointer;
-			color: #FFF;
-			transition: all 0.3s;
-			position: absolute;
 		}
 
 		.btn span {
@@ -76,18 +74,33 @@
 			transform: scale(0.1, 1);
 		}
 
+		.btn1 {
+			color: #FFF;
+			transition: all 0.3s;
+			position: absolute;
+			top: 42%;
+			right: 42%;
+		}
+
+		.btn2 {
+			color: #FFF;
+			transition: all 0.5s;
+			position: absolute;
+			top: 48%;
+			right: 42%;
+		}
+
 	</style>
 	<body>
 		<div class="container">
 			<h1>Find Differences in Exoplanet Databases</h1>
-			<div class="btn">
+			<div class="btn btn1">
 				<span>UPDATE</span>
 			</div>
 
-			<table>
-				<tbody>
-				</tbody>
-			</tbody>
+			<div class="btn btn2">
+				<span>REGISTER</span>
+			</div>
 		</div>
 	</body>
 </html>
