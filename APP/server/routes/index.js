@@ -55,12 +55,17 @@ router.get('/createTables/:password', function(req, res) {
 
 	createtables.createTables().then(function(err) {
 		res.statusCode = 200;
-		res.send('create tables.');
+		res.send('created tables');
 	});
 });
 
 router.get('/addNASAData', function(req, res) {
 	addNASAData.addData().then(function(err) {
+		if (err) {
+			res.statusCode = 404;
+			return res.send(err);
+		}
+
 		res.statusCode = 200;
 		res.send('added data.');
 	});
