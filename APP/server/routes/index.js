@@ -5,6 +5,7 @@ const path = require('path');
 const http = require('request-promise');
 const droptables = require('../models/dropTables.js');
 const createtables = require('../models/createTables.js');
+const addNASAData = require('../models/addNASAData.js');
 
 router.get('/', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', '..', 'client', 'index.html'));
@@ -39,9 +40,10 @@ router.get('/dropTables/:password', function(req, res) {
 		return res.send('Error 404: Invalid password.');
 	}
 
-	droptables.dropTable();
-	res.statusCode = 200;
-	res.send('confirmed');
+	droptables.dropTable().then(function(err) {
+		res.statusCode = 200;
+		res.send('drop tables.');
+	});
 });
 
 router.get('/createTables/:password', function(req, res) {
@@ -51,8 +53,16 @@ router.get('/createTables/:password', function(req, res) {
 		return res.send('Error 404: Invalid password.');
 	}
 
-	createtables.createTables();
-	res.statusCode = 200;
-	res.send('confirmed');
+	createtables.createTables().then(function(err) {
+		res.statusCode = 200;
+		res.send('create tables.');
+	});
+});
+
+router.get('/addNASAData', function(req, res) {
+	addNASAData.addData().then(function(err) {
+		res.statusCode = 200;
+		res.send('added data.');
+	});
 });
 module.exports = router;
