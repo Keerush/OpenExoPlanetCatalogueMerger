@@ -1,4 +1,4 @@
-var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap', 'ngYoutubeEmbed']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider

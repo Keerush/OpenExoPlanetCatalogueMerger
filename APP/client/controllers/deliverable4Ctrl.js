@@ -60,4 +60,6 @@ app.controller('deliverable4Ctrl', function($scope) {
 			' The back end of our system consists of addNasaData, addEuData, addOpenData, createTables, dropTables, and compareDB scripts. The addNasaData, addEuData, and addOpenData inserts the data from Nasa archive, exoplanet.eu, and Open exoplanet respectively. Create and drop tables creates and deletes the tables that are needed to store to above data. The compareDB script contains the methods that deal with finding differences between the other databases and open exoplanet repository and pushing the changes to the repository afterwards. The front end communicates to the back end of our system through api calls, as well as the backend with the database.'
 		]
 	};
+
+	$scope.groupVid = 'https://www.youtube.com/watch?v=UWi97g6hDww';
 });
