@@ -11,12 +11,12 @@ var pool = mysql.createPool({
 exports.createTables = function() {
 	var promise = new Promise(function(resolve, reject) {
 		// Create tables.
-		var tNames = 'NasaNames(' +
+		var tNames = 'Names(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'otherName VARCHAR(255) NOT NULL' +
 			')';
 
-		var tSystem = 'NasaSystem(' +
+		var tSystem = 'System(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'declination VARCHAR(255),' +
 			'rightascension VARCHAR(255),' +
@@ -26,12 +26,12 @@ exports.createTables = function() {
 			'videolink VARCHAR(255)' +
 			')';
 
-		var tStarSystem = 'NasaStarSystem(' +
+		var tStarSystem = 'StarSystem(' +
 			'starName VARCHAR(255) NOT NULL PRIMARY KEY,' +
 			'systemName VARCHAR(255) NOT NULL' +
 			')';
 
-		var tPlanet = 'NasaPlanet(' +
+		var tPlanet = 'Planet(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'semimajoraxis FLOAT,' +
 			'semimajoraxisminus FLOAT,' +
@@ -107,7 +107,7 @@ exports.createTables = function() {
 			'spinorbitalignment FLOAT' +
 			')';
 
-		var tStar = 'NasaStar(' +
+		var tStar = 'Star(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'mass FLOAT,' +
 			'massminus FLOAT,' +
@@ -148,12 +148,12 @@ exports.createTables = function() {
 			'magKplus FLOAT' +
 			')';
 
-		var tPlanetStar = 'NasaPlanetStar(' +
+		var tPlanetStar = 'PlanetStar(' +
 			'planetName VARCHAR(255) NOT NULL PRIMARY KEY,' +
 			'starName VARCHAR(255) NOT NULL' +
 			')';
 
-		var tBinary = 'NasaBinary(' +
+		var tBinary = 'Binary(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'semimajoraxis FLOAT,' +
 			'separation FLOAT,' +
@@ -177,44 +177,43 @@ exports.createTables = function() {
 			'magK VARCHAR(255)' +
 			')';
 
-		var tBinaryBinary = 'NasaBinaryBinary(' +
+		var tBinaryBinary = 'BinaryBinary(' +
 			'binaryName VARCHAR(255) NOT NULL PRIMARY KEY,' +
 			'otherBinaryName VARCHAR(255) NOT NULL' +
 			')';
 
-		var tStarBinary = 'NasaStarBinary(' +
+		var tStarBinary = 'StarBinary(' +
 			'starName VARCHAR(255) NOT NULL PRIMARY KEY,' +
 			'binaryName VARCHAR(255) NOT NULL' +
 			')';
 
-		var tables = [{
-			key: 'NasaNames',
-			value: tNames
-		}, {
-			key: 'NasaSystem',
-			value: tSystem
-		}, {
-			key: 'NasaStarSystem',
-			value: tStarSystem
-		}, {
-			key: 'NasaPlanet',
-			value: tPlanet
-		}, {
-			key: 'NasaStar',
-			value: tStar
-		}, {
-			key: 'NasaPlanetStar',
-			value: tPlanetStar
-		}, {
-			key: 'NasaBinary',
-			value: tBinary
-		}, {
-			key: 'NasaBinaryBinary',
-			value: tBinaryBinary
-		}, {
-			key: 'NasaStarBinary',
-			value: tStarBinary
-		}];
+		var sources = [
+			'Nasa',
+			'Eu',
+			'Open'
+		];
+
+		var tables = [
+			tNames,
+			tSystem,
+			tStarSystem,
+			tPlanet,
+			tStar,
+			tPlanetStar,
+			tBinary,
+			tBinaryBinary,
+			tStarBinary
+		];
+		
+		var queryTables = [];
+		sources.forEach(function(name) {
+			tables.forEach(function(obj) {
+				var data = {};
+				data['value'] = name + obj;
+				data['key'] = data.value.substring(0, data.value.indexOf('('));
+				queryTables.push(data);
+			});
+		});
 
 		var db = {
 			query: function(sql, params) {
@@ -225,7 +224,7 @@ exports.createTables = function() {
 			}
 		};
 
-		var promises = tables.map(function(obj) {
+		var promises = queryTables.map(function(obj) {
 			var promise = db.query('SELECT COUNT(*) AS tableCount FROM information_schema.tables WHERE table_schema="sql9142844" AND table_name="' + obj.key + '";')
 				.then(function(res) {
 					if (res[0][0].tableCount == 0) {

@@ -19,19 +19,32 @@ exports.dropTable = function() {
 			}
 		};
 
-		var tables = [
-			'NasaNames',
-			'NasaSystem',
-			'NasaStarSystem',
-			'NasaPlanet',
-			'NasaStar',
-			'NasaPlanetStar',
-			'NasaBinary',
-			'NasaBinaryBinary',
-			'NasaStarBinary'
+		var sources = [
+			'Nasa',
+			'Eu',
+			'Open'
 		];
 
-		var promises = tables.map(function(table) {
+		var tables = [
+			'Names',
+			'System',
+			'StarSystem',
+			'Planet',
+			'Star',
+			'PlanetStar',
+			'Binary',
+			'BinaryBinary',
+			'StarBinary'
+		];
+
+		var allTables = [];
+		sources.forEach(function(name) {
+			tables.forEach(function(table) {
+				allTables.push(name + table);
+			});
+		});
+
+		var promises = allTables.map(function(table) {
 			var promise = db.query('SELECT COUNT(*) AS tableCount FROM information_schema.tables WHERE table_schema="sql9142844" AND table_name="' + table + '";')
 				.then(function(res) {
 					if (res[0][0].tableCount == 1) {
