@@ -7,6 +7,13 @@
         <uib-tab index="2" heading="Sprint Plan">
         </uib-tab>
         <uib-tab index="4" heading="System Design">
+            <h3>System Design</h3>
+            <img src="{{systemDesign.image}}" class="biopic">
+            <hr>
+            <div class="well">
+                <h4 ng-repeat='des in systemDesign.description'>{{des}}</h4>
+            </div>
+            <hr>
         </uib-tab>
         <uib-tab index="5" heading="Reflection">
         </uib-tab>

@@ -52,4 +52,12 @@ app.controller('deliverable4Ctrl', function($scope) {
 		vulnerabilities: "",
 		poorTesting: ""
 	}];
+
+	$scope.systemDesign = {
+		image: 'images/system_design_revised.png',
+		description: [
+			'The front end of our system consists of setAutoUpdate, manualUpdate, admin, viewDifferences, and editXml pages. The setAutoupdate page will allow the user to store and email for notifications and set a time period of when to check for data using the scripts found in the backend. The manual update is similar to the previously mentioned page but it allows the user to start the update process and push change to the open planet repo. The admin page is used to clean up data in the database by dropping the tables, and creating them. This will generally be used for new databases or if an old database is getting removed. The view differences page is used to view the differences that have been found from either the manual update or the automated update. This gives the user the ability to view ,modify and delete these changes, before they are pushed to the open exoplanet repository.',
+			' The back end of our system consists of addNasaData, addEuData, addOpenData, createTables, dropTables, and compareDB scripts. The addNasaData, addEuData, and addOpenData inserts the data from Nasa archive, exoplanet.eu, and Open exoplanet respectively. Create and drop tables creates and deletes the tables that are needed to store to above data. The compareDB script contains the methods that deal with finding differences between the other databases and open exoplanet repository and pushing the changes to the repository afterwards. The front end communicates to the back end of our system through api calls, as well as the backend with the database.'
+		]
+	};
 });
