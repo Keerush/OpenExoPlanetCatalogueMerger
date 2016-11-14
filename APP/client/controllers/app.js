@@ -35,7 +35,7 @@ app.config(function($routeProvider, $locationProvider) {
 		controller: 'demoCtrl'
 	})
 	.when('/frontend1', {
-		templateUrl: 'views/frontend1.html',
+		templateUrl: 'views/demo/frontend1.html',
 	})
 	.otherwise({ 
 		redirectTo: '/' 
