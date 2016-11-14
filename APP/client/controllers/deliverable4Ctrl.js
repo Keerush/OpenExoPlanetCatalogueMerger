@@ -39,18 +39,18 @@ app.controller('deliverable4Ctrl', function($scope) {
 		vulnerabilities: "As mentioned earlier, hard coding the database login information is a serious security issue. The login credentials should be placed in a textfile and read in.",
 		poorTesting: "Could be more thorough with testing, currently there is only 1 test."
 	}, {
-		reviewerName: "",
-		codeName: "",
-		codeLink: "",
-		author: "",
-		dateOfReview: "",
-		bugs: "",
-		poorCodeLogic: "",
-		poorCodeStyle: "",
-		missingDocumentation: "",
-		unreadableCode: "",
-		vulnerabilities: "",
-		poorTesting: ""
+		reviewerName: "Kent Chow",
+		codeName: "addOpenData.js",
+		codeLink: "https://github.com/CSCC01-Fall2016/team20-Project/blob/master/APP/server/models/addOpenData.js",
+		author: "Keerush",
+		dateOfReview: "Sunday, November 13, 2016",
+		bugs: "None",
+		poorCodeLogic: "None",
+		poorCodeStyle: "Server data should be stored separate instead of hardcoded.",
+		missingDocumentation: "No documentations",
+		unreadableCode: "None",
+		vulnerabilities: "None",
+		poorTesting: "No tests made yet"
 	}];
 
 	$scope.systemDesign = {
