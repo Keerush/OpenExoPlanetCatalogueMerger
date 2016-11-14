@@ -28,7 +28,8 @@ app.config(function($routeProvider, $locationProvider) {
 		controller: 'deliverable3-part2Ctrl'
 	})
 	.when('/deliverable4', {
-		templateUrl: 'views/deliverable4.html'
+		templateUrl: 'views/deliverable4.html',
+		controller: 'deliverable4Ctrl'
 	})
 	.when('/demo', {
 		templateUrl: 'views/demo.html',

@@ -11,6 +11,24 @@
         <uib-tab index="5" heading="Reflection">
         </uib-tab>
         <uib-tab index="6" heading="Code Inspection Report">
+            <div class="row" ng-repeat="review in codeReviews">
+                <hr>
+                <div class="col-md-3">
+                    <p><b>Reviewer:</b> {{review.reviewerName}}</p>
+                    <p><b>Code under review:</b> <a target="_blank" href="{{review.codeLink}}">{{review.codeName}}</a></p>
+                    <p><b>Author:</b> {{review.author}}</p>
+                    <p><b>Date of review:</b> {{review.dateOfReview}}</p>
+                </div>
+                <div class="col-md-9">
+                    <p><b>Bugs:</b> {{review.bugs}}</p>
+                    <p><b>Poor Code Logic:</b> {{review.poorCodeLogic}}</p>
+                    <p><b>Poor Code Style:</b> {{review.poorCodeStyle}}</p>
+                    <p><b>Missing Documentation:</b> {{review.missingDocumentation}}</p>
+                    <p><b>Unreadable Code:</b> {{review.unreadableCode}}</p>
+                    <p><b>Vulnerabilities:</b> {{review.vulnerabilities}}</p>
+                    <p><b>Poor Testing:</b> {{review.poorTesting}}</p>
+                </div>
+            </div>
         </uib-tab>
         <uib-tab index="7" heading="Overview of Deliverable 4">
         </uib-tab>
