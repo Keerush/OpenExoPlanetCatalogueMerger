@@ -1,0 +1,51 @@
+<html lang="en">
+	<head>
+		<title>Register Email</title>
+	</head>
+	<style>
+		body {
+			background-image: url("/cmshome/wongsi11/cscc01f16_space/team20-Project/APP/client/images/spacebackground.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+			background-attachment: fixed;
+			color: #e5e5e5;
+			font-family: sans-serif;
+		}
+
+		h1 {
+			margin-top: 100px;
+			text-align: center;
+			font-size: 36pt;
+		}
+		.style-form {
+			width: 20%;
+			clear: both;
+			margin: auto;
+		}
+		.style-form input {
+			margin-bottom: 20px;
+			width: 100%;
+			clear: both;
+		}
+
+	</style>
+	<body>
+		<h1>Register your Email <br> to get Daily Updates</h1>
+		<div class="style-form">
+		<form>
+			<label>First Name:</label>
+			<input type="text" ng-model="firstname">
+			<label>Last Name:</label>
+			<input type="text" ng-model="lastname">
+			<label>Email:</label>
+			<input type="text" ng-model="email">
+			<br>
+			<!-- <a href="frontend1.html"><button ng-click="submit()">Submit</button></a> -->
+			<button onclick="location.href='frontend1.html'" type="button">Submit</button>
+			<button onclick="location.href='frontend1.html'" type="button">Cancel</button>
+			<!-- <a href="frontend1.html"><button>Cancel</button></a> -->
+		</form>
+		</div>
+	</body>
+</html>
