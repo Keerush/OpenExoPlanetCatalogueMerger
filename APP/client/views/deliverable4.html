@@ -37,11 +37,16 @@
                 </div>
             </div>
         </uib-tab>
-        <uib-tab index="7" heading="Overview of Deliverable 4">
-        </uib-tab>
-        <uib-tab index="8" heading="Code Review Video">
-        	<h3>Sneak-peek at our code review...</h3>
+        <uib-tab index="7" heading="Code Review Video/System Validations">
+            <h3>Sneak-peek at our code review...</h3>
             <ng-youtube-embed url="groupVid" width="100%" gaming="false"></ng-youtube-embed>
+            <hr>
+            <h3>System Validations</h3>
+            <div class="well">
+                <h4 ng-repeat='desc in systemValidationDesc'>{{desc}}</h4>
+            </div>
+        </uib-tab>
+        <uib-tab index="8" heading="Overview of Deliverable 4">
         </uib-tab>
     </uib-tabset>
 </div>
