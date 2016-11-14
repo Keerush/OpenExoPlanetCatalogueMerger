@@ -31,7 +31,7 @@
 
 	</style>
 	<body>
-		<h1>Register your email to get daily updates</h1>
+		<h1>Register your Email <br> to get Daily Updates</h1>
 		<div class="style-form">
 		<form>
 			<label>First Name:</label>
@@ -41,8 +41,10 @@
 			<label>Email:</label>
 			<input type="text" ng-model="email">
 			<br>
-			<a href="frontend1.html"><button ng-click="submit()">Submit</button></a>
-			<a href="frontend1.html"><button>Cancel</button></a>
+			<!-- <a href="frontend1.html"><button ng-click="submit()">Submit</button></a> -->
+			<button onclick="location.href='frontend1.html'" type="button">Submit</button>
+			<button onclick="location.href='frontend1.html'" type="button">Cancel</button>
+			<!-- <a href="frontend1.html"><button>Cancel</button></a> -->
 		</form>
 		</div>
 	</body>
