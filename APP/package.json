@@ -19,7 +19,8 @@
     "q": "",
     "request": "",
     "promise-mysql": "^2.0.0",
-    "simple-git": "^1.62.0"
+    "simple-git": "^1.62.0",
+    "xml2json": "^0.10.0"
   },
   "devDependencies": {
     "mocha": "^3.1.2",
