@@ -60,7 +60,7 @@ exports.addData = function() {
 						.then(function(connection) {
 							return connection.query(item[0], [item[1]])
 								.then(function(response) {
-									
+									pool.releaseConnection(connection);
 								}).catch(function(err) {
 									console.log(err);
 									return (Q.reject(err));

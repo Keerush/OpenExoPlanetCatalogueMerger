@@ -36,7 +36,12 @@ exports.createTables = function() {
 			'semimajoraxis FLOAT,' +
 			'semimajoraxisminus FLOAT,' +
 			'semimajoraxisplus FLOAT,' +
-			'separation FLOAT,' +
+			'separationarcsec FLOAT,' +
+			'separationarcsecminus FLOAT,' +
+			'separationarcsecplus FLOAT,' +
+			'separationau FLOAT,' +
+			'separationauminus FLOAT,' +
+			'separationauplus FLOAT,' +
 			'eccentricity FLOAT,' +
 			'eccentricityminus FLOAT,' +
 			'eccentricityplus FLOAT,' +
@@ -44,8 +49,14 @@ exports.createTables = function() {
 			'periastronminus FLOAT,' +
 			'periastronplus FLOAT,' +
 			'longitude FLOAT,' +
+			'longitudeminus FLOAT,' +
+			'longitudeplus FLOAT,' +
 			'meananomaly FLOAT,' +
+			'meananomalyminus FLOAT,' +
+			'meananomalyplus FLOAT,' +
 			'ascendingnode FLOAT,' +
+			'ascendingnodeminus FLOAT,' +
+			'ascendingnodeplus FLOAT,' +
 			'inclination FLOAT,' +
 			'inclinationminus FLOAT,' +
 			'inclinationplus FLOAT,' +
@@ -61,7 +72,7 @@ exports.createTables = function() {
 			'periastrontime FLOAT,' +
 			'periastrontimeminus FLOAT,' +
 			'periastrontimeplus FLOAT,' +
-			'maximumrvtime FLOAT,' +
+			'maximumrvtime DOUBLE,' +
 			'maximumrvtimeminus FLOAT,' +
 			'maximumrvtimeplus FLOAT,' +
 			'massjupiter FLOAT,' +
@@ -77,7 +88,11 @@ exports.createTables = function() {
 			'temperatureminus FLOAT,' +
 			'temperatureplus FLOAT,' +
 			'age FLOAT,' +
+			'ageminus FLOAT,' +
+			'ageplus FLOAT,' +
 			'spectraltype VARCHAR(255),' +
+			'spectraltypeminus VARCHAR(255),' +
+			'spectraltypeplus VARCHAR(255),' +
 			'magB FLOAT,' +
 			'magBminus FLOAT,' +
 			'magBplus FLOAT,' +
@@ -104,7 +119,9 @@ exports.createTables = function() {
 			'description VARCHAR(255),' +
 			'discoveryyear INT,' +
 			'lastupdate	VARCHAR(255),' +
-			'spinorbitalignment FLOAT' +
+			'spinorbitalignment FLOAT,' +
+			'spinorbitalignmentminus FLOAT,' +
+			'spinorbitalignmentplus FLOAT' +
 			')';
 
 		var tStar = 'Star(' +
@@ -204,7 +221,7 @@ exports.createTables = function() {
 			tBinaryBinary,
 			tStarBinary
 		];
-		
+
 		var queryTables = [];
 		sources.forEach(function(name) {
 			tables.forEach(function(obj) {
