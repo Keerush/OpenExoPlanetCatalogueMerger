@@ -1,0 +1,123 @@
+83/100
+
+CSCC01 Deliverable 3 Marking Guide
+-----------------------------------
+
+Project Management:  __________ (40%) 36/40
+
+  Release plan:  
+    - each release corresponds to end of Sprint [1]
+    - project fully laid out:
+      for each release date, list of user stories to implement [1]
+    - project velocity specified and used [-1]
+    - highest priority user stories first modulo dependencies  [1]
+    - reasonable goals for each release -1
+
+    [4/5]
+
+
+  Product Backlog:
+    - user stories follow the correct format.
+    - user stories, together, reflect all the user requirements (from
+      all personas).
+    - user stories correspond to actual requirements (no "invented"
+      features).
+    - user stories contain enough information for devs to estimate how
+      long it would take to implement it. -1
+    - each user story addresses one specific requirement (no "world
+      peace" stories).
+
+    [4/5]
+
+  Sprint Backlog(s):
+     - user stories taken from the Product Backlog
+     - estimated costs
+     - estimated values
+
+     [5/5]
+
+  Sprint Plan(s):
+    - user stories divided into tasks when appropriate.
+    - each Sprint Plan contains all the necessary information:
+        who is working on which task on which day
+    - sum of costs of user stories in the sprint = project velocity
+    - good planning decisions
+
+    [5/5]
+
+  Use of Task Board:
+    - correct format of task boards
+    - snapshots in the begginning and end of each Sprint are provided
+
+    [5/5]
+    
+  Use of Burndown Charts:
+    - snapshots in the begginning and end of each Sprint are provided
+    - correctness of burndown charts
+
+    [5/5]
+
+  Use of Repo:
+    (good use of branches not required here, but is required for next deliverable)
+
+    [3/5] -1, angular should be in package.json, don't see any commits from Simon.
+
+  Use of communication tools:
+     - evidence of using communication tools of their choice effectively
+
+    [5/5]
+
+
+Design and Implementation:  __________ (30%) 17/30
+
+   System Design:
+      - good modular design
+      - general and easy to extend
+      - it is clear how the current implementation is going to be
+        extended into an application that satisfies the client's needs
+
+    [7/10] -3, I would like to see you expand more on the specific details on the Backend, Data Handler and Database.
+
+   Implementation:
+     - 0 marks if it doesn't run
+     - at least one feature is either fully implemented of nearly implemented
+     - quality and maturity of code
+
+    [10/20], demo ran. Didn't do enough work to consider any feature to be finished.
+
+
+
+
+Report: __________ (20%) 20/20
+
+  - well-presented, is easy to read and to navigate
+  - spelling and grammar
+  - looks professional 
+  - quality of the README file
+
+Interview: ________ (10%) 10/10
+Product backlog
+Split up a couple of user stories, to target specific differences between catalogues. Split one into 4.
+
+Satisfying
+
+Sprint backlog
+Had tasks to split up data fetching and csv conversion 
+Understood how the process worked
+
+Satisfying 
+
+System design
+Frontend and backend and database separation, named a couple api calls
+
+Satisfying 
+
+Task board and burndown 
+Lost a member on day 3, reviewed assigned tasks and reworked the backlog so it could be done with users. Seems to have increase their productivity after losing a member.
+
+Implementation
+Was able to explain configuration, had a successful demo
+
+Satisfying
+
+
