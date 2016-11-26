@@ -12,9 +12,10 @@ var pool = mysql.createPool({
 module.exports = () => {
     var promise = new Promise(function(resolve, reject) {
         // Create tables.
-        var tNames = "Names(" +
-            " name VARCHAR(255)"+
-            " )";
+        var tNames = 'Names(' +
+            'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
+            'otherName VARCHAR(255) NOT NULL' +
+        		')';
 
         var tSystem = 'System(' +
             'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
@@ -201,13 +202,13 @@ module.exports = () => {
 
         var tStarBinary = 'StarBinary(' +
             'starName VARCHAR(255) NOT NULL PRIMARY KEY,' +
-            ' binaryName VARCHAR(255) NOT NULL' +
-            ' )';
+            'binaryName VARCHAR(255) NOT NULL' +
+            ')';
 
-        var sources = ["Nasa","Eu", "Open"];
+        var sources = ["Nasa", "Eu", "Open"];
 
         var tables = [
-            tNames
+            tNames,
             tSystem,
             tStarSystem,
             tPlanet,
@@ -224,8 +225,7 @@ module.exports = () => {
             tables.forEach(function(obj) {
                 var promise = pool.getConnection()
                     .then(function(connection) {
-												var args = name + obj;
-												console.log(args);
+                        var args = name + obj;
                         return connection.query('CREATE TABLE ' + args)
                             .then(function(response) {
                                 pool.releaseConnection(connection);
@@ -243,10 +243,10 @@ module.exports = () => {
             pool.end();
             return resolve('Done!');
         }).catch(function(err) {
-            console.log("error somewhere");
+            console.log("error somewhere : ", err);
             pool.end();
             return resolve('Done with errors!');
         });
     });
-		return promise;
+    return promise;
 };
