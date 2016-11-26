@@ -1,42 +1,18 @@
-var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap', 'ngYoutubeEmbed']);
+var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/', {
-		templateUrl: 'views/homepage.html'
+		templateUrl: 'views/frontend1.html',
 	})
-	.when('/about_us', {
-		templateUrl: 'views/about_us.html'
+	.when('/edit_xml', {
+		templateUrl: 'views/edit_xml.html',
 	})
-	.when('/about_members', {
-		templateUrl: 'views/about_members.html',
-		controller: 'aboutMembersCtrl'
+	.when('/register_email', {
+		templateUrl: 'views/register_email.html',
 	})
-	.when('/team_agreement', {
-		templateUrl: 'views/team_agreement.html'
-	})
-	.when('/personas_user-stories', {
-		templateUrl: 'views/personas_user-stories.html',
-		controller: 'personasUserStoriesCtrl'
-	})
-	.when('/deliverable3part1', {
-		templateUrl: 'views/deliverable3part1.html',
-		controller: 'deliverable3-part1Ctrl'
-	})
-    .when('/deliverable3part2', {
-		templateUrl: 'views/deliverable3part2.html',
-		controller: 'deliverable3-part2Ctrl'
-	})
-	.when('/deliverable4', {
-		templateUrl: 'views/deliverable4.html',
-		controller: 'deliverable4Ctrl'
-	})
-	.when('/demo', {
-		templateUrl: 'views/demo.html',
-		controller: 'demoCtrl'
-	})
-	.when('/frontend1', {
-		templateUrl: 'views/demo/frontend1.html',
+	.when('/show_updates', {
+		templateUrl: 'views/show_updates.html',
 	})
 	.otherwise({ 
 		redirectTo: '/' 

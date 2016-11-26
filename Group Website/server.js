@@ -34,11 +34,12 @@ router.get('/euData', function(req, res) {
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-app.use(express.static(__dirname + '/public'), router);
+app.use(express.static(__dirname + '/client'), router);
 
 router.get('*', function(req, res) {
-	res.sendFile('public/index.html');
+	res.sendFile('client/index.html');
 });
+
 // START THE SERVER
 // =============================================================================
 app.listen(port);
