@@ -7,7 +7,7 @@ var parser = require('xml2json');
 
 // Add to a config file.
 var repoLoc = 'https://github.com/OpenExoplanetCatalogue/open_exoplanet_catalogue.git';
-var folderPath = '/open_exoplanet_catalogue/systems/';
+var folderPath = '/server/models/open_exoplanet_catalogue/systems/';
 var localLoc = config.directory + folderPath;
 
 function findByKey(currObj, searchKey) {
@@ -111,21 +111,11 @@ function getSeperation(obj, unit) {
 	return obj;
 }
 
-module.exports = () => {
+function loadOpenDB() {
 	// clone the exoplanet repo.
 	console.log('here');
 	//needs to be rewritten, this is asychronous so lines 151 is run first, throwing an error
-	fs.read(localLoc, fs.F_OK,(err, fd) => {
-		console.log("error is ",err) ;
-		if (err) {
-			git().clone(repoLoc, localLoc)
-				.then(function(err) {
-					console.log('Pulling open exoplanet repo completed.');
-				});
-		} else {
-			console.log('else branch');
-		}
-	});
+
 	var pool = mysql.createPool({
 		host: config.mysql.host,
 		user: config.mysql.username,
@@ -245,5 +235,20 @@ module.exports = () => {
 		console.log("error somewhere");
 		console.log(err);
 		pool.end();
+	});
+};
+
+module.exports = () => {
+	fs.access(localLoc, (err) => {
+		if (err) {
+			console.log('Open repo not found pulling data.');
+			git().clone(repoLoc, localLoc)
+				.then(function(err) {
+					console.log('Pulling open exoplanet repo completed.');
+					loadOpenDB();
+				});
+		} else {
+			loadOpenDB();
+		}
 	});
 };
