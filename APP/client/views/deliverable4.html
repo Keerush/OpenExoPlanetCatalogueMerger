@@ -1,0 +1,100 @@
+<div class="container">
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Product Backlog">
+            <img src="images/d4_images/d4_backlog1.png" class="bioPic">
+            <img src="images/d4_images/d4_backlog2.png" class="bioPic">
+            <img src="images/d4_images/d4_backlog3.png" class="bioPic">
+            <hr>
+        </uib-tab>
+        <uib-tab index="1" heading="Release Plan">
+            <img src="images/d4_images/d4_release1.png" class="bioPic">
+            <img src="images/d4_images/d4_release2.png" class="bioPic">
+            <img src="images/d4_images/d4_release3.png" class="bioPic">
+            <hr>
+        </uib-tab>
+        <uib-tab index="2" heading="Sprint Plans">
+            <h4>Sprint 2 Taskboard Start/End</h4>
+            <img src="images/d4_images/sprint2/sprint2_taskboard_start.png" class="bioPic">
+            <img src="images/d4_images/sprint2/sprint2_taskboard_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 2 Backlog</h4>
+            <img src="images/d4_images/sprint2/sprint2.png" class="bioPic">
+            <hr>
+            <h4>Sprint 2 Burndown Chart Start/End</h4>
+            <img src="images/d4_images/sprint2/sprint2_burndown_start.png" class="bioPic">
+            <img src="images/d4_images/sprint2/sprint2_burndown_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 3 Taskboard Start/End</h4>
+            <img src="images/d4_images/sprint3/sprint3_taskboard_start.png" class="bioPic">
+            <img src="images/d4_images/sprint3/sprint3_taskboard_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 3 Backlog</h4>
+            <img src="images/d4_images/sprint3/sprint3.png" class="bioPic">
+            <hr>
+            <h4>Sprint 3 Burndown Chart Start/End</h4>
+            <img src="images/d4_images/sprint3/sprint3_burndown_start.png" class="bioPic">
+            <img src="images/d4_images/sprint3/sprint3_burndown_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 4 Taskboard Start/End</h4>
+            <img src="images/d4_images/sprint4/sprint4_taskboard_start.png" class="bioPic">
+            <img src="images/d4_images/sprint4/sprint4_taskboard_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 4 Backlog</h4>
+            <img src="images/d4_images/sprint4/sprint4_1.png" class="bioPic">
+            <img src="images/d4_images/sprint4/sprint4_2.png" class="bioPic">
+            <hr>
+            <h4>Sprint 4 Burndown Chart Start/End</h4>
+            <img src="images/d4_images/sprint4/sprint4_burndown_start.png" class="bioPic">
+            <img src="images/d4_images/sprint4/sprint4_burndown_end.png" class="bioPic">
+            <hr>
+        </uib-tab>
+        <uib-tab index="4" heading="System Design">
+            <h3>System Design</h3>
+            <img src="{{systemDesign.image}}" class="biopic">
+            <hr>
+            <div class="well">
+                <h4 ng-repeat='des in systemDesign.description'>{{des}}</h4>
+            </div>
+            <hr>
+        </uib-tab>
+        <uib-tab index="5" heading="Changes">
+            <h4>We changed our product backlog to include more user stories. We felt that the user stories we had in deliverable 3 were still too big, thus we decided to break user story 1 and user story 2 down into several other user stories. For example, user story 1 requires us to find differences between databases and display all of them to the user. We broke this user story down by separating the task of finding differences and the task of displaying these differences into two user stories. As a consequence of splitting up these user stories, we also adjusted the amount of developer hours and priorities of each user story. We found that our initial estimate of the time it should take to complete user story 1 in deliverable 3 was too short, thus we increased the estimated developer hours in our new user stories. We also updated our release plan such that it would better match our project velocity and our new estimated required developer hours.</h4>
+            <h4>As for our taskboard, there were several changes made since deliverable 3. Since we changed user story 1 and 2, the taskboard we had in deliverable 3 no longer represent our current user stories. We found that tasks that we left in our To Do column were no longer relevant, thus we removed them. We also removed the completed tasks that we had in deliverable 3 because they did not match well with our new user stories. For example, one completed task was to create a GUI for pulling data from the exoplanet.eu database. However, when creating our new user stories, we felt that this task was no longer high priority as our new user stories focused more on the backend of our system. To avoid redoing these completed tasks, we kept the code in our repo and we plan on building upon them in the future.</h4>
+        </uib-tab>
+        <uib-tab index="6" heading="Code Inspection Report">
+            <div class="row" ng-repeat="review in codeReviews">
+                <hr>
+                <div class="col-md-3">
+                    <p><b>Reviewer:</b> {{review.reviewerName}}</p>
+                    <p><b>Code under review:</b> <a target="_blank" href="{{review.codeLink}}">{{review.codeName}}</a></p>
+                    <p><b>Author:</b> {{review.author}}</p>
+                    <p><b>Date of review:</b> {{review.dateOfReview}}</p>
+                </div>
+                <div class="col-md-9">
+                    <p><b>Bugs:</b> {{review.bugs}}</p>
+                    <p><b>Poor Code Logic:</b> {{review.poorCodeLogic}}</p>
+                    <p><b>Poor Code Style:</b> {{review.poorCodeStyle}}</p>
+                    <p><b>Missing Documentation:</b> {{review.missingDocumentation}}</p>
+                    <p><b>Unreadable Code:</b> {{review.unreadableCode}}</p>
+                    <p><b>Vulnerabilities:</b> {{review.vulnerabilities}}</p>
+                    <p><b>Poor Testing:</b> {{review.poorTesting}}</p>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="7" heading="Code Review Video/System Validations">
+            <h3>Sneak-peek at our code review...</h3>
+            <ng-youtube-embed url="groupVid" width="100%" gaming="false"></ng-youtube-embed>
+            <hr>
+            <h3>System Validations</h3>
+            <div class="well">
+                <h4 ng-repeat='desc in systemValidationDesc'>{{desc}}</h4>
+            </div>
+        </uib-tab>
+        <uib-tab index="8" heading="Overview of Deliverable 4">
+            <h4>As we progressed from deliverable 3 to 4, we made several changes to our user stories, release plan, and tasks. These changes are described in our Change tab. In deliverable 3, we completed the task of downloading the necessary data from the different databases and then displaying them to the user. We did not format the data in any way, nor did we store them in any sort of database. As we moved to deliverable 4, we managed to store the data we downloaded into a MySQL database. We formatted tables with schemas that matched the XML files found in the Open Exoplanet Catalogue, so that when we export our data from our database, we know that the data is compatible with OEC. We also created scripts so that the user can remove all data from our MySQL database and add them back in again. We also made a web GUI that would make use of our scripts. Lastly, we also began the process of using our MySQL database to query differences between each exoplanet database and haven these differences be displayed to the user.</h4>
+            <h4>For sprint 2, our estimated project velocity was 28. Our actual was 20. For sprint 3, our estimated was 24. Our actual was 12. For sprint 4, our estimated was 40. Our actual was 20.</h4>
+            <h4>We found that we did not follow our plans exactly. As described earlier, we made several changes to our release plan and user stories. Judging from our actual project velocity, we may have to make several changes in the future as well.</h4>
+            <h4>Overall, the main difference between deliverable 3 and deliverable 4 was our expected progress and our actual progress. In deliverable 3, we felt that the progress we made was smooth and the direction of our end result was very clear. However, as we worked longer throughout deliverable 4, we experienced unexpected problems. There were times when we had to revise our plans due to poor estimates in how long tasks should take. Thus the progression and end result for deliverable 4 was not as smooth as and clear as we expected. </h4>
+        </uib-tab>
+    </uib-tabset>
+</div>

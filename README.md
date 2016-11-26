@@ -21,3 +21,9 @@ You can find our website under APP/public
 1. If you want to view our demo app, cd into the APP folder and make sure to install dependencies by running: **npm install**  
 2. Next run: **node server.js**  
 3. View your [localhost](http://localhost:8080/) in a browser and click on our demo app
+
+Deliverable 4:  
+You can find our website under APP  
+1. To view our website, move to the APP folder and make sure to install dependencies by running: **npm install**   
+2. Next run: **npm start**  
+3. View your [localhost](http://localhost:8080/) in a browser

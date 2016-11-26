@@ -1,4 +1,4 @@
-var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap', 'ngYoutubeEmbed']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -27,9 +27,16 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'views/deliverable3part2.html',
 		controller: 'deliverable3-part2Ctrl'
 	})
+	.when('/deliverable4', {
+		templateUrl: 'views/deliverable4.html',
+		controller: 'deliverable4Ctrl'
+	})
 	.when('/demo', {
 		templateUrl: 'views/demo.html',
 		controller: 'demoCtrl'
+	})
+	.when('/frontend1', {
+		templateUrl: 'views/demo/frontend1.html',
 	})
 	.otherwise({ 
 		redirectTo: '/' 
