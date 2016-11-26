@@ -230,8 +230,7 @@ module.exports = () => {
 			tables.forEach(function(obj) {
 				var promise = pool.getConnection()
 					.then(function(connection) {
-						var args = name + obj;
-						console.log(args);
+                        var args = name + obj;
 						return connection.query('CREATE TABLE IF NOT EXISTS ' + args)
 							.then(function(response) {
 								pool.releaseConnection(connection);
@@ -261,10 +260,10 @@ module.exports = () => {
 			pool.end();
 			return resolve('Done!');
 		}).catch(function(err) {
-			console.log("error somewhere");
+            console.log("error somewhere : ", err);
 			pool.end();
 			return resolve('Done with errors!');
 		});
 	});
-	return promise;
+    return promise;
 };
