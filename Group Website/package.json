@@ -4,6 +4,7 @@
   "description": "Website for progress of group website.",
   "private": true,
   "scripts": {
+    "start": "supervisor ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,7 +12,8 @@
   "dependencies": {
     "express": "^4.14.0",
     "pg": "^6.1.0",
-	"request": "^2.75.0",
-    "request-promise": "^4.1.1"
-	}
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1",
+    "supervisor": "^0.11.0"
+  }
 }
