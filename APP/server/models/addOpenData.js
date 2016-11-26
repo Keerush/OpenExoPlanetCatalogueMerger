@@ -1,3 +1,4 @@
+var config = require('../../config.js')
 var git = require('simple-git');
 var mysql = require('promise-mysql');
 var fs = require('fs');
@@ -7,7 +8,7 @@ var parser = require('xml2json');
 // Add to a config file.
 var repoLoc = 'https://github.com/OpenExoplanetCatalogue/open_exoplanet_catalogue.git';
 var folderPath = '/open_exoplanet_catalogue/systems/';
-var localLoc = __dirname + folderPath;
+var localLoc = config.directory + folderPath;
 
 function findByKey(currObj, searchKey) {
 	var result = [];
@@ -110,12 +111,26 @@ function getSeperation(obj, unit) {
 	return obj;
 }
 
-function loadToDB() {
+module.exports = () => {
+	// clone the exoplanet repo.
+	console.log('here');
+	//needs to be rewritten, this is asychronous so lines 151 is run first, throwing an error
+	fs.read(localLoc, fs.F_OK,(err, fd) => {
+		console.log("error is ",err) ;
+		if (err) {
+			git().clone(repoLoc, localLoc)
+				.then(function(err) {
+					console.log('Pulling open exoplanet repo completed.');
+				});
+		} else {
+			console.log('else branch');
+		}
+	});
 	var pool = mysql.createPool({
-		host: 'sql9.freemysqlhosting.net',
-		user: 'sql9142844',
-		password: 'yiZUzq27ZS',
-		database: 'sql9142844'
+		host: config.mysql.host,
+		user: config.mysql.username,
+		password: config.mysql.password,
+		database: config.mysql.database
 	});
 
 	var planetInput = [],
@@ -232,15 +247,3 @@ function loadToDB() {
 		pool.end();
 	});
 };
-
-// clone the exoplanet repo.
-fs.access(localLoc, fs.F_OK, function(err) {
-	if (err) {
-		git().clone(repoLoc, localLoc)
-			.then(function(err) {
-				console.log('Pulling open exoplanet repo completed.');
-			});
-	}
-});
-
-loadToDB();
