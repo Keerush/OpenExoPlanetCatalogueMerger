@@ -12,7 +12,7 @@ var pool = mysql.createPool({
 });
 
 function pad(num, places) {
-	var zero = 2 - num.toString().length + 1;
+	var zero = places - num.toString().length + 1;
 	return Array(+(zero > 0 && zero)).join("0") + num;
 }
 
@@ -31,13 +31,13 @@ function formatDistance(str, vals) {
 	return output.trim();
 }
 
-function pushDiffs(updateInput) {
+function pushDiffs(updateInput, tableName) {
 	var promise = new Promise(function(resolve, reject) {
-		console.log('checking if open is different.');
-		var diffQuery = 'SELECT a.name FROM ((SELECT * from NasaSystem WHERE name in ?) a JOIN (SELECT * from OpenSystem WHERE name in ?) b ON a.name = b.name AND (select * from NasaSystem where name = a.name) <> (select * from OpenSystem where name = b.name));',
+		console.log('checking if open is different from Nasa' + tableName + '.');
+		var diffQuery = 'SELECT a.name FROM ((SELECT * from Nasa' + tableName + ' WHERE name in ?) a JOIN (SELECT * from Open' + tableName + ' WHERE name in ?) b ON a.name = b.name AND (SELECT * from Nasa' + tableName + ' where name = a.name) <> (SELECT * from Open' + tableName + ' where name = b.name));',
 			insertQuery = 'INSERT IGNORE INTO UnderReview (keyName, tableName) VALUES ?';
 		var input = Array.from(new Set(updateInput));
-		var diffs = [];
+		let diffs = [];
 
 		Q.fcall(() => {
 			var promise = pool.getConnection()
@@ -48,7 +48,7 @@ function pushDiffs(updateInput) {
 						])
 						.then(function(rows) {
 							diffs = rows.map((row) => {
-								return [row.name, 'Nasa'];
+								return [row.name, 'Nasa' + tableName];
 							});
 							pool.releaseConnection(connection);
 						}).catch(function(err) {
@@ -58,10 +58,8 @@ function pushDiffs(updateInput) {
 				});
 			return promise;
 		}).then(() => {
-			console.log('test');
 			var promise = pool.getConnection()
 				.then(function(connection) {
-					console.log(diffs);
 					return connection.query(insertQuery, [diffs])
 						.then(function() {
 							pool.releaseConnection(connection);
@@ -80,7 +78,6 @@ function pushDiffs(updateInput) {
 
 module.exports = () => {
 	var promise = new Promise(function(resolve, reject) {
-
 		console.log('Getting data from NASA');
 		request({
 			url: config.nasa.url,
@@ -93,7 +90,8 @@ module.exports = () => {
 					nameInput = [],
 					starSystemInput = [],
 					planetStarInput = [],
-					updateInput = [];
+					updateSystemInput = [],
+					updatePlanetInput = [];
 
 				console.log('Retrieved nasa data...');
 				data.forEach(function(item) {
@@ -102,8 +100,11 @@ module.exports = () => {
 					starInput.push([item.pl_hostname, item.st_mass, item.st_masserr2, item.st_masserr1, item.st_rad, item.st_raderr2, item.st_raderr1, item.st_teff, item.st_tefferr2, item.st_tefferr1, item.st_age, item.st_ageerr1, item.st_ageerr2, item.st_metfe, item.st_metfeerr2, item.st_metfeerr1, item.st_spstr, item.st_bj, item.st_bjerr, item.st_bjerr, item.st_vj, item.st_vjerr, item.st_vjerr, item.st_rc, item.st_rcerr, item.st_rcerr, item.st_ic, item.st_icerr, item.st_icerr, item.st_j, item.st_jerr, item.st_jerr, item.st_h, item.st_herr, item.st_herr, item.st_k, item.st_kerr, item.st_kerr]);
 					nameInput.push([item.pl_hostname, item.pl_hostname]);
 					starSystemInput.push([item.pl_hostname, item.pl_hostname]);
-					planetStarInput.push([item.pl_hostname + item.pl_letter, item.pl_hostname]);
-					updateInput.push(item.pl_hostname);
+					planetStarInput.push([item.pl_hostname + ' ' + item.pl_letter, item.pl_hostname]);
+
+					// Need to check last row update.
+					updateSystemInput.push(item.pl_hostname);
+					updatePlanetInput.push(item.pl_hostname + ' ' + item.pl_letter);
 				});
 
 				console.log('Now parsing...');
@@ -139,7 +140,9 @@ module.exports = () => {
 				});
 
 				// check for differences from the newly imported data.
-				promises.push(pushDiffs(updateInput));
+				promises.push(pushDiffs(updateSystemInput, 'System'));
+				promises.push(pushDiffs(updateSystemInput, 'Star'));
+				promises.push(pushDiffs(updatePlanetInput, 'Planet'));
 
 				Q.all(promises).then(function(data) {
 					console.log('ending pool');
