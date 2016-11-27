@@ -24,7 +24,8 @@ module.exports = () => {
 			'distance FLOAT,' +
 			'distanceminus FLOAT,' +
 			'distanceplus FLOAT,' +
-			'videolink VARCHAR(255)' +
+			'videolink VARCHAR(255),' +
+			'lastupdate	VARCHAR(255)' +
 			')';
 
 		var tStarSystem = 'StarSystem(' +
@@ -163,7 +164,8 @@ module.exports = () => {
 			'magHplus FLOAT,' +
 			'magK FLOAT,' +
 			'magKminus FLOAT,' +
-			'magKplus FLOAT' +
+			'magKplus FLOAT,' +
+			'lastupdate	VARCHAR(255)' +
 			')';
 
 		var tPlanetStar = 'PlanetStar(' +
@@ -192,7 +194,8 @@ module.exports = () => {
 			'magI VARCHAR(255),' +
 			'magJ VARCHAR(255),' +
 			'magH VARCHAR(255),' +
-			'magK VARCHAR(255)' +
+			'magK VARCHAR(255),' +
+			'lastupdate	VARCHAR(255)' +
 			')';
 
 		var tBinaryBinary = 'BinaryBinary(' +
@@ -233,6 +236,7 @@ module.exports = () => {
                         var args = name + obj;
 						return connection.query('CREATE TABLE IF NOT EXISTS ' + args)
 							.then(function(response) {
+								console.log('Created ' + name + obj.substring(0, obj.indexOf('(')));
 								pool.releaseConnection(connection);
 							}).catch(function(err) {
 								console.log(err);
@@ -247,6 +251,7 @@ module.exports = () => {
 			.then(function(connection) {
 				return connection.query('CREATE TABLE IF NOT EXISTS ' + tUnderReview)
 					.then(function(response) {
+						console.log('Created NeedsReview');
 						pool.releaseConnection(connection);
 					}).catch(function(err) {
 						console.log(err);
