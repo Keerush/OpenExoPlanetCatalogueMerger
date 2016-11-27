@@ -10,16 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "csvtojson": "^1.0.3",
     "express": "^4.14.0",
-    "pg": "^6.1.0",
-    "request": "^2.75.0",
-    "request-promise": "^4.1.1",
-    "supervisor": "^0.11.0",
     "mysql": "^2.12.0",
+    "pg": "^6.1.0",
+    "promise-mysql": "^2.0.0",
     "q": "",
     "request": "",
-    "promise-mysql": "^2.0.0",
+    "request-promise": "^4.1.1",
     "simple-git": "^1.62.0",
+    "supervisor": "^0.11.0",
     "xml2json": "^0.10.0"
   },
   "devDependencies": {

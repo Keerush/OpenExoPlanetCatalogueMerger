@@ -1,10 +1,11 @@
 var config = require('../../config.js')
+var Converter = require("csvtojson").Converter;
 var mysql = require('promise-mysql');
 var request = require('request');
 var Q = require('q');
 var fs = require('fs');
 
-exports.addData = function() {
+module.exports = () => {
 	var promise = new Promise(function(resolve, reject) {
 		var pool = mysql.createPool({
 			host: config.mysql.host,
@@ -14,14 +15,14 @@ exports.addData = function() {
 		});
 
 		var url = config.exoplanet.url;
-
+		var converter = new Converter();
 		console.log('Getting data from exoplanet.eu');
-		request({
-			url: url,
-			json: true
-		}, function(err, response, data) {
-
+		converter.on("end_parsed", function (jsonArray) {
+			console.log(jsonArray);
+			return resolve();
 		});
+		request.get(url).pipe(converter);
+
 	});
 	return promise;
 };
