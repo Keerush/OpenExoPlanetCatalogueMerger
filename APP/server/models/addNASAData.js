@@ -76,6 +76,103 @@ function pushDiffs(updateInput, tableName) {
 	return promise;
 }
 
+function runQueries(queries) {
+	var promise = new Promise(function(resolve, reject) {
+		var promises = [];
+		queries.forEach(function(item, index) {
+			var promiseQ = pool.getConnection()
+				.then(function(connection) {
+					return connection.query(item[0], [item[1]])
+						.then(function(response) {
+							pool.releaseConnection(connection);
+						}).catch(function(err) {
+							console.log(err);
+							return (Q.reject(err));
+						});
+				});
+			promises.push(promiseQ);
+		});
+
+		Q.all(promises).then(function(data) {
+			return resolve('Done!');
+		}).catch(function(err) {
+			console.log(err);
+			console.log("error somewhere");
+			return resolve('Done with errors!');
+		});
+
+	});
+
+	return promise;
+}
+
+function runUpdates(updateSystemInput, updateStarInput, updatePlanetInput) {
+	var promise = new Promise(function(resolve, reject) {
+		var promises = [],
+		systemKeys = Object.getOwnPropertyNames(updateSystemInput),
+		starKeys = Object.getOwnPropertyNames(updateStarInput),
+		planetKeys = Object.getOwnPropertyNames(updatePlanetInput);
+
+		if (systemKeys.length != 0) {
+			promises.push(pushDiffs(systemKeys, 'System'));
+		}
+		if (starKeys.length != 0) {
+			promises.push(pushDiffs(starKeys, 'Star'));
+		}
+		if (planetKeys.length != 0) {
+			promises.push(pushDiffs(planetKeys, 'Planet'));
+		}
+
+		Q.all(promises).then(function(data) {
+			return resolve('Done!');
+		}).catch(function(err) {
+			console.log(err);
+			console.log("error somewhere");
+			return resolve('Done with errors!');
+		});
+	});
+
+	return promise;
+}
+
+function checkUpdates(updatesInfo) {
+	var promise = new Promise(function(resolve, reject) {
+		var promises = [];
+		updatesInfo.forEach((item) => {
+			var promiseU = pool.getConnection()
+				.then(function(connection) {
+					console.log('Checking for new updates.');
+					return connection.query(item[1], [
+							[item[2].map(x => x[0])]
+						])
+						.then(function(rows) {
+							rows.forEach((row) => {
+								if (row.name in item[0] && item[0][row.name] == row.lastupdate) {
+									delete item[0][row.name];
+								}
+							});
+
+							pool.releaseConnection(connection);
+						}).catch(function(err) {
+							console.log(err);
+							return (Q.reject(err));
+						});
+				});
+			promises.push(promiseU);
+		});
+
+		Q.all(promises).then(function(data) {
+			return resolve(updatesInfo.map(x => x[0]));
+		}).catch(function(err) {
+			console.log(err);
+			console.log("error somewhere");
+			return resolve('Done with errors!');
+		});
+	});
+
+	return promise
+}
+
 module.exports = () => {
 	var promise = new Promise(function(resolve, reject) {
 		console.log('Getting data from NASA');
@@ -90,8 +187,9 @@ module.exports = () => {
 					nameInput = [],
 					starSystemInput = [],
 					planetStarInput = [],
-					updateSystemInput = [],
-					updatePlanetInput = [];
+					updateStarInput = {},
+					updateSystemInput = {},
+					updatePlanetInput = {};
 
 				console.log('Retrieved nasa data...');
 				data.forEach(function(item) {
@@ -102,9 +200,9 @@ module.exports = () => {
 					starSystemInput.push([item.pl_hostname, item.pl_hostname]);
 					planetStarInput.push([item.pl_hostname + ' ' + item.pl_letter, item.pl_hostname]);
 
-					// Need to check last row update.
-					updateSystemInput.push(item.pl_hostname);
-					updatePlanetInput.push(item.pl_hostname + ' ' + item.pl_letter);
+					updateSystemInput[item.pl_hostname] = item.rowupdate;
+					updateStarInput[item.pl_hostname] = item.rowupdate;
+					updatePlanetInput[item.pl_hostname + ' ' + item.pl_letter] = item.rowupdate;
 				});
 
 				console.log('Now parsing...');
@@ -113,7 +211,10 @@ module.exports = () => {
 					starQuery = 'REPLACE INTO NasaStar (name, mass, massplus, massminus, radius, radiusplus, radiusminus, temperature, temperatureplus, temperatureminus, age, ageplus, ageminus, metallicity, metallicityplus, metallicityminus, spectraltype, magB, magBplus, magBminus, magV, magVplus, magVminus, magR, magRplus, magRminus, magI, magIplus, magIminus, magJ, magJplus, magJminus, magH, magHplus, magHminus, magK, magKplus, magKminus, lastupdate) VALUES ?',
 					nameQuery = 'REPLACE INTO NasaNames (name, otherName) VALUES ?',
 					starSystemQuery = 'REPLACE INTO NasaStarSystem(starName, systemName) VALUES ?',
-					planetStarQuery = 'REPLACE INTO NasaPlanetStar(planetName, starName) VALUES ?';
+					planetStarQuery = 'REPLACE INTO NasaPlanetStar(planetName, starName) VALUES ?',
+					updateSystemQuery = 'SELECT name, lastupdate FROM NasaSystem WHERE name IN ?',
+					updateStarQuery = 'SELECT name, lastupdate FROM NasaStar WHERE name IN ?',
+					updatePlanetQuery = 'SELECT name, lastupdate FROM NasaPlanet WHERE name IN ?';
 
 				var queries = [
 						[systemQuery, systemInput],
@@ -125,24 +226,20 @@ module.exports = () => {
 					],
 					promises = [];
 
-				queries.forEach(function(item, index) {
-					var promise = pool.getConnection()
-						.then(function(connection) {
-							return connection.query(item[0], [item[1]])
-								.then(function(response) {
-									pool.releaseConnection(connection);
-								}).catch(function(err) {
-									console.log(err);
-									return (Q.reject(err));
-								});
+				// check last row update.
+				var updatesInfo = [
+					[updateSystemInput, updateSystemQuery, systemInput],
+					[updateStarInput, updateStarQuery, starInput],
+					[updatePlanetInput, updatePlanetQuery, planetInput]
+				];
+				var promise = checkUpdates(updatesInfo)
+					.then((res) => {
+						return runQueries(queries).then(() => {
+							// check for differences from the newly imported data.
+							return runUpdates(res[0], res[1], res[2]);
 						});
-					promises.push(promise);
-				});
-
-				// check for differences from the newly imported data.
-				promises.push(pushDiffs(updateSystemInput, 'System'));
-				promises.push(pushDiffs(updateSystemInput, 'Star'));
-				promises.push(pushDiffs(updatePlanetInput, 'Planet'));
+					});
+				promises.push(promise);
 
 				Q.all(promises).then(function(data) {
 					console.log('ending pool');
