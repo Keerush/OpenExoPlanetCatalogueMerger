@@ -11,104 +11,104 @@ var folderPath = '/open_exoplanet_catalogue/';
 var localLoc = config.directory + folderPath;
 
 function findByKey(currObj, searchKey) {
-    var result = [];
-    if (currObj instanceof Array) {
-        for (var i = 0; i < currObj.length; i++) {
-            var temp = findByKey(currObj[i], searchKey);
-            if (typeof temp !== 'undefined' && temp.length > 0) {
-                result = result.concat(temp);
-            }
-        }
-    } else {
-        for (var currKey in currObj) {
-            if (currKey == searchKey) {
-                result = result.concat(currObj[currKey]);
-            }
-            if (currObj[currKey] instanceof Object || currObj[currKey] instanceof Array)
-                var temp = findByKey(currObj[currKey], searchKey);
-            if (typeof temp !== 'undefined' && temp.length > 0) {
-                result = result.concat(temp);
-            }
-        }
-    }
-    return result;
+	var result = [];
+	if (currObj instanceof Array) {
+		for (var i = 0; i < currObj.length; i++) {
+			var temp = findByKey(currObj[i], searchKey);
+			if (typeof temp !== 'undefined' && temp.length > 0) {
+				result = result.concat(temp);
+			}
+		}
+	} else {
+		for (var currKey in currObj) {
+			if (currKey == searchKey) {
+				result = result.concat(currObj[currKey]);
+			}
+			if (currObj[currKey] instanceof Object || currObj[currKey] instanceof Array)
+				var temp = findByKey(currObj[currKey], searchKey);
+			if (typeof temp !== 'undefined' && temp.length > 0) {
+				result = result.concat(temp);
+			}
+		}
+	}
+	return result;
 };
 
 function getValue(obj) {
-    if (obj instanceof Object) {
-        return obj['$t'];
-    }
-    return obj;
+	if (obj instanceof Object) {
+		return obj['$t'];
+	}
+	return obj;
 };
 
 function getPlus(obj) {
-    if (obj instanceof Object) {
-        return obj.errorplus;
-    }
-    return null;
+	if (obj instanceof Object) {
+		return obj.errorplus;
+	}
+	return null;
 };
 
 function getMinus(obj) {
-    if (obj instanceof Object) {
-        return obj.errorminus;
-    }
-    return null;
+	if (obj instanceof Object) {
+		return obj.errorminus;
+	}
+	return null;
 };
 
 function getNames(obj) {
-    var origName = '';
-    var namesInput = [];
+	var origName = '';
+	var namesInput = [];
 
-    if (obj.name instanceof Array) {
-        origName = obj.name[0];
-        obj.name.forEach(function(name) {
-            namesInput.push([name, origName]);
-        });
-    } else {
-        origName = obj.name;
-        namesInput.push([origName, origName]);
-    }
+	if (obj.name instanceof Array) {
+		origName = obj.name[0];
+		obj.name.forEach(function(name) {
+			namesInput.push([name, origName]);
+		});
+	} else {
+		origName = obj.name;
+		namesInput.push([origName, origName]);
+	}
 
-    return [origName, namesInput];
+	return [origName, namesInput];
 }
 
 function getMassValue(obj, type) {
-    if (obj instanceof Object) {
-        if ((type == 'msini' && obj.type == 'msini') || (type == 'jupiter' && obj.type != 'msini')) {
-            return obj['$t'];
-        }
-    }
-    return null;
+	if (obj instanceof Object) {
+		if ((type == 'msini' && obj.type == 'msini') || (type == 'jupiter' && obj.type != 'msini')) {
+			return obj['$t'];
+		}
+	}
+	return null;
 }
 
 
 function getMassPlus(obj, type) {
-    if (obj instanceof Object) {
-        if ((type == 'msini' && obj.type == 'msini') || (type == 'jupiter' && obj.type != 'msini')) {
-            return obj.errorplus;
-        }
-    }
-    return null;
+	if (obj instanceof Object) {
+		if ((type == 'msini' && obj.type == 'msini') || (type == 'jupiter' && obj.type != 'msini')) {
+			return obj.errorplus;
+		}
+	}
+	return null;
 }
 
 function getMassMinus(obj, type) {
-    if (obj instanceof Object) {
-        if ((type == 'msini' && obj.type == 'msini') || (type == 'jupiter' && obj.type != 'msini')) {
-            return obj.errorminus;
-        }
-    }
-    return null;
+	if (obj instanceof Object) {
+		if ((type == 'msini' && obj.type == 'msini') || (type == 'jupiter' && obj.type != 'msini')) {
+			return obj.errorminus;
+		}
+	}
+	return null;
 }
 
 function getSeperation(obj, unit) {
-    if (obj instanceof Array) {
-        obj.forEach(function(item) {
-            if (item.unit == unit) {
-                return item;
-            }
-        });
-    }
-    return obj;
+	if (obj instanceof Array) {
+		obj.forEach(function(item) {
+			if (item.unit == unit) {
+				return item;
+			}
+		});
+	}
+	return obj;
 }
 
 module.exports = () => {
