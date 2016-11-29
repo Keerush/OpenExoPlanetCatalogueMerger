@@ -8,7 +8,8 @@ const droptables = require('../models/dropTables.js');
 const createtables = require('../models/createTables.js');
 const addNASAData = require('../models/addNASAData.js');
 const getNASAData = require('../models/getUnderReview');
-const editNASAData = require('../models/editNasaFiles.js');
+const editNASAData = require('../models/editNasaFiles');
+const ignoreDiffs = require('../models/ignoreDiffs');
 
 router.use(bodyParser.json());
 
@@ -103,7 +104,7 @@ router.get('/getNasaSystemDiff', (req, res) => {
 });
 
 router.post('/editXmls', (req, res) => {
-	if (!req.body.hasOwnProperty('editData') || !req.body.hasOwnProperty('ignoreData')) {
+	if (Object.getOwnPropertyNames(req.body).length === 0 || req.body.length === 0) {
 		res.statusCode = 400;
 		return res.send('Invalid body.');
 	}
@@ -117,4 +118,19 @@ router.post('/editXmls', (req, res) => {
 			return res.send(err);
 		});
 });
+
+router.post('/ignoreDiffs', (req, res) => {
+	if (Object.getOwnPropertyNames(req.body).length === 0 || req.body.length === 0) {
+		res.statusCode = 400;
+		return res.send('Invalid body.');
+	}
+
+	ignoreDiffs(req.body)
+		.then(() => {
+			res.statusCode = 200;
+			return res.send('ok');
+		}).catch((err) => {
+			res.statusCode = 500;
+			return res.send(err);
+		});});
 module.exports = router;
