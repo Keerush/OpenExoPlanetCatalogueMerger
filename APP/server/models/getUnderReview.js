@@ -10,6 +10,17 @@ var pool = mysql.createPool({
 	database: config.mysql.database
 });
 
+/*
+	- sendQueryNasa will return:
+	 	[{
+			nasa: {...},
+			open: {...}
+		}, {...}]
+
+	- nasa contains information found in nasa db
+	- open contains information found in open db
+*/
+
 function sendQueryNasa(query) {
 	var promise = new Promise(function(resolve, reject) {
 
