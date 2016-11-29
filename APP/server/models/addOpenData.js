@@ -7,7 +7,7 @@ var parser = require('xml2json');
 
 // Add to a config file.
 var repoLoc = 'https://github.com/OpenExoplanetCatalogue/open_exoplanet_catalogue.git';
-var folderPath = '/open_exoplanet_catalogue/';
+var folderPath = '/repos/master/';
 var localLoc = config.directory + folderPath;
 
 function findByKey(currObj, searchKey) {
@@ -135,8 +135,9 @@ module.exports = () => {
             if (!err) {
                 var func;
 
-                git().cwd(localLoc + "systems");
-                if (files) {
+                git().cwd(localLoc);
+                if (files && files.length) {
+                    console.log("checkout")
                     func = git().checkout("master");
                 } else {
                     func = git().clone(repoLoc, localLoc);
@@ -167,11 +168,9 @@ module.exports = () => {
                                 console.log('starts with .');
                                 return;
                             }
-                            console.log(file);
                             var fileR = localLoc + file;
                             var data = fs.readFileSync(fileR);
 
-                            console.log('Parsing ' + file);
                             var info = JSON.parse(parser.toJson(data));
 
                             // parse planet data ----------------------
@@ -227,7 +226,6 @@ module.exports = () => {
                                     starSystemInput.push([getNames(system.star)[0], systemName]);
                                 }
                             }
-                            console.log('Parsing Completed:' + file);
                         });
                         console.log('read all files');
 
