@@ -13,13 +13,13 @@ const fs = require('fs')
 module.exports = {
 	pushDifferences: function(token, username) {
 		var testtoken = "044977754f2e14d05536dec207a231e502d1a6dc"
-
+		token = testtoken;
 		var options = {
 			url: "https://api.github.com/user",
 			headers: {
 				json: true,
 				'User-Agent': "openexoplanetmerger",
-				'Authorization': 'token 044977754f2e14d05536dec207a231e502d1a6dc'
+				'Authorization': 'token ' + token
 			},
 			transform: function(body, response, resolveWithFullResponse) {
 				return response;
@@ -41,7 +41,7 @@ module.exports = {
 						url: "https://api.github.com/user/repos",
 						headers: {
 							'User-Agent': "openexoplanetmerger",
-							'Authorization': 'token 044977754f2e14d05536dec207a231e502d1a6dc'
+							'Authorization': 'token ' + token
 						}
 					};
 
@@ -71,7 +71,7 @@ module.exports = {
 						url: "https://api.github.com/repos/" + username + "/open_exoplanet_catalogue",
 						headers: {
 							'User-Agent': "openexoplanetmerger",
-							'Authorization': 'token 044977754f2e14d05536dec207a231e502d1a6dc'
+							'Authorization': 'token ' + token
 						}
 					};
 					return request.delete(deleteOptions)
@@ -86,7 +86,7 @@ module.exports = {
 					url: "https://api.github.com/repos/OpenExoplanetCatalogue/open_exoplanet_catalogue/forks",
 					headers: {
 						'User-Agent': "openexoplanetmerger",
-						'Authorization': 'token 044977754f2e14d05536dec207a231e502d1a6dc'
+						'Authorization': 'token ' + token
 					}
 				}
 				return request.post(forkOptions);
