@@ -14,7 +14,9 @@ const ignoreDiffs = require('../models/ignoreDiffs');
 router.use(bodyParser.json());
 
 router.get('/', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', '..', 'client', 'index.html'));
+	console.log("here");
+	res.statusCode = 200
+	res.send("API: Running!");
 });
 
 router.get('/nasaData', function(req, res) {
