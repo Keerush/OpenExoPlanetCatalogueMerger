@@ -1,5 +1,8 @@
 module.exports = {
 	"directory" : __dirname,
+	"logLocation" : __dirname + "/logs/importantinformation.log",
+	"masterRepoLocation" : __dirname + "/repos/master/",
+	"forkedRepoLocation" : __dirname + "/repos/fork/",
 	"mysql": {
 		"host": "127.0.0.1",
 		"username": "root",

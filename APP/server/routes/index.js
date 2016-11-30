@@ -6,6 +6,7 @@ const http = require('request-promise');
 const droptables = require('../models/dropTables.js');
 const createtables = require('../models/createTables.js');
 const addNASAData = require('../models/addNASAData.js');
+const getNASAData = require('../models/getUnderReview');
 
 router.get('/', (req, res, next) => {
 	res.sendFile(path.join(__dirname, '..', '..', 'client', 'index.html'));
@@ -68,6 +69,32 @@ router.get('/addNASAData', function(req, res) {
 
 		res.statusCode = 200;
 		res.send('added data.');
+	});
+});
+
+router.get('/getNasaStarDiff', (req, res) => {
+	getNASAData.getNasaStar()
+	.then((data) => {
+		res.statusCode = 200;
+		return res.send(data);
+	});
+});
+
+
+router.get('/getNasaPlanetDiff', (req, res) => {
+	getNASAData.getNasaPlanet()
+	.then((data) => {
+		res.statusCode = 200;
+		return res.send(data);
+	});
+});
+
+
+router.get('/getNasaSystemDiff', (req, res) => {
+	getNASAData.getNasaSystem()
+	.then((data) => {
+		res.statusCode = 200;
+		return res.send(data);
 	});
 });
 module.exports = router;
