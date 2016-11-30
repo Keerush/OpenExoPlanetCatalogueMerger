@@ -86,4 +86,4 @@ module.exports = () => {
 		request.get(url).pipe(converter);
 	});
 	return promise;
-};
+}; 
