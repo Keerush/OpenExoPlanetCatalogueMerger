@@ -1,0 +1,148 @@
+
+65.5/100
+
+CSCC01 Deliverable 4 Marking Guide
+-----------------------------------
+
+Project Management:  __________ (20%) 17.5 
+
+  Release plan:  2.5/2.5
+    - each release corresponds to end of Sprint
+    - project fully laid out:
+      for each release date, list of user stories to implement
+    - project velocity specified and used
+    - highest priority user stories first modulo dependencies
+    - reasonable goals for each release
+  
+  Product Backlog: 2.5/2.5
+    - user stories follow the correct format.
+    - user stories, together, reflect all the user requirements (from
+      all personas).
+    - user stories correspond to actual requirements (no "invented"
+      features).
+    - user stories contain enough information for devs to estimate how
+      long it would take to implement it.
+    - each user story addresses one specific requirement (no "world
+      peace" stories).
+
+  Sprint Backlog(s): 2.5/2.5
+     - user stories taken from the Product Backlog
+     - estimated costs
+     - estimated values
+
+  Sprint Plan(s): 0/2.5, need to plan better. Falling behind by alot.
+    - user stories divided into tasks when appropriate.
+    - each Sprint Plan contains all the necessary information:
+        who is working on which task on which day 
+    - sum of costs of user stories in the sprint = project velocity
+    - good planning decisions
+
+  Use of Task Board: 2.5/2.5
+    - correct format of task boards
+    - snapshots in the begginning and end of each Sprint are provided
+    
+  Use of Burndown Charts: 2.5/2.5
+    - snapshots in the begginning and end of each Sprint are provided
+    - correctness of burndown charts
+
+  Use of Repo: 2.5/2.5
+      (including good use of branching from now on!)
+
+  Use of communication tools: 2.5/2.5
+     - evidence of using communication tools of their choice effectively
+
+
+Design and Implementation:  __________ (30%) 15
+
+   System Design: 15/15, great job. good diagram
+      - good modular design
+      - general and easy to extend
+      - it is clear how the current implementation is going to be
+        extended into an application that satisfies the client's needs
+
+   Implementation: 0/15, demo doesnt run (going to the route doesn't work), please take c24 and learn some functional programming, features aren't close to done when shown in interview too :/
+     - 0 marks if it doesn't run
+     - most of the features are either fully implemented of nearly implemented
+     - quality and maturity of code
+
+
+Verification and Validation:  __________ (25%) 9
+
+   - quality of unit tests: 2/5, some tests, need better coverage
+         - good coverage
+	       - no redundancy
+   - code review activities and outcomes: 7/10, not all reviews are thorough
+         - each review follows a checklist (not necessarily the example one, but the same checklist for all)
+	       - each review is thorough
+	       - evidence of addressing the outcomes of the review
+	       - the video demonstrates an effective process used for the review/collection meeting
+   - validation activities and outcomes: 0/10
+         - evidence of feedback from the user
+	       - evidence of addressing feedback from the user
+
+
+Report: __________ (15%) 14
+
+  - well-presented, is easy to read and to navigate /3.75
+  - spelling and grammar /3.75
+  - looks professional 2.75/3.75, swore in video
+  - quality of the README file /3.75
+
+
+Interview: ________ (10%) 10
+CSC C01 - Deliverable 4 Interview Record
+
+Team:
+
+All members present and on time:
+
+1) Team Members' Roles [2]:
+
+ Ask for a volunteer to explain the role of each team member as they
+ worked on this phase of the project.
+
+ Team member:
+
+Notes:
+Simon did front-end
+Keerush and kent worked on the backend, populating the db.
+Kent documented
+Brandon made sure everything’s done how it should be done.
+
+2) Checkout, build, run [2]:
+
+ Ask for a volunteer to checkout, configure, build, and run the
+ application.
+
+ Team member: brandon
+
+Notes:
+Good, was able to run the app
+
+3) Demo [2]:
+
+ Ask for a volunteer to demo the application.
+
+ Team member: 
+
+Notes:
+Good, they're falling behind. Not much to show.
+
+4) Project Management [2]:
+
+  Ask for a volunteer to explain any changes to the sprint backlog/plan
+
+  Team member:
+
+Notes:
+Changed 3 user stories into 6.
+
+5) Code reviews [2]:
+
+  Ask for a volunteer to go over a code review summary for the review
+  of your choice.
+
+  Team member:
+
+Notes:
+Good.
