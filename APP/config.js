@@ -1,11 +1,11 @@
 module.exports = {
 	"directory" : __dirname,
 	"mysql": {
-		"host": "cmsvm35.utsc.utoronto.ca",
-		"username": "student",
+		"host": "127.0.0.1",
+		"username": "root",
 		"port": "3306",
-		"password": "password",
-		"database": "NASA"
+		"password": "",
+		"database": "cscc01db"
 	},
 	"exoplanet": {
 		"url": "http://exoplanet.eu/catalog/csv"
