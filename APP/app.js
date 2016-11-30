@@ -1,10 +1,16 @@
 const express = require('express');
 const path = require('path');
-const routes = require('./server/routes/index');
+const Apiroutes = require('./server/routes/index');
+const Webroutes = require('./client/routes')
 
 const app = express();
+app.use('/public',express.static('client'))
+app.use('/public', Webroutes);
+app.use('/api', Apiroutes);
 
-app.use(express.static(path.join(__dirname, 'client')));
-app.use('/', routes);
+
+app.get('/', (req, res, next) => {
+	res.redirect('/public')
+})
 
 module.exports = app;

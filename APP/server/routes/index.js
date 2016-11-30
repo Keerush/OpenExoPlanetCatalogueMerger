@@ -9,7 +9,9 @@ const addNASAData = require('../models/addNASAData.js');
 const getNASAData = require('../models/getUnderReview');
 
 router.get('/', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', '..', 'client', 'index.html'));
+	console.log("here");
+	res.statusCode = 200
+	res.send("API: Running!");
 });
 
 router.get('/nasaData', function(req, res) {
