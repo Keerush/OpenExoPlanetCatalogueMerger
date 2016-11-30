@@ -24,13 +24,56 @@ var builder = new xml2js.Builder({
 
 function editFileAttribute(newVal, fileVals) {
 	// Does not have a error plus and minus value.
-	if (typeof fileVals[0] === 'string') {
+	if (newVal.endsWith('plus') || newVal.endsWith('minus'))
+		if (typeof fileVals[0] === 'string') {
+			return [newVal];
+		}
+}
+
+function editValue(oldVal, newVal) {
+	if (typeof oldVal[0] === 'string') {
 		return [newVal];
+	} else {
+		var editVal = oldVal;
+		editVal['_'] = newVal;
+		return editVal;
 	}
 }
 
+function editPlus(oldVal, newVal) {
+	var editVal = {};
+
+	if (typeof oldVal[0] === 'string') {
+		editVal['_'] = oldVal[0];
+		editVal['$'] = {
+			'errorminus': '',
+			'errorplus': newVal
+		};
+	} else {
+		editVal = oldVal[0];
+		editVal['$']['errorplus'] = newVal;
+	}
+	console.log(editVal);
+	return editVal;
+}
+
+function editMinus(oldVal, newVal) {
+	var editVal = {};
+	if (typeof oldVal[0] === 'string') {
+		editVal['_'] = oldVal[0];
+		editVal['$'] = {
+			'errorminus': newVal,
+			'errorplus': ''
+		};
+	} else {
+		editVal = oldVal[0];
+		editVal['$']['errorminus'] = newVal;
+	}
+	return editVal;
+}
+
 /*
-	-Format for editData: 
+	-Format for editData:
 		list of objects that was sent by getNasaStar, getNasaSystem, and getNasaPlanet. (see getUnderReview.js)
 */
 module.exports = (editData) => {
@@ -39,20 +82,36 @@ module.exports = (editData) => {
 		editData.forEach((data) => {
 			// convert to js object.
 			var fileLoc = config.masterRepoLocation + '/systems/' + data.filename;
-			fs.readfile(fileLoc, function(err, data) {
-				parser.parseString(data, function(err, result) {
-					var editObj = {};
-					if (data.tableName === 'System') {
-						editObj = data.system;
-						if (data.declination != null) {
-							result.declination = editFileAttribute(data.declination, result.declination);
+			var filedata = fs.readFileSync(fileLoc);
+
+			parser.parseString(filedata, function(err, result) {
+				var editObj = {};
+				if (data.tableName === 'System') {
+					editObj = result.system;
+					for (var attribute in data) {
+						if (attribute !== 'filename' && attribute !== 'tableName' && attribute !== 'name') {
+							if (attribute.endsWith('plus')) {
+								var parentAttribute = attribute.replace('plus', '');
+								editObj[parentAttribute] = editPlus(editObj[parentAttribute], data[attribute]);
+							} else if (attribute.endsWith('minus')) {
+								var parentAttribute = attribute.replace('minus', '');
+								editObj[parentAttribute] = editMinus(result[parentAttribute], data[attribute]);
+							} else {
+								editObj[attribute] = editValue(editObj[attribute], data[attribute]);
+							}
 						}
 					}
+				}
+
+				// Write edited xml.
+				var newXml = builder.buildObject(result);
+				fs.writeFile(fileLoc, newXml, function(err) {
+					if (err)
+						console.log(err);
 				});
 			});
-
-			// for each data properity replace file
 		});
+		resolve('done');
 	});
 
 	return promise;

@@ -132,5 +132,6 @@ router.post('/ignoreDiffs', (req, res) => {
 		}).catch((err) => {
 			res.statusCode = 500;
 			return res.send(err);
-		});});
+		});
+});
 module.exports = router;
