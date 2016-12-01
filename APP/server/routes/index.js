@@ -3,10 +3,15 @@ const router = express.Router();
 const pg = require('pg');
 const path = require('path');
 const http = require('request-promise');
+const bodyParser = require('body-parser');
 const droptables = require('../models/dropTables.js');
 const createtables = require('../models/createTables.js');
 const addNASAData = require('../models/addNASAData.js');
 const getNASAData = require('../models/getUnderReview');
+const editNASAData = require('../models/editNasaFiles');
+const ignoreDiffs = require('../models/ignoreDiffs');
+
+router.use(bodyParser.json());
 
 router.get('/', (req, res, next) => {
 	console.log("here");
@@ -75,28 +80,67 @@ router.get('/addNASAData', function(req, res) {
 });
 
 router.get('/getNasaStarDiff', (req, res) => {
-	getNASAData.getNasaStar()
-	.then((data) => {
-		res.statusCode = 200;
-		return res.send(data);
-	});
-});
+	var limit = req.query.limit;
+	var offset = req.query.offset;
 
+	getNASAData.getNasaStar(limit, offset)
+		.then((data) => {
+			res.statusCode = 200;
+			return res.send(data);
+		});
+});
 
 router.get('/getNasaPlanetDiff', (req, res) => {
-	getNASAData.getNasaPlanet()
-	.then((data) => {
-		res.statusCode = 200;
-		return res.send(data);
-	});
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getNASAData.getNasaPlanet(limit, offset)
+		.then((data) => {
+			res.statusCode = 200;
+			return res.send(data);
+		});
 });
 
-
 router.get('/getNasaSystemDiff', (req, res) => {
-	getNASAData.getNasaSystem()
-	.then((data) => {
-		res.statusCode = 200;
-		return res.send(data);
-	});
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getNASAData.getNasaSystem(limit, offset)
+		.then((data) => {
+			res.statusCode = 200;
+			return res.send(data);
+		});
+});
+
+router.post('/editXmls', (req, res) => {
+	if (Object.getOwnPropertyNames(req.body).length === 0 || req.body.length === 0) {
+		res.statusCode = 400;
+		return res.send('Invalid body.');
+	}
+
+	editNASAData(req.body)
+		.then(() => {
+			res.statusCode = 200;
+			return res.send('ok');
+		}).catch((err) => {
+			res.statusCode = 500;
+			return res.send(err);
+		});
+});
+
+router.post('/ignoreDiffs', (req, res) => {
+	if (Object.getOwnPropertyNames(req.body).length === 0 || req.body.length === 0) {
+		res.statusCode = 400;
+		return res.send('Invalid body.');
+	}
+
+	ignoreDiffs(req.body)
+		.then(() => {
+			res.statusCode = 200;
+			return res.send('ok');
+		}).catch((err) => {
+			res.statusCode = 500;
+			return res.send(err);
+		});
 });
 module.exports = router;

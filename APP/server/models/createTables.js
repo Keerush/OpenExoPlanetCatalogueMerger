@@ -25,7 +25,8 @@ module.exports = () => {
 			'distanceminus FLOAT,' +
 			'distanceplus FLOAT,' +
 			'videolink VARCHAR(255),' +
-			'lastupdate	VARCHAR(255)' +
+			'lastupdate	VARCHAR(255),' +
+			'fileName VARCHAR(255)' +
 			')';
 
 		var tStarSystem = 'StarSystem(' +
@@ -123,7 +124,8 @@ module.exports = () => {
 			'lastupdate	VARCHAR(255),' +
 			'spinorbitalignment FLOAT,' +
 			'spinorbitalignmentminus FLOAT,' +
-			'spinorbitalignmentplus FLOAT' +
+			'spinorbitalignmentplus FLOAT,' +
+			'fileName VARCHAR(255)' +
 			')';
 
 		var tStar = 'Star(' +
@@ -165,7 +167,8 @@ module.exports = () => {
 			'magK FLOAT,' +
 			'magKminus FLOAT,' +
 			'magKplus FLOAT,' +
-			'lastupdate	VARCHAR(255)' +
+			'lastupdate	VARCHAR(255),' +
+			'fileName VARCHAR(255)' +
 			')';
 
 		var tPlanetStar = 'PlanetStar(' +
@@ -195,7 +198,8 @@ module.exports = () => {
 			'magJ VARCHAR(255),' +
 			'magH VARCHAR(255),' +
 			'magK VARCHAR(255),' +
-			'lastupdate	VARCHAR(255)' +
+			'lastupdate	VARCHAR(255),' +
+			'fileName VARCHAR(255)' +
 			')';
 
 		var tBinaryBinary = 'BinaryBinary(' +
