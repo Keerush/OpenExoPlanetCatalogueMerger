@@ -81,7 +81,7 @@ module.exports = (editData) => {
 		// go through each entry, and read the files.
 		editData.forEach((data) => {
 			// convert to js object.
-			var fileLoc = config.masterRepoLocation + '/systems/' + data.filename;
+			var fileLoc = config.forkRepoLocation + '/systems/' + data.filename;
 			var filedata = fs.readFileSync(fileLoc);
 
 			parser.parseString(filedata, function(err, result) {
