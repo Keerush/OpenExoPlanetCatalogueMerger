@@ -90,20 +90,20 @@
         <div class="Nasa_Star" ng-init="getNasaStarDiff()">
 				  <h3>Stars</h3>
           <div ng-repeat="star in nasaStarData">
-            <a href="public/edit_xml">{{"Star Name: " + star.nasa.n_name}}</a>
+            <a href="public/edit_xml">{{star.nasa.n_name + ": Last Updated " + star.nasa.n_lastupdate}}</a>
           </div>
         </div>
         <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
 				  <h3>Planets</h3>
           <div ng-repeat="planet in nasaPlanetData">
-            <a href="public/edit_xml">{{"Planet Name: " + planet.nasa.n_name}}</a>
+            <a href="public/edit_xml">{{planet.nasa.n_name + ": Last Updated " + planet.nasa.n_lastupdate}}</a>
           </div>
         </div>
 
         <div class="Nasa_System" ng-init="getNasaSystemDiff()">
 				  <h3>Systems</h3>
           <div ng-repeat="system in nasaSystemData">
-            <a href="public/edit_xml">{{"System Name: " + system.nasa.n_name}}</a>
+            <a href="public/edit_xml">{{system.nasa.n_name + ": Last Updated " + system.nasa.n_lastupdate}}</a>
           </div>
         </div>
 			</div>
