@@ -1,6 +1,7 @@
 var config = require('../../config.js');
 var xml2js = require('xml2js');
 var fs = require('fs');
+var removeUnderReview = require('./ignoreDiffs.js');
 
 var parser = new xml2js.Parser();
 var builder = new xml2js.Builder({
@@ -158,10 +159,10 @@ module.exports = (editData) => {
 
 			parser.parseString(filedata, function(err, result) {
 				var editObj = {};
-				if (data.tableName === 'System') {
+				if (data.tableName.includes('System')) {
 					editObj = result.system;
 					editAttributes(data, editObj);
-				} else if (data.tableName === 'Star') {
+				} else if (data.tableName.includes('Star')) {
 					editObj = findByKeyName(result.system, 'star', data.name);
 					editAttributes(data, editObj);
 				} else {
@@ -174,11 +175,18 @@ module.exports = (editData) => {
 				fs.writeFile(fileLoc, newXml, function(err) {
 					if (err) {
 						console.log(err);
+					} else {
+						// remove from underreview table.
+						removeUnderReview([{
+							'name': data.name,
+							'tableName': data.tableName
+						}]).then(() => {
+							resolve('done');
+						});
 					}
 				});
 			});
 		});
-		resolve('done');
 	});
 
 	return promise;

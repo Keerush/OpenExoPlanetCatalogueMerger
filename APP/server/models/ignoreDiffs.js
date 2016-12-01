@@ -3,12 +3,15 @@ var mysql = require('promise-mysql');
 var Q = require('q');
 
 // Intialize pool.
-var pool = mysql.createPool({
-	host: config.mysql.host,
-	user: config.mysql.username,
-	password: config.mysql.password,
-	database: config.mysql.database
-});
+function initializePool() {
+	var pool = mysql.createPool({
+		host: config.mysql.host,
+		user: config.mysql.username,
+		password: config.mysql.password,
+		database: config.mysql.database
+	});
+	return pool;
+}
 
 /*
 	-Format for ignoreData: 
@@ -19,6 +22,7 @@ module.exports = (ignoreData) => {
 
 	// Update ignored UnderReview data.
 	var promise = new Promise(function(resolve, reject) {
+		var pool = initializePool();
 		var deleteQuery = 'DELETE FROM UnderReview WHERE (keyName, tableName) IN ?';
 		var promises = [];
 
