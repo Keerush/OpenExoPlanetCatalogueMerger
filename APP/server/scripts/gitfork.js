@@ -1,5 +1,5 @@
-var gitstuff = require('../models/gitstuff.js');
+var gitstuff = require('../models/gitfork.js');
 
-gitstuff.pushDifferences("test","BlazeBlaster").then(function (result) {
+gitstuff.forkRepo("test","BlazeBlaster").then(function (result) {
 	console.log(result);
 });
