@@ -1,16 +1,7 @@
 var config = require('../../config.js');
-var mysql = require('promise-mysql');
-var Q = require('q');
 var xml2js = require('xml2js');
 var fs = require('fs');
-
-// Intialize pool.
-var pool = mysql.createPool({
-	host: config.mysql.host,
-	user: config.mysql.username,
-	password: config.mysql.password,
-	database: config.mysql.database
-});
+var removeUnderReview = require('./ignoreDiffs.js');
 
 var parser = new xml2js.Parser();
 var builder = new xml2js.Builder({
@@ -22,46 +13,76 @@ var builder = new xml2js.Builder({
 	}
 });
 
-function editValue(oldVal, newVal) {
-	if (typeof oldVal[0] === 'string') {
-		return [newVal];
+function getOldVal(oldVal) {
+	if (typeof oldVal !== 'undefined') {
+		return oldVal[0];
 	} else {
-		var editVal = oldVal[0];
-		console.log(oldVal);
-		editVal['_'] = newVal;
-		return editVal;
+		return '*';
 	}
 }
 
-function editPlus(oldVal, newVal) {
-	var editVal = {};
+function editValue(oldVal, newVal, type, unit) {
+	var val = getOldVal(oldVal);
+	if (typeof val === 'string') {
+		return [newVal];
+	} else {
+		var editVal = val;
+		editVal['_'] = newVal;
+		if (type !== '') {
+			editVal['$']['type'] = type;
+		}
+		if (unit !== '') {
+			editVal['$']['unit'] = unit;
+		}
+		return [editVal];
+	}
+}
 
-	if (typeof oldVal[0] === 'string') {
-		editVal['_'] = oldVal[0];
+function editPlus(oldVal, newVal, type, unit) {
+	var editVal = {};
+	var val = getOldVal(oldVal);
+
+	if (typeof val === 'string') {
+		editVal['_'] = val;
 		editVal['$'] = {
 			'errorminus': '',
 			'errorplus': newVal
 		};
 	} else {
-		editVal = oldVal[0];
+		editVal = val;
 		editVal['$']['errorplus'] = newVal;
 	}
-	return editVal;
+
+	if (type !== '') {
+		editVal['$']['type'] = type;
+	}
+	if (unit !== '') {
+		editVal['$']['unit'] = type;
+	}
+	return [editVal];
 }
 
-function editMinus(oldVal, newVal) {
+function editMinus(oldVal, newVal, type, unit) {
 	var editVal = {};
-	if (typeof oldVal[0] === 'string') {
-		editVal['_'] = oldVal[0];
+	var val = getOldVal(oldVal);
+
+	if (typeof val === 'string') {
+		editVal['_'] = val;
 		editVal['$'] = {
 			'errorminus': newVal,
 			'errorplus': ''
 		};
 	} else {
-		editVal = oldVal[0];
+		editVal = val;
 		editVal['$']['errorminus'] = newVal;
 	}
-	return editVal;
+	if (type !== '') {
+		editVal['$']['type'] = type;
+	}
+	if (unit !== '') {
+		editVal['$']['unit'] = type;
+	}
+	return [editVal];
 }
 
 function findByKeyName(currObj, searchKey, name) {
@@ -93,15 +114,32 @@ function findByKeyName(currObj, searchKey, name) {
 
 function editAttributes(data, editObj) {
 	for (var attribute in data) {
-		if (attribute !== 'filename' && attribute !== 'tableName' && attribute !== 'name') {
+		if (attribute !== 'filename' && attribute !== 'tableName' && attribute !== 'name' && data[attribute] !== null) {
+			var parentAttribute = attribute;
+			var type = '',
+				unit = '';
+
+			if (attribute.includes('separation')) {
+				parentAttribute = 'separation';
+				if (parentAttribute.includes('arcsec')) {
+					unit = 'arcsec';
+				} else {
+					unit = 'AU';
+				}
+			} else if (attribute.includes('mass')) {
+				parentAttribute = 'mass';
+				if (parentAttribute.includes('msini')) {
+					type = 'msini';
+				}
+			}
 			if (attribute.endsWith('plus')) {
-				var parentAttribute = attribute.replace('plus', '');
-				editObj[parentAttribute] = editPlus(editObj[parentAttribute], data[attribute]);
+				parentAttribute = parentAttribute.replace('plus', '');
+				editObj[parentAttribute] = editPlus(editObj[parentAttribute], data[attribute], type, unit);
 			} else if (attribute.endsWith('minus')) {
-				var parentAttribute = attribute.replace('minus', '');
-				editObj[parentAttribute] = editMinus(result[parentAttribute], data[attribute]);
+				parentAttribute = parentAttribute.replace('minus', '');
+				editObj[parentAttribute] = editMinus(editObj[parentAttribute], data[attribute], type, unit);
 			} else {
-				editObj[attribute] = editValue(editObj[attribute], data[attribute]);
+				editObj[parentAttribute] = editValue(editObj[parentAttribute], data[attribute], type, unit);
 			}
 		}
 	}
@@ -121,10 +159,10 @@ module.exports = (editData) => {
 
 			parser.parseString(filedata, function(err, result) {
 				var editObj = {};
-				if (data.tableName === 'System') {
+				if (data.tableName.includes('System')) {
 					editObj = result.system;
 					editAttributes(data, editObj);
-				} else if (data.tableName === 'Star') {
+				} else if (data.tableName.includes('Star')) {
 					editObj = findByKeyName(result.system, 'star', data.name);
 					editAttributes(data, editObj);
 				} else {
@@ -135,12 +173,20 @@ module.exports = (editData) => {
 				// Write edited xml.
 				var newXml = builder.buildObject(result);
 				fs.writeFile(fileLoc, newXml, function(err) {
-					if (err)
+					if (err) {
 						console.log(err);
+					} else {
+						// remove from underreview table.
+						removeUnderReview([{
+							'name': data.name,
+							'tableName': data.tableName
+						}]).then(() => {
+							resolve('done');
+						});
+					}
 				});
 			});
 		});
-		resolve('done');
 	});
 
 	return promise;
