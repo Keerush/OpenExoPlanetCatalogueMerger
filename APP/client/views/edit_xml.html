@@ -25,14 +25,14 @@
 	}
 </style>
 <body>
+	<div ng-app="show_updates">
+
 	<h1>Exoplanet Name</h1>
-	<textarea class="xml">
+	<textarea class="xml" ng-init="$scope.parent.getInfo()"></textarea>
 	</textarea>
 	<br>
 	<a href="public/show_updates"><button ng-click="submitFunction()">Save</button></a>
 	<a href="public/show_updates"><button ng-click="cancelFunction()">Cancel</button></a>
-
-
+</div>
 </body>
 </html>
-<!--

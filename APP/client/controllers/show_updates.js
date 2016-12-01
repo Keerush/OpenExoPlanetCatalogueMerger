@@ -88,4 +88,40 @@ app.controller('show_updates', function($scope, $http, $window) {
   $scope.cancelFunction = function() {
     $window.alert("All Changes Made were Unsaved.");
   }
+
+  $scope.addInfo = function(obj) {
+    var $scope.$parent.dataList = [];
+    dataList.push(obj);
+    // $location.path("public/edit_xml");
+    console.log(dataList);
+  }
+
+  $scope.getInfo = function() {
+    return dataList;
+  }
+  console.log("initiating this controller");
 });
+
+//
+// app.service('addXml', function()) {
+//   var nameList = [];
+//
+//   var addInfo = function(obj) {
+//     nameList.push(obj);
+//   };
+//
+//   var getInfo = function() {
+//    return nameList;
+//   };
+//
+//   return {
+//     addInfo: addInfo,
+//     getInfo: getInfo
+//   };
+// }
+//
+// app.controller('transferXml', function($scope, show_updates) {
+//   $scope.callToAddToInfo = function(obj) {
+//     show.addInfo(obj);
+//   };
+// });
