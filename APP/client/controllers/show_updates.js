@@ -22,7 +22,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getNasaStarDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js',
+      url: '/getNasaStarDiff',
       params: 'limit=10'
     }).then(function successCallBack(res) {
       $scope.nasaStarData = res.data;
@@ -33,7 +33,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getNasaSystemDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js',
+      url: '/getNasaSystemDiff',
       params: 'limit=10'
     }).then(function successCallBack(res) {
       $scope.nasaSystemData = res.data;
@@ -45,7 +45,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUStarDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js?'
+      url: '/getEUStardiff'
     }).then(function successCallBack(res) {
       $scope.euStarData = res.data;
     }, function errorCallBack(res) {
@@ -56,7 +56,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUPlanetDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js'
+      url: '/getEUPlanetDiff'
     }).then(function successCallBack(res) {
       $scope.euPlanetData = res.data;
     }, function errorCallBack(res) {
@@ -67,7 +67,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUSystemDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js'
+      url: '/getEUSystemDiff'
     }).then(function successCallBack(res) {
       $scope.euSystemData = res.data;
     }, function errorCallBack(res) {
