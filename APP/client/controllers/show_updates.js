@@ -1,4 +1,4 @@
-app.controller('show_updates', function($scope, $http) {
+app.controller('show_updates', function($scope, $http, $window) {
 
   $scope.nasaStarData = '';
   $scope.nasaPlanetData = '';
@@ -6,14 +6,14 @@ app.controller('show_updates', function($scope, $http) {
   $scope.euStarData = '';
   $scope.euPlanetData = '';
   $scope.euSystemData = '';
+  $scope.editedData = '';
 
-  $scope.NasaPlanetDiff = function() {
+  $scope.getNasaPlanetDiff = function() {
     $http({
       method: 'GET',
-      url: '/getNasaPlanetDiff',
-      params: 'limit=10'
+      url: '/api/getNasaPlanetDiff?limit=5&offset=0'
     }).then(function successCallBack(res) {
-      $scope.nasaPanetData = res.data;
+      $scope.nasaPlanetData = res.data;
     }, function errorCallBack(res) {
       $scope.error = res.status + " - " + res.statusText;
     });
@@ -22,8 +22,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getNasaStarDiff = function() {
     $http({
       method: 'GET',
-      url: '/getNasaStarDiff',
-      params: 'limit=10'
+      url: '/api/getNasaStarDiff?limit=5&offset=0'
     }).then(function successCallBack(res) {
       $scope.nasaStarData = res.data;
     }, function errorCallBack(res) {
@@ -33,8 +32,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getNasaSystemDiff = function() {
     $http({
       method: 'GET',
-      url: '/getNasaSystemDiff',
-      params: 'limit=10'
+      url: '/api/getNasaSystemDiff?limit=5&offset=0'
     }).then(function successCallBack(res) {
       $scope.nasaSystemData = res.data;
     }, function errorCallBack(res) {
@@ -45,7 +43,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUStarDiff = function() {
     $http({
       method: 'GET',
-      url: '/getEUStardiff'
+      url: '/api/getEUStardiff?limit=1&offset=0'
     }).then(function successCallBack(res) {
       $scope.euStarData = res.data;
     }, function errorCallBack(res) {
@@ -56,7 +54,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUPlanetDiff = function() {
     $http({
       method: 'GET',
-      url: '/getEUPlanetDiff'
+      url: '/api/getEUPlanetDiff?limit=1&offset=0'
     }).then(function successCallBack(res) {
       $scope.euPlanetData = res.data;
     }, function errorCallBack(res) {
@@ -67,7 +65,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUSystemDiff = function() {
     $http({
       method: 'GET',
-      url: '/getEUSystemDiff'
+      url: '/api/getEUSystemDiff?limit=1&offset=0'
     }).then(function successCallBack(res) {
       $scope.euSystemData = res.data;
     }, function errorCallBack(res) {
@@ -75,4 +73,19 @@ app.controller('show_updates', function($scope, $http) {
     });
   }
 
+  $scope.submitFunction = function() {
+    $http({
+      method: 'POST',
+      url: '/api/addOpenData'
+    }).then(function successCallBack(res) {
+      $scope.editedData = res.data;
+      $window.alert("Your Edits have been Saved into the Database!");
+    }, function errorCallBack(res){
+      $scope.error = res.status + " - " + res.statusText;
+    });
+  }
+
+  $scope.cancelFunction = function() {
+    $window.alert("All Changes Made were Unsaved.");
+  }
 });
