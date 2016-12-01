@@ -22,14 +22,40 @@
 		font-size: 36pt;
 	}
 
+	h2 {
+		border-bottom: 5px solid black;
+	}
+
+	h3 {
+		text-decoration: underline;
+	}
+
 	.container {
 		text-align: center;
 		width: 100%;
+		vertical-align: top;
 	}
 
 	a {
 		text-decoration: none;
 	}
+
+	.Exoplanet {
+		background: white;
+		color: black;
+		display: inline-block;
+		float: none;
+		width: 100%;
+	}
+
+	.Nasa {
+		background: white;
+		color: black;
+		display: inline-block;
+		float:none;
+		width:100%;
+	}
+
 
 </style>
 <body>
@@ -37,15 +63,35 @@
 		<h1>New Updates from Other Databases</h1>
 		<div class="row">
 			<div class="col-sm-6">
+			<div class="Exoplanet">
 				<h2>Exoplanet.eu</h2>
+				<h3>Stars</h3>
+				<script>getExoStar()</script>
+
+				<h3>Planets</h3>
+				<script>getExoPlanet()</script>
+
+				<h3>Systems</h3>
+				<script>getExoSystem()</script>
+			</div>
 			</div>
 				<div class="col-sm-6">
+				<div class="Nasa">
 				<h2>NASA Exoplanet Archive</h2>
+				<h3>Stars</h3>
+				{{nasaStarData}}
+
+				<h3>Planets</h3>
+				{{nasaPlanetData}}
+
+				<h3>Systems</h3>
+				{{nasaSystemData}}
+			</div>
 			</div>
 		</div>
 		<br><br>
-		<a href="public/somepage"><button ng-click="submit()">Add to Database</button></a>
-		<a href="public/frontend1"><button ng-click="cancel()">Cancel</button></a>
+		<a href="public/somepage"><button onclick="submit()">Add to Database</button></a>
+		<a href="public/frontend1"><button onclick="cancel()">Cancel</button></a>
 
 	</div>
 </body>
