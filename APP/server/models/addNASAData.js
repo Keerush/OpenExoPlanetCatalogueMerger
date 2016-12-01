@@ -173,6 +173,14 @@ function checkUpdates(updatesInfo) {
 	return promise
 }
 
+function getDiscoveryMethod(method) {
+	if (method === 'Radial Velocity') {
+		return 'RV';
+	} else {
+		return method;
+	}
+}
+
 module.exports = () => {
 	var promise = new Promise(function(resolve, reject) {
 		console.log('Getting data from NASA');
@@ -194,7 +202,7 @@ module.exports = () => {
 				console.log('Retrieved nasa data...');
 				data.forEach(function(item) {
 					systemInput.push([item.pl_hostname, formatDistance(item.dec_str, ['d', 'm', 's']), formatDistance(item.ra_str, ['h', 'm', 's']), item.st_dist, item.st_disterr1, item.st_disterr2, item.rowupdate]);
-					planetInput.push([item.pl_hostname + ' ' + item.pl_letter, item.pl_orbsmax, item.pl_orbsmaxerr2, item.pl_orbsmaxerr1, item.pl_orbeccen, item.pl_orbeccenerr2, item.pl_orbeccenerr1, item.pl_orblper, item.pl_orblpererr2, item.pl_orblpererr1, item.pl_orbincl, item.pl_orbinclerr2, item.pl_orbinclerr1, item.pl_imppar, item.pl_impparerr2, item.pl_impparerr1, item.pl_orbper, item.pl_orbpererr2, item.pl_orbpererr1, item.pl_tranmid, item.pl_tranmiderr1, item.pl_tranmiderr2, item.pl_orbtper, item.pl_orbtpererr2, item.pl_orbtpererr1, item.pl_massj, item.pl_massjerr2, item.pl_massjerr1, item.pl_msinij, item.pl_msinijerr2, item.pl_msinijerr1, item.pl_radj, item.pl_radjerr2, item.pl_radjerr1, item.pl_eqt, item.pl_eqterr2, item.pl_eqterr1, item.pl_discmethod, item.pl_ttvflag, item.pl_disc, item.rowupdate]);
+					planetInput.push([item.pl_hostname + ' ' + item.pl_letter, item.pl_orbsmax, item.pl_orbsmaxerr2, item.pl_orbsmaxerr1, item.pl_orbeccen, item.pl_orbeccenerr2, item.pl_orbeccenerr1, item.pl_orblper, item.pl_orblpererr2, item.pl_orblpererr1, item.pl_orbincl, item.pl_orbinclerr2, item.pl_orbinclerr1, item.pl_imppar, item.pl_impparerr2, item.pl_impparerr1, item.pl_orbper, item.pl_orbpererr2, item.pl_orbpererr1, item.pl_tranmid, item.pl_tranmiderr1, item.pl_tranmiderr2, item.pl_orbtper, item.pl_orbtpererr2, item.pl_orbtpererr1, item.pl_massj, item.pl_massjerr2, item.pl_massjerr1, item.pl_msinij, item.pl_msinijerr2, item.pl_msinijerr1, item.pl_radj, item.pl_radjerr2, item.pl_radjerr1, item.pl_eqt, item.pl_eqterr2, item.pl_eqterr1, getDiscoveryMethod(item.pl_discmethod), item.pl_ttvflag, item.pl_disc, item.rowupdate]);
 					starInput.push([item.pl_hostname, item.st_mass, item.st_masserr2, item.st_masserr1, item.st_rad, item.st_raderr2, item.st_raderr1, item.st_teff, item.st_tefferr2, item.st_tefferr1, item.st_age, item.st_ageerr1, item.st_ageerr2, item.st_metfe, item.st_metfeerr2, item.st_metfeerr1, item.st_spstr, item.st_bj, item.st_bjerr, item.st_bjerr, item.st_vj, item.st_vjerr, item.st_vjerr, item.st_rc, item.st_rcerr, item.st_rcerr, item.st_ic, item.st_icerr, item.st_icerr, item.st_j, item.st_jerr, item.st_jerr, item.st_h, item.st_herr, item.st_herr, item.st_k, item.st_kerr, item.st_kerr, item.rowupdate]);
 					nameInput.push([item.pl_hostname, item.pl_hostname]);
 					starSystemInput.push([item.pl_hostname, item.pl_hostname]);
