@@ -80,25 +80,32 @@ router.get('/addNASAData', function(req, res) {
 });
 
 router.get('/getNasaStarDiff', (req, res) => {
-	getNASAData.getNasaStar()
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getNASAData.getNasaStar(limit, offset)
 		.then((data) => {
 			res.statusCode = 200;
 			return res.send(data);
 		});
 });
-
 
 router.get('/getNasaPlanetDiff', (req, res) => {
-	getNASAData.getNasaPlanet()
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getNASAData.getNasaPlanet(limit, offset)
 		.then((data) => {
 			res.statusCode = 200;
 			return res.send(data);
 		});
 });
 
-
 router.get('/getNasaSystemDiff', (req, res) => {
-	getNASAData.getNasaSystem()
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getNASAData.getNasaSystem(limit, offset)
 		.then((data) => {
 			res.statusCode = 200;
 			return res.send(data);
