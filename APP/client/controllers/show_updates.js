@@ -1,4 +1,4 @@
-app.controller('show_updates', function($scope, $http, $window) {
+app.controller('show_updates', function($scope, $http, $window, $location) {
 
   $scope.nasaStarData = '';
   $scope.nasaPlanetData = '';
@@ -90,14 +90,17 @@ app.controller('show_updates', function($scope, $http, $window) {
   }
 
   $scope.addInfo = function(obj) {
-    var $scope.$parent.dataList = [];
-    dataList.push(obj);
+    console.log("here");
+    $scope.$parent.dataList = [];
+    $scope.$parent.dataList.push(obj);
     // $location.path("public/edit_xml");
-    console.log(dataList);
+    console.log($scope.$parent.dataList);
+    $location.path('/public/edit_xml')
   }
 
   $scope.getInfo = function() {
-    return dataList;
+    console.log($scope.$parent.dataList);
+    return $scope.$parent.dataList;
   }
   console.log("initiating this controller");
 });

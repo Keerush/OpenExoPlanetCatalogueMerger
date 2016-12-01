@@ -96,7 +96,7 @@
         <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
 				  <h3>Planets</h3>
           <div ng-repeat="planet in nasaPlanetData">
-            <a href="public/edit_xml" ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name}}</a>
+            <a ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name}}</a>
           </div>
         </div>
 
