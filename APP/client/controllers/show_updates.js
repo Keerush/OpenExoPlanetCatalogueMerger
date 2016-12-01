@@ -7,12 +7,13 @@ app.controller('show_updates', function($scope, $http) {
   $scope.euPlanetData = '';
   $scope.euSystemData = '';
 
-  $scope.getNasaPlanetDiff = function() {
+  $scope.NasaPlanetDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js??'
+      url: '/getNasaPlanetDiff',
+      params: 'limit=10'
     }).then(function successCallBack(res) {
-      $scope.nasaStarData = res.data;
+      $scope.nasaPanetData = res.data;
     }, function errorCallBack(res) {
       $scope.error = res.status + " - " + res.statusText;
     });
@@ -21,9 +22,10 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getNasaStarDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js?'
+      url: 'public/index.js',
+      params: 'limit=10'
     }).then(function successCallBack(res) {
-      $scope.nasaPlanetData = res.data;
+      $scope.nasaStarData = res.data;
     }, function errorCallBack(res) {
       $scope.error = res.status +  " - " + res.statusText;
     });
@@ -31,7 +33,8 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getNasaSystemDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js?'
+      url: 'public/index.js',
+      params: 'limit=10'
     }).then(function successCallBack(res) {
       $scope.nasaSystemData = res.data;
     }, function errorCallBack(res) {
@@ -53,7 +56,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUPlanetDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js?'
+      url: 'public/index.js'
     }).then(function successCallBack(res) {
       $scope.euPlanetData = res.data;
     }, function errorCallBack(res) {
@@ -64,7 +67,7 @@ app.controller('show_updates', function($scope, $http) {
   $scope.getEUSystemDiff = function() {
     $http({
       method: 'GET',
-      url: 'public/index.js?'
+      url: 'public/index.js'
     }).then(function successCallBack(res) {
       $scope.euSystemData = res.data;
     }, function errorCallBack(res) {
