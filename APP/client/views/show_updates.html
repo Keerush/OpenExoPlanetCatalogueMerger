@@ -22,14 +22,41 @@
 		font-size: 36pt;
 	}
 
+	h2 {
+		border-bottom: 5px solid black;
+	}
+
+	h3 {
+		text-decoration: underline;
+	}
+
 	.container {
 		text-align: center;
 		width: 100%;
+		vertical-align: top;
 	}
 
 	a {
 		text-decoration: none;
 	}
+
+	.Exoplanet {
+		background: white;
+		color: black;
+		display: inline-block;
+		float: none;
+		width: 100%;
+	}
+
+	.Nasa {
+		background: white;
+		color: black;
+		display: inline-block;
+		float:none;
+		width:100%;
+    overflow: auto;
+	}
+
 
 </style>
 <body>
@@ -37,16 +64,54 @@
 		<h1>New Updates from Other Databases</h1>
 		<div class="row">
 			<div class="col-sm-6">
+			  <div class="Exoplanet">
 				<h2>Exoplanet.eu</h2>
+
+        <div class="Eu_Star" ng-init="getEUStardiff()">
+				<h3>Stars</h3>
+        {{euStarData}}
+        </div>
+
+        <div class="Eu-Planet" ng-init="getEUPlanetDiff()">
+				<h3>Planets</h3>
+        {{euPlanetData}}
+        </div>
+
+        <div class="Eu-System" ng-init="getEUSystemDiff()">
+				<h3>Systems</h3>
+        {{euSystemData}}
+        </div>
+
+			  </div>
 			</div>
 				<div class="col-sm-6">
+				<div class="Nasa">
 				<h2>NASA Exoplanet Archive</h2>
+        <div class="Nasa_Star" ng-init="getNasaStarDiff()">
+				  <h3>Stars</h3>
+          <div ng-repeat="star in nasaStarData">
+            <a href="public/edit_xml">{{"Star Name: " + star.nasa.n_name}}</a>
+          </div>
+        </div>
+        <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
+				  <h3>Planets</h3>
+          <div ng-repeat="planet in nasaPlanetData">
+            <a href="public/edit_xml">{{"Planet Name: " + planet.nasa.n_name}}</a>
+          </div>
+        </div>
+
+        <div class="Nasa_System" ng-init="getNasaSystemDiff()">
+				  <h3>Systems</h3>
+          <div ng-repeat="system in nasaSystemData">
+            <a href="public/edit_xml">{{"System Name: " + system.nasa.n_name}}</a>
+          </div>
+        </div>
+			</div>
 			</div>
 		</div>
 		<br><br>
-		<a href="public/somepage"><button ng-click="submit()">Add to Database</button></a>
-		<a href="public/frontend1"><button ng-click="cancel()">Cancel</button></a>
-
+		<a href="public/frontend1"><button ng-click="submitFunction()">Add to Database</button></a>
+		<a href="public/frontend1"><button ng-click="cancelFunction()">Cancel</button></a>
 	</div>
 </body>
 </html>
