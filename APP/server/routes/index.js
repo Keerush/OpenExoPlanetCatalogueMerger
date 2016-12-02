@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const droptables = require('../models/dropTables.js');
 const createtables = require('../models/createTables.js');
 const addNASAData = require('../models/addNASAData.js');
-const getNASAData = require('../models/getUnderReview');
+const getUnderReview = require('../models/getUnderReview');
 const editNASAData = require('../models/editNasaFiles');
 const ignoreDiffs = require('../models/ignoreDiffs');
 
@@ -83,7 +83,7 @@ router.get('/getNasaStarDiff', (req, res) => {
 	var limit = req.query.limit;
 	var offset = req.query.offset;
 
-	getNASAData.getNasaStar(limit, offset)
+	getUnderReview.getNasaStar(limit, offset)
 		.then((data) => {
 			res.statusCode = 200;
 			return res.send(data);
@@ -94,7 +94,7 @@ router.get('/getNasaPlanetDiff', (req, res) => {
 	var limit = req.query.limit;
 	var offset = req.query.offset;
 
-	getNASAData.getNasaPlanet(limit, offset)
+	getUnderReview.getNasaPlanet(limit, offset)
 		.then((data) => {
 			res.statusCode = 200;
 			return res.send(data);
@@ -105,7 +105,40 @@ router.get('/getNasaSystemDiff', (req, res) => {
 	var limit = req.query.limit;
 	var offset = req.query.offset;
 
-	getNASAData.getNasaSystem(limit, offset)
+	getUnderReview.getNasaSystem(limit, offset)
+		.then((data) => {
+			res.statusCode = 200;
+			return res.send(data);
+		});
+});
+
+router.get('/getEuStarDiff', (req, res) => {
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getUnderReview.getEuStar(limit, offset)
+		.then((data) => {
+			res.statusCode = 200;
+			return res.send(data);
+		});
+});
+
+router.get('/getEuPlanetDiff', (req, res) => {
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getUnderReview.getEuPlanet(limit, offset)
+		.then((data) => {
+			res.statusCode = 200;
+			return res.send(data);
+		});
+});
+
+router.get('/getEuSystemDiff', (req, res) => {
+	var limit = req.query.limit;
+	var offset = req.query.offset;
+
+	getUnderReview.getEuSystem(limit, offset)
 		.then((data) => {
 			res.statusCode = 200;
 			return res.send(data);
