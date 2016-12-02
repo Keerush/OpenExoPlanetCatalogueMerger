@@ -68,4 +68,12 @@ app.controller('deliverable5Ctrl', function($scope) {
 	];
 
 	$scope.groupVid = 'https://www.youtube.com/watch?v=EYX8G1A-Gr0';
+
+	$scope.systemDesign = {
+		image: 'images/d5_images/system_design.png',
+		description: [
+		'The front end of our system consists of frontpage, show_updates, and edit_xml pages. The setAutoupdate page would have allowed the user to store and email for notifications and set a time period of when to check for data using the scripts found in the backend. The manual update would have been similar to the previously mentioned page but it allows the user to start the update process and push change to the open planet repo. The admin page is used to clean up data in the database by dropping the tables, and creating them. This will generally be used for new databases or if an old database is getting removed. The show_updates page is used to view the differences that have been found from either the manual update or the automated update. This gives the user the ability to view, modify and delete these changes, before they are pushed to the open exoplanet repository.',
+		'The back end of our system consists of addNasaData, addEuData, addOpenData, createTables, dropTables, editXMLFile, git and getUnderReview scripts. The addNasaData, addEuData, and addOpenData inserts the data from Nasa archive, exoplanet.eu, and Open exoplanet respectively, and pushing the changes between themselves to the under review table. Create and drop tables creates and deletes the tables that are needed to store to above data. The getUnderReview script contains the methods that deal with getting the differences in the underreview table and returning a json format to the frontend to display. The editXMLFile.js takes the finalize outputs of differences from the user and edits the corresponding files. The git script contains methods that fork the OEC repository so that the editXMLFile script can edit them as well as creating pull requests of the finalized differences. The front end communicates to the back end of our system through api calls, as well as the backend with the database and github.'
+		]
+	};
 });

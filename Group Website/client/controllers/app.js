@@ -36,7 +36,8 @@ app.config(function($routeProvider, $locationProvider) {
 			controller: 'demoCtrl'
 		})
 		.when('/deliverable5', {
-			templateUrl: 'views/deliverable5.html'
+			templateUrl: 'views/deliverable5.html',
+			controller: 'deliverable5Ctrl'
 		})
 		.otherwise({
 			redirectTo: '/'
