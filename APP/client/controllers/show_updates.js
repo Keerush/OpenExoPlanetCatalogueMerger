@@ -1,5 +1,6 @@
 app.controller('show_updates', function($scope, $http, $window, $location) {
 
+    $scope.gitURL = "https://github.com/login/oauth/authorize?client_id=976efe23b3dbd42727fc&scope=public_repo"
     checkGit = function() {
         var searchObject = $location.search();
         if (searchObject['code']) {
