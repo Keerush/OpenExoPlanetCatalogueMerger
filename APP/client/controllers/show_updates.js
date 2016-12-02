@@ -1,5 +1,26 @@
 app.controller('show_updates', function($scope, $http, $window, $location) {
 
+  checkGit = function() {
+    var searchObject = $location.search();
+    if (searchObject['code']) {
+      var options = {
+        client_id = "976efe23b3dbd42727fc",
+        client_secret = "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
+        code = searchObject['code'],
+        state = "ILOVENISEKOI"
+      }
+      $http.post("https://github.com/login/oauth/access_token",options).then(function successCallBack(res) {
+        console.log(res);
+        $http.put('/api/fork',{
+          access_token = res.access_token;
+        });
+      }, function errorCallBack(res){
+        $scope.error = res.status + " - " + res.statusText;
+      });
+
+      })
+    }
+  }
   $scope.nasaStarData = '';
   $scope.nasaPlanetData = '';
   $scope.nasaSystemData = '';
@@ -32,6 +53,8 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     });
   }
   $scope.getNasaSystemDiff = function() {
+    console.log("parent scope is ", $scope.$parent.dataList);
+
     $http({
       method: 'GET',
       url: '/api/getNasaSystemDiff?limit=5&offset=0'
@@ -76,9 +99,12 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
   }
 
   $scope.submitFunction = function() {
-    $http({
-      method: 'POST',
-      url: '/api/addOpenData'
+    $http.get("https://github.com/login/oauth/authorize",{
+      client_id: "976efe23b3dbd42727fc",
+      redirect_uri: "cmsvm35.utsc.utoronto.ca/public/show_updates",
+      scope: "public_repo",
+      state: "ILOVENISEKOI",
+      allow_signup: "false"
     }).then(function successCallBack(res) {
       $scope.editedData = res.data;
       $window.alert("Your Edits have been Saved into the Database!");
@@ -93,7 +119,11 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
 
 
   $scope.addInfo = function(obj) {
-    console.log("here");
+    console.log("here ", obj);
+    if ($scope.$parent.dataList) {
+      $location.path('/public/edit_xml')
+      return;
+    }
     $scope.$parent.dataList = [];
     $scope.$parent.dataList.push(obj);
     // $location.path("public/edit_xml");

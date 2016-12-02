@@ -151,8 +151,10 @@ function editAttributes(data, editObj) {
 */
 module.exports = (editData) => {
 	var promise = new Promise(function(resolve, reject) {
+		console.log("data is: " ,editData);
 		// go through each entry, and read the files.
 		editData.forEach((data) => {
+			console.log(data);
 			// convert to js object.
 			var fileLoc = config.forkedRepoLocation + '/systems/' + data.filename;
 			var filedata = fs.readFileSync(fileLoc);

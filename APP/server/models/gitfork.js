@@ -11,9 +11,7 @@ const fs = require('fs')
 
 
 module.exports = {
-	forkRepo: function(token, username) {
-		var testtoken = "044977754f2e14d05536dec207a231e502d1a6dc"
-		token = testtoken;
+	forkRepo: function(token) {
 		var options = {
 			url: "https://api.github.com/user",
 			headers: {
@@ -30,11 +28,7 @@ module.exports = {
 				console.log('we got here')
 				if (response.statusCode === 200 && response.statusMessage === "OK") {
 					var body = JSON.parse(response.body)
-					if (body["login"] != username) {
-						console.log("unauthorized access! we don't know who you are")
-						winston.log('error', "unauthorized access... something's fishy!!");
-						throw "unauthorized access"
-					}
+
 					winston.log('info', "We're authenticated and ready to go!")
 
 					var getOptions = {
@@ -105,7 +99,9 @@ module.exports = {
 							winston.log('error', "Error deleting the forked repo", err);
 							return;
 						}
-						git().clone(gitlocation, config.forkedRepoLocation)
+						git().clone(gitlocation, config.forkedRepoLocation, function(result) {
+							return "SUCCESS"
+						})
 					})
 
 

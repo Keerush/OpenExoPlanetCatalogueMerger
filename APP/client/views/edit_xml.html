@@ -74,10 +74,10 @@
 	<div class="EditNasa" ng-init="getInfo()">
 	<h3>NASA Database</h3>
 	<div class="editNasaBox">
-		<div ng-repeat="data in $parent.dataList">
-		<div ng-repeat="(key, value) in data.nasa">
+
+		<div ng-repeat="(key, value) in $parent.dataList[0].nasa">
 		<div ng-if="!!value">
-			<h4>{{key}}:<input ng-model="value"></h4>
+			<h4>{{key}}:<input ng-model="$parent.dataList[0].nasa[key]"></h4>
 		</div>
 		</div>
 		</div>
