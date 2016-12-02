@@ -8,7 +8,7 @@ const droptables = require('../models/dropTables.js');
 const createtables = require('../models/createTables.js');
 const addNASAData = require('../models/addNASAData.js');
 const getUnderReview = require('../models/getUnderReview');
-const editNASAData = require('../models/editNasaFiles');
+const editXMLData = require('../models/editXMLFiles');
 const ignoreDiffs = require('../models/ignoreDiffs');
 
 router.use(bodyParser.json());
@@ -151,7 +151,7 @@ router.post('/editXmls', (req, res) => {
 		return res.send('Invalid body.');
 	}
 
-	editNASAData(req.body)
+	editXMLData(req.body)
 		.then(() => {
 			res.statusCode = 200;
 			return res.send('ok');
