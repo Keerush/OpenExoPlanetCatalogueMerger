@@ -24,8 +24,13 @@
 	}
 
 	h4 {
-		color: white;
+		color: black;
 	}
+
+	input {
+		width: 100%;
+	}
+
 	.xml {
 		border: none;
 		margin-bottom: 30px;
@@ -35,38 +40,30 @@
 		width: 100%;
 		vertical-align: top;
 	}
-	.editNasa {
+	.editNasaBox {
+		background: white;
 		color: black;
 		display: inline-block;
 		float: none;
 		width: 100%;
     overflow: auto;
-
+		text-align: left;
 	}
 
-	.editNasa textarea {
-		resize: none;
-		width: 100%;
-		height: 90%;
-		white-space: pre-wrap;
-	}
-
-	.editOpen {
+	.editOpenBox {
+		background: white;
 		color: black;
 		display: inline-block;
 		float: none;
 		width: 100%;
     overflow: auto;
+		text-align: left;
 	}
 
-	.editOpen textarea {
-		resize: none;
-		width:100%;
-		height: 90%;
-	}
 
 	button {
 		margin: 20px;
+		bottom: 0;
 	}
 </style>
 <body>
@@ -75,26 +72,36 @@
 	<h1>Exoplanet Name</h1>
 	<div class="col-sm-6">
 	<div class="EditNasa" ng-init="getInfo()">
-		<h3>NASA DATABSE</h3>
-		<div ng-repeat="data in dataList">
+	<h3>NASA Database</h3>
+	<div class="editNasaBox">
+		<div ng-repeat="data in $parent.dataList">
 		<div ng-repeat="(key, value) in data.nasa">
 		<div ng-if="!!value">
-			<h4>{{key}}:
-			<font color="black"><input value="{{value}}"></font>
-			</h4>
+			<h4>{{key}}:<input ng-model="value"></h4>
 		</div>
 		</div>
 		</div>
 	</div>
-</div>
+	</div>
+	</div>
+
+
 <div class="col-sm-6">
 	<div class="EditOpen" ng-init="getInfo()">
 		<h3>Our Database (Open)</h3>
-		<textarea ng-repeat="data in dataList">{{data.open}}</textarea>
+		<div class="editOpenBox">
+			<div ng-repeat="data in dataList">
+			<div ng-repeat="(key, value) in data.open">
+			<div ng-if="!!value">
+				<h4>{{key}}:<input value="{{value}}"></h4>
+			</div>
+			</div>
+			</div>
+		</div>
 	</div>
 </div>
-	<a href="public/show_updates"><button ng-click="submitFunction()">Save</button></a>
-	<a href="public/show_updates"><button ng-click="cancelFunction()">Cancel</button></a>
+	<button ng-click="submitFunction()">Save</button></a>
+	<button ng-click="cancelFunction()">Cancel</button></a>
 </div>
 </body>
 </html>
