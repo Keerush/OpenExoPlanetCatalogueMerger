@@ -4,6 +4,7 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     checkGit = function() {
         var searchObject = $location.search();
         console.log("SEARCHOBJECT IS: ", searchObject);
+
         if (searchObject['code']) {
             var options = {
                 "code": searchObject['code'],
@@ -98,7 +99,6 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     $scope.submitFunction = function() {
         $http.get("https://github.com/login/oauth/authorize", {
             client_id: "976efe23b3dbd42727fc",
-            redirect_uri: "cmsvm35.utsc.utoronto.ca/public/show_updates",
             scope: "public_repo",
             state: "ILOVENISEKOI",
             allow_signup: "false"
