@@ -49,9 +49,10 @@ router.put('/token', (req, res, next) => {
 	}
 })
 router.put('/fork', function (req, res) {
-	if (req.access_token) {
-		fork(req.access_token).then(function (response) {
-			pullRequest(req.access_token)
+	if (req.body.access_token) {
+		fork.forkRepo(req.body.access_token).then(function (response) {
+			console.log("GENERATE PULL REQUEST");
+			pullRequest.generatePullRequest(req.body.access_token)
 		})
 	}
 	else {

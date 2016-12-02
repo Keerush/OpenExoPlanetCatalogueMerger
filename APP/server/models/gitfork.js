@@ -1,5 +1,5 @@
 var config = require('../../config.js');
-var exec = require('child_process').exec;
+var exec = require('child_process').execSync;
 var request = require('request-promise');
 var git = require('simple-git');
 var winston = require('winston');
@@ -8,6 +8,7 @@ winston.add(winston.transports.File, {
 })
 winston.remove(winston.transports.Console);
 const fs = require('fs')
+var Q = require('q')
 
 
 module.exports = {
@@ -62,7 +63,7 @@ module.exports = {
 			.then(function(deleted) {
 				var forkOptions = {
 					json: true,
-					url: "https://api.github.com/repos/OpenExoplanetCatalogue/open_exoplanet_catalogue/forks",
+					url: "https://api.github.com/repos/keerush/open_exoplanet_catalogue/forks",
 					headers: {
 						'User-Agent': "openexoplanetmerger",
 						'Authorization': 'token ' + token
@@ -93,16 +94,21 @@ module.exports = {
 						}
 					})
 
-					exec('rm -rf ' + config.forkedRepoLocation, function(err, stdout, stderr) {
-						console.log("deleted the (previous) forked repo (if it existed)");
+					console.log("DELETEING FILES");
+					exec('rm -rf ' + config.forkedRepoLocation)
+
+
+					console.log("deleted the (previous) forked repo (if it existed)");
+					var deferred = Q.defer();
+					git().clone(gitlocation, config.forkedRepoLocation, function(err, result) {
 						if (err) {
-							winston.log('error', "Error deleting the forked repo", err);
-							return;
+							console.log(err)
+							deferred.reject(err);
 						}
-						git().clone(gitlocation, config.forkedRepoLocation, function(result) {
-							return "SUCCESS"
-						})
+						console.log("WE HAVE CLONED THE REPO");
+						deferred.resolve("SUCCESS")
 					})
+					return deferred.promise;
 
 
 				}
@@ -111,6 +117,7 @@ module.exports = {
 			.catch(function(error) {
 				console.log("there is an error");
 				winston.log('error', "there is an error, ", error)
+				throw error
 			})
 	}
 

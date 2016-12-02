@@ -9,7 +9,6 @@ var S = require('string');
 
 module.exports = {
 	generatePullRequest: function(database, token) {
-		token = "044977754f2e14d05536dec207a231e502d1a6dc"
 		git.diffSummary(function(error, result) {
 			var string = "There are differences between " + database + " and the open-exoplanet catalogue in the files"
 			var index
