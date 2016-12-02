@@ -21,9 +21,9 @@ module.exports = () => {
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'declination VARCHAR(255),' +
 			'rightascension VARCHAR(255),' +
-			'distance FLOAT,' +
-			'distanceminus FLOAT,' +
-			'distanceplus FLOAT,' +
+			'distance DOUBLE,' +
+			'distanceminus DOUBLE,' +
+			'distanceplus DOUBLE,' +
 			'videolink VARCHAR(255),' +
 			'lastupdate	VARCHAR(255),' +
 			'fileName VARCHAR(255)' +
@@ -36,137 +36,137 @@ module.exports = () => {
 
 		var tPlanet = 'Planet(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
-			'semimajoraxis FLOAT,' +
-			'semimajoraxisminus FLOAT,' +
-			'semimajoraxisplus FLOAT,' +
-			'separationarcsec FLOAT,' +
-			'separationarcsecminus FLOAT,' +
-			'separationarcsecplus FLOAT,' +
-			'separationau FLOAT,' +
-			'separationauminus FLOAT,' +
-			'separationauplus FLOAT,' +
-			'eccentricity FLOAT,' +
-			'eccentricityminus FLOAT,' +
-			'eccentricityplus FLOAT,' +
-			'periastron FLOAT,' +
-			'periastronminus FLOAT,' +
-			'periastronplus FLOAT,' +
-			'longitude FLOAT,' +
-			'longitudeminus FLOAT,' +
-			'longitudeplus FLOAT,' +
-			'meananomaly FLOAT,' +
-			'meananomalyminus FLOAT,' +
-			'meananomalyplus FLOAT,' +
-			'ascendingnode FLOAT,' +
-			'ascendingnodeminus FLOAT,' +
-			'ascendingnodeplus FLOAT,' +
-			'inclination FLOAT,' +
-			'inclinationminus FLOAT,' +
-			'inclinationplus FLOAT,' +
-			'impactparameter FLOAT,' +
-			'impactparameterminus FLOAT,' +
-			'impactparameterplus FLOAT,' +
-			'period FLOAT,' +
-			'periodminus FLOAT,' +
-			'periodplus FLOAT,' +
-			'transittime FLOAT,' +
-			'transittimeminus FLOAT,' +
-			'transittimeplus FLOAT,' +
-			'periastrontime FLOAT,' +
-			'periastrontimeminus FLOAT,' +
-			'periastrontimeplus FLOAT,' +
+			'semimajoraxis DOUBLE,' +
+			'semimajoraxisminus DOUBLE,' +
+			'semimajoraxisplus DOUBLE,' +
+			'separationarcsec DOUBLE,' +
+			'separationarcsecminus DOUBLE,' +
+			'separationarcsecplus DOUBLE,' +
+			'separationau DOUBLE,' +
+			'separationauminus DOUBLE,' +
+			'separationauplus DOUBLE,' +
+			'eccentricity DOUBLE,' +
+			'eccentricityminus DOUBLE,' +
+			'eccentricityplus DOUBLE,' +
+			'periastron DOUBLE,' +
+			'periastronminus DOUBLE,' +
+			'periastronplus DOUBLE,' +
+			'longitude DOUBLE,' +
+			'longitudeminus DOUBLE,' +
+			'longitudeplus DOUBLE,' +
+			'meananomaly DOUBLE,' +
+			'meananomalyminus DOUBLE,' +
+			'meananomalyplus DOUBLE,' +
+			'ascendingnode DOUBLE,' +
+			'ascendingnodeminus DOUBLE,' +
+			'ascendingnodeplus DOUBLE,' +
+			'inclination DOUBLE,' +
+			'inclinationminus DOUBLE,' +
+			'inclinationplus DOUBLE,' +
+			'impactparameter DOUBLE,' +
+			'impactparameterminus DOUBLE,' +
+			'impactparameterplus DOUBLE,' +
+			'period DOUBLE,' +
+			'periodminus DOUBLE,' +
+			'periodplus DOUBLE,' +
+			'transittime DOUBLE,' +
+			'transittimeminus DOUBLE,' +
+			'transittimeplus DOUBLE,' +
+			'periastrontime DOUBLE,' +
+			'periastrontimeminus DOUBLE,' +
+			'periastrontimeplus DOUBLE,' +
 			'maximumrvtime DOUBLE,' +
-			'maximumrvtimeminus FLOAT,' +
-			'maximumrvtimeplus FLOAT,' +
-			'massjupiter FLOAT,' +
-			'massjupiterminus FLOAT,' +
-			'massjupiterplus FLOAT,' +
-			'massmsini FLOAT,' +
-			'massmsiniminus FLOAT,' +
-			'massmsiniplus FLOAT,' +
-			'radius FLOAT,' +
-			'radiusminus FLOAT,' +
-			'radiusplus FLOAT,' +
-			'temperature FLOAT,' +
-			'temperatureminus FLOAT,' +
-			'temperatureplus FLOAT,' +
-			'age FLOAT,' +
-			'ageminus FLOAT,' +
-			'ageplus FLOAT,' +
+			'maximumrvtimeminus DOUBLE,' +
+			'maximumrvtimeplus DOUBLE,' +
+			'massjupiter DOUBLE,' +
+			'massjupiterminus DOUBLE,' +
+			'massjupiterplus DOUBLE,' +
+			'massmsini DOUBLE,' +
+			'massmsiniminus DOUBLE,' +
+			'massmsiniplus DOUBLE,' +
+			'radius DOUBLE,' +
+			'radiusminus DOUBLE,' +
+			'radiusplus DOUBLE,' +
+			'temperature DOUBLE,' +
+			'temperatureminus DOUBLE,' +
+			'temperatureplus DOUBLE,' +
+			'age DOUBLE,' +
+			'ageminus DOUBLE,' +
+			'ageplus DOUBLE,' +
 			'spectraltype VARCHAR(255),' +
 			'spectraltypeminus VARCHAR(255),' +
 			'spectraltypeplus VARCHAR(255),' +
-			'magB FLOAT,' +
-			'magBminus FLOAT,' +
-			'magBplus FLOAT,' +
-			'magV FLOAT,' +
-			'magVminus FLOAT,' +
-			'magVplus FLOAT,' +
-			'magR FLOAT,' +
-			'magRminus FLOAT,' +
-			'magRplus FLOAT,' +
-			'magI FLOAT,' +
-			'magIminus FLOAT,' +
-			'magIplus FLOAT,' +
-			'magJ FLOAT,' +
-			'magJminus FLOAT,' +
-			'magJplus FLOAT,' +
-			'magH FLOAT,' +
-			'magHminus FLOAT,' +
-			'magHplus FLOAT,' +
-			'magK FLOAT,' +
-			'magKminus FLOAT,' +
-			'magKplus FLOAT,' +
+			'magB DOUBLE,' +
+			'magBminus DOUBLE,' +
+			'magBplus DOUBLE,' +
+			'magV DOUBLE,' +
+			'magVminus DOUBLE,' +
+			'magVplus DOUBLE,' +
+			'magR DOUBLE,' +
+			'magRminus DOUBLE,' +
+			'magRplus DOUBLE,' +
+			'magI DOUBLE,' +
+			'magIminus DOUBLE,' +
+			'magIplus DOUBLE,' +
+			'magJ DOUBLE,' +
+			'magJminus DOUBLE,' +
+			'magJplus DOUBLE,' +
+			'magH DOUBLE,' +
+			'magHminus DOUBLE,' +
+			'magHplus DOUBLE,' +
+			'magK DOUBLE,' +
+			'magKminus DOUBLE,' +
+			'magKplus DOUBLE,' +
 			'discoverymethod VARCHAR(255),' +
 			'istransiting INT,' +
 			'description VARCHAR(255),' +
 			'discoveryyear INT,' +
 			'lastupdate	VARCHAR(255),' +
-			'spinorbitalignment FLOAT,' +
-			'spinorbitalignmentminus FLOAT,' +
-			'spinorbitalignmentplus FLOAT,' +
+			'spinorbitalignment DOUBLE,' +
+			'spinorbitalignmentminus DOUBLE,' +
+			'spinorbitalignmentplus DOUBLE,' +
 			'fileName VARCHAR(255)' +
 			')';
 
 		var tStar = 'Star(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
-			'mass FLOAT,' +
-			'massminus FLOAT,' +
-			'massplus FLOAT,' +
-			'radius FLOAT,' +
-			'radiusminus FLOAT,' +
-			'radiusplus FLOAT,' +
-			'temperature FLOAT,' +
-			'temperatureminus FLOAT,' +
-			'temperatureplus FLOAT,' +
-			'age FLOAT,' +
-			'ageminus FLOAT,' +
-			'ageplus FLOAT,' +
-			'metallicity FLOAT,' +
-			'metallicityminus FLOAT,' +
-			'metallicityplus FLOAT,' +
+			'mass DOUBLE,' +
+			'massminus DOUBLE,' +
+			'massplus DOUBLE,' +
+			'radius DOUBLE,' +
+			'radiusminus DOUBLE,' +
+			'radiusplus DOUBLE,' +
+			'temperature DOUBLE,' +
+			'temperatureminus DOUBLE,' +
+			'temperatureplus DOUBLE,' +
+			'age DOUBLE,' +
+			'ageminus DOUBLE,' +
+			'ageplus DOUBLE,' +
+			'metallicity DOUBLE,' +
+			'metallicityminus DOUBLE,' +
+			'metallicityplus DOUBLE,' +
 			'spectraltype VARCHAR(255),' +
-			'magB FLOAT,' +
-			'magBminus FLOAT,' +
-			'magBplus FLOAT,' +
-			'magV FLOAT,' +
-			'magVminus FLOAT,' +
-			'magVplus FLOAT,' +
-			'magR FLOAT,' +
-			'magRminus FLOAT,' +
-			'magRplus FLOAT,' +
-			'magI FLOAT,' +
-			'magIminus FLOAT,' +
-			'magIplus FLOAT,' +
-			'magJ FLOAT,' +
-			'magJminus FLOAT,' +
-			'magJplus FLOAT,' +
-			'magH FLOAT,' +
-			'magHminus FLOAT,' +
-			'magHplus FLOAT,' +
-			'magK FLOAT,' +
-			'magKminus FLOAT,' +
-			'magKplus FLOAT,' +
+			'magB DOUBLE,' +
+			'magBminus DOUBLE,' +
+			'magBplus DOUBLE,' +
+			'magV DOUBLE,' +
+			'magVminus DOUBLE,' +
+			'magVplus DOUBLE,' +
+			'magR DOUBLE,' +
+			'magRminus DOUBLE,' +
+			'magRplus DOUBLE,' +
+			'magI DOUBLE,' +
+			'magIminus DOUBLE,' +
+			'magIplus DOUBLE,' +
+			'magJ DOUBLE,' +
+			'magJminus DOUBLE,' +
+			'magJplus DOUBLE,' +
+			'magH DOUBLE,' +
+			'magHminus DOUBLE,' +
+			'magHplus DOUBLE,' +
+			'magK DOUBLE,' +
+			'magKminus DOUBLE,' +
+			'magKplus DOUBLE,' +
 			'lastupdate	VARCHAR(255),' +
 			'fileName VARCHAR(255)' +
 			')';
@@ -178,19 +178,19 @@ module.exports = () => {
 
 		var tBinary = 'Binary(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
-			'semimajoraxis FLOAT,' +
-			'separation FLOAT,' +
-			'positionangle FLOAT,' +
-			'eccentricity FLOAT,' +
-			'periastron FLOAT,' +
-			'longitude FLOAT,' +
-			'meananomaly FLOAT,' +
-			'ascendingnode FLOAT,' +
-			'inclination FLOAT,' +
-			'period FLOAT,' +
-			'transittime FLOAT,' +
-			'periastrontime FLOAT,' +
-			'maximumrvtime FLOAT,' +
+			'semimajoraxis DOUBLE,' +
+			'separation DOUBLE,' +
+			'positionangle DOUBLE,' +
+			'eccentricity DOUBLE,' +
+			'periastron DOUBLE,' +
+			'longitude DOUBLE,' +
+			'meananomaly DOUBLE,' +
+			'ascendingnode DOUBLE,' +
+			'inclination DOUBLE,' +
+			'period DOUBLE,' +
+			'transittime DOUBLE,' +
+			'periastrontime DOUBLE,' +
+			'maximumrvtime DOUBLE,' +
 			'magB VARCHAR(255),' +
 			'magV VARCHAR(255),' +
 			'magR VARCHAR(255),' +

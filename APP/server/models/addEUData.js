@@ -27,6 +27,12 @@ module.exports = () => {
 
 		console.log('Getting data from exoplanet.eu');
 		converter.on("record_parsed", function (item) {
+			for (var currKey in item) {
+				// inconsistent values found in eu 
+				if (item[currKey] == 'nan' || item[currKey] == 'inf') {
+					delete[currKey];
+				}
+			}
 			// TODO: need to format item.dec and item.ra
 			systemInput.push([item.star_name, item.dec, item.ra, item.star_distance, item.star_distance_error_max, item.star_distance_error_max, item.updated]);
 			planetInput.push([item["# name"], item.semi_major_axis, item.semi_major_axis_error_min, item.semi_major_axis_error_max, item.eccentricity, item.eccentricity_error_min, item.eccentricity_error_max, item.omega, item.omega_error_max, item.omega_error_min, item.inclination, item.inclination_error_max, item.inclination_error_min, item.impact_parameter, item.impact_parameter_error_max, item.impact_parameter_error_min, item.tperi, item.tperi_error_max, item.tperi_error_min, null, null, null, item.tperi, item.tperi_error_max, item.tperi_error_min, null, null, null, item.mass_sini, item.mass_sini_error_max, item.mass_sini_error_min, item.radius, item.radius_error_max, item.radius_error_min, null, null, null, item.detection_type, null, item.discovered, item.updated]);
