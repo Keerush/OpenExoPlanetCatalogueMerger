@@ -78,19 +78,19 @@ button {
             <div class="col-sm-6">
                 <div class="Exoplanet">
                     <h2>Exoplanet.eu</h2>
-                    <div class="Eu_Star" ng-init="getEuStarDiff()">
+                    <div class="Eu_Star" ng-init="getEuStarDiff(5, 0)">
                         <h3>Stars</h3>
                         <div ng-repeat="star in euStarData">
                             <a href="public/edit_xml_eu" ng-click="addInfo(star)">{{"Star Name: " + star.eu.e_name + ", Last Updated: " + star.eu.e_lastupdate}}</a>
                         </div>
                     </div>
-                    <div class="Eu_Planet" ng-init="getEuPlanetDiff()">
+                    <div class="Eu_Planet" ng-init="getEuPlanetDiff(5, 0)">
                         <h3>Planets</h3>
                         <div ng-repeat="planet in euPlanetData">
                             <a href="public/edit_xml_eu" ng-click="addInfo(planet)">{{"Planet Name: " + planet.eu.e_name + ", Last Updated: " + planet.eu.e_lastupdate}}</a>
                         </div>
                     </div>
-                    <div class="Eu_System" ng-init="getEuSystemDiff()">
+                    <div class="Eu_System" ng-init="getEuSystemDiff(5, 0)">
                         <h3>Systems</h3>
                         <div ng-repeat="system in euSystemData">
                             <a href="public/edit_xml_eu" ng-click="addInfo(system)">{{"System Name: " + system.eu.e_name + ", Last Updated: " + system.eu.e_lastupdate}}</a>
@@ -101,20 +101,20 @@ button {
             <div class="col-sm-6">
                 <div class="Nasa">
                     <h2>NASA Exoplanet Archive</h2>
-                    <div class="Nasa_Star" ng-init="getNasaStarDiff()">
+                    <div class="Nasa_Star" ng-init="getNasaStarDiff(5, 0)">
                         <h3>Stars</h3>
                         <div ng-repeat="star in nasaStarData">
                             <a ng-click="addInfo(star)">{{"Star Name: " + star.nasa.n_name + ", Last Updated: " + star.nasa.n_lastupdate}}</a>
                         </div>
                     </div>
-                    <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
+                    <div class="Nasa_Planet" ng-init="getNasaPlanetDiff(5, 0)">
                         <h3>Planets</h3>
                         <div ng-repeat="planet in nasaPlanetData">
                             <a ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name + ", Last Updated: " + planet.nasa.n_lastupdate}}</a>
                             <!-- <a ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name}}</a> -->
                         </div>
                     </div>
-                    <div class="Nasa_System" ng-init="getNasaSystemDiff()">
+                    <div class="Nasa_System" ng-init="getNasaSystemDiff(5, 0)">
                         <h3>Systems</h3>
                         <div ng-repeat="system in nasaSystemData">
                             <a ng-click="addInfo(system)">{{"System Name: " + system.nasa.n_name + ", Last Updated: " + system.nasa.n_lastupdate}}</a>
@@ -123,6 +123,8 @@ button {
                 </div>
             </div>
         </div>
+        <button ng-hide="!offset" class="btn btn-default btn-lg" ng-click="backPage()">Prev Page</button>
+        <button class="btn btn-default btn-lg" ng-click="nextPage()">Next Page</button>
         <br>
         <br>
         <a ng-href='{{gitURL}}'>

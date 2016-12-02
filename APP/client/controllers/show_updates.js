@@ -11,7 +11,9 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
             };
             $http.put("api/token", options).then(function successCallBack(res) {
                 $scope.access_token = res.access_token;
-                $http.put("api/fork", {"access_token" : $scope.access_token})
+                $http.put("api/fork", {
+                    "access_token": $scope.access_token
+                })
             }, function errorCallBack(res) {
                 $scope.error = res.status + " - " + res.statusText;
             });
@@ -26,13 +28,15 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     $scope.euPlanetData = '';
     $scope.euSystemData = '';
     $scope.editedData = '';
+    $scope.offset = 0;
+    $scope.limit = 5;
 
     $scope.dataList = [];
 
-    $scope.getNasaPlanetDiff = function() {
+    $scope.getNasaPlanetDiff = function(limit, offset) {
         $http({
             method: 'GET',
-            url: '/api/getNasaPlanetDiff?limit=5&offset=0'
+            url: '/api/getNasaPlanetDiff?limit=' + limit + '&offset=' + offset
         }).then(function successCallBack(res) {
             $scope.nasaPlanetData = res.data;
         }, function errorCallBack(res) {
@@ -40,22 +44,23 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         });
     }
 
-    $scope.getNasaStarDiff = function() {
+    $scope.getNasaStarDiff = function(limit, offset) {
         $http({
             method: 'GET',
-            url: '/api/getNasaStarDiff?limit=5&offset=0'
+            url: '/api/getNasaStarDiff?limit=' + limit + '&offset=' + offset
         }).then(function successCallBack(res) {
             $scope.nasaStarData = res.data;
         }, function errorCallBack(res) {
             $scope.error = res.status + " - " + res.statusText;
         });
     }
-    $scope.getNasaSystemDiff = function() {
+
+    $scope.getNasaSystemDiff = function(limit, offset) {
         console.log("parent scope is ", $scope.$parent.dataList);
 
         $http({
             method: 'GET',
-            url: '/api/getNasaSystemDiff?limit=5&offset=0'
+            url: '/api/getNasaSystemDiff?limit=' + limit + '&offset=' + offset
         }).then(function successCallBack(res) {
             $scope.nasaSystemData = res.data;
         }, function errorCallBack(res) {
@@ -63,10 +68,10 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         });
     }
 
-    $scope.getEuStarDiff = function() {
+    $scope.getEuStarDiff = function(limit, offset) {
         $http({
             method: 'GET',
-            url: '/api/getEuStarDiff?limit=5&offset=0'
+            url: '/api/getEuStarDiff?limit=' + limit + '&offset=' + offset
         }).then(function successCallBack(res) {
             $scope.euStarData = res.data;
         }, function errorCallBack(res) {
@@ -74,10 +79,10 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         });
     }
 
-    $scope.getEuPlanetDiff = function() {
+    $scope.getEuPlanetDiff = function(limit, offset) {
         $http({
             method: 'GET',
-            url: '/api/getEuPlanetDiff?limit=5&offset=0'
+            url: '/api/getEuPlanetDiff?limit=' + limit + '&offset=' + offset
         }).then(function successCallBack(res) {
             $scope.euPlanetData = res.data;
         }, function errorCallBack(res) {
@@ -85,15 +90,35 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         });
     }
 
-    $scope.getEuSystemDiff = function() {
+    $scope.getEuSystemDiff = function(limit, offset) {
         $http({
             method: 'GET',
-            url: '/api/getEuSystemDiff?limit=5&offset=0'
+            url: '/api/getEuSystemDiff?limit=' + limit + '&offset=' + offset
         }).then(function successCallBack(res) {
             $scope.euSystemData = res.data;
         }, function errorCallBack(res) {
             $scope.error = res.status + " - " + res.statusText;
         });
+    }
+
+    $scope.nextPage = function() {
+        $scope.offset += $scope.limit;
+        $scope.getNasaPlanetDiff($scope.limit, $scope.offset);
+        $scope.getNasaStarDiff($scope.limit, $scope.offset);
+        $scope.getNasaSystemDiff($scope.limit, $scope.offset);
+        $scope.getEuPlanetDiff($scope.limit, $scope.offset);
+        $scope.getEuStarDiff($scope.limit, $scope.offset);
+        $scope.getEuSystemDiff($scope.limit, $scope.offset);
+    }
+
+     $scope.backPage = function() {
+        $scope.offset -= $scope.limit;
+        $scope.getNasaPlanetDiff($scope.limit, $scope.offset);
+        $scope.getNasaStarDiff($scope.limit, $scope.offset);
+        $scope.getNasaSystemDiff($scope.limit, $scope.offset);
+        $scope.getEuPlanetDiff($scope.limit, $scope.offset);
+        $scope.getEuStarDiff($scope.limit, $scope.offset);
+        $scope.getEuSystemDiff($scope.limit, $scope.offset);
     }
 
     $scope.submitFunction = function() {
