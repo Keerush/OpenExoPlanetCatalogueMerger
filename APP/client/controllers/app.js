@@ -9,6 +9,10 @@ app.config(function($routeProvider, $locationProvider) {
 		templateUrl: 'public/views/edit_xml.html',
 		controller: 'edit_xml'
 	})
+	.when('/public/edit_xml_eu', {
+		templateUrl: 'public/views/edit_xml_eu.html',
+		controller: 'edit_xml'
+	})
 	.when('/public/register_email', {
 		templateUrl: 'public/views/register_email.html',
 		controller: 'register_email'

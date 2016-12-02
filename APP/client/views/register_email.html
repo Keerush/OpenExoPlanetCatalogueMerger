@@ -27,8 +27,11 @@
 			margin-bottom: 20px;
 			width: 100%;
 			clear: both;
+			color:black;
 		}
-
+		button {
+			color:black;
+		}
 	</style>
 	<body>
 		<h1>Register your Email <br> to get Daily Updates</h1>
@@ -41,10 +44,10 @@
 			<label>Email:</label>
 			<input type="text" ng-model="email">
 			<br>
-			<!-- <a href="frontend1.html"><button ng-click="submit()">Submit</button></a> -->
-			<button onclick="location.href='/'" type="button">Submit</button>
-			<button onclick="location.href='/'" type="button">Cancel</button>
-			<!-- <a href="frontend1.html"><button>Cancel</button></a> -->
+			<a href="public/frontend1"><button ng-click="registerEmail()">Submit</button></a>
+			<!-- <button ="location.href='/'" type="button">Submit</button>
+			<button onclick="location.href='/'" type="button">Cancel</button> -->
+			<a href="public/frontend1"><button>Cancel</button></a>
 		</form>
 		</div>
 	</body>

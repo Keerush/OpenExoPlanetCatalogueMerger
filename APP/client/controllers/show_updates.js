@@ -8,6 +8,8 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
   $scope.euSystemData = '';
   $scope.editedData = '';
 
+  $scope.dataList=[];
+
   $scope.getNasaPlanetDiff = function() {
     $http({
       method: 'GET',
@@ -89,6 +91,7 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     $window.alert("All Changes Made were Unsaved.");
   }
 
+
   $scope.addInfo = function(obj) {
     console.log("here");
     $scope.$parent.dataList = [];
@@ -104,27 +107,3 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
   }
   console.log("initiating this controller");
 });
-
-//
-// app.service('addXml', function()) {
-//   var nameList = [];
-//
-//   var addInfo = function(obj) {
-//     nameList.push(obj);
-//   };
-//
-//   var getInfo = function() {
-//    return nameList;
-//   };
-//
-//   return {
-//     addInfo: addInfo,
-//     getInfo: getInfo
-//   };
-// }
-//
-// app.controller('transferXml', function($scope, show_updates) {
-//   $scope.callToAddToInfo = function(obj) {
-//     show.addInfo(obj);
-//   };
-// });
