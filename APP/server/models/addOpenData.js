@@ -126,6 +126,7 @@ module.exports = () => {
         //needs to be rewritten, this is asychronous so lines 151 is run first, throwing an error
 
         fs.readdir(localLoc, fs.F_OK, function(err, files) {
+            console.log("here");
             if (err && err.code === 'ENOENT') {
                 console.log("directory doesn't exist!");
                 fs.mkdirSync(localLoc);
