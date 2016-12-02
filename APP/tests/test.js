@@ -115,3 +115,73 @@ describe("Testing get Nasa Planet differences", function() {
 			});
 	}).timeout(10000);
 });
+
+
+describe("Testing get Eu Star differences", function() {
+	it('should have status code 200 after all differences have been pushed.', function(done) {
+		server
+			.get('/api/getEuStarDiff')
+			.expect(200)
+			.end(function(err, res) {
+				res.status.should.equal(200);
+				done();
+			});
+	}).timeout(5000);
+
+	it('should have status code 200 after 10 differences have been pushed.', function(done) {
+		server
+			.get('/api/getEuStarDiff?limit=10&offset=0')
+			.expect(200)
+			.end(function(err, res) {
+				res.status.should.equal(200);
+				res.body.length.should.equal(10);
+				done();
+			});
+	}).timeout(5000);
+});
+
+describe("Testing get Eu System differences", function() {
+	it('should have status code 200 after all differences have been pushed.', function(done) {
+		server
+			.get('/api/getEuSystemDiff')
+			.expect(200)
+			.end(function(err, res) {
+				res.status.should.equal(200);
+				done();
+			});
+	}).timeout(5000);
+
+	it('should have status code 200 after 10 differences have been pushed.', function(done) {
+		server
+			.get('/api/getEuSystemDiff?limit=10&offset=0')
+			.expect(200)
+			.end(function(err, res) {
+				res.status.should.equal(200);
+				res.body.length.should.equal(10);
+				done();
+			});
+	}).timeout(5000);
+});
+
+describe("Testing get Eu Planet differences", function() {
+	it('should have status code 200 after all differences have been pushed.', function(done) {
+		server
+			.get('/api/getEuPlanetDiff')
+			.expect(200)
+			.end(function(err, res) {
+				res.status.should.equal(200);
+				done();
+			});
+	}).timeout(100000);
+
+	it('should have status code 200 after 10 differences have been pushed.', function(done) {
+		server
+			.get('/api/getEuPlanetDiff?limit=10&offset=0')
+			.expect(200)
+			.end(function(err, res) {
+				res.status.should.equal(200);
+				res.body.length.should.equal(10);
+				done();
+			});
+	}).timeout(10000);
+});
