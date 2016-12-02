@@ -121,14 +121,8 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
 
     $scope.addInfo = function(obj) {
         console.log("here ", obj);
-        if ($scope.$parent.dataList) {
-            $location.path('/public/edit_xml')
-            return;
-        }
         $scope.$parent.dataList = [];
         $scope.$parent.dataList.push(obj);
-        // $location.path("public/edit_xml");
-        console.log($scope.$parent.dataList);
         $location.path('/public/edit_xml')
     }
 
@@ -136,5 +130,4 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         console.log($scope.$parent.dataList);
         return $scope.$parent.dataList;
     }
-    console.log("initiating this controller");
 });

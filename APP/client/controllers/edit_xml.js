@@ -10,7 +10,7 @@ app.controller('edit_xml', function($scope, $http, $window, $location) {
         change[currKey.replace('n_', '')] = $scope.$parent.dataList[0].nasa[currKey];
       }
     }
-    
+
     $http.post("api/editXmls", [change])
       .then(function successCallBack(res) {
         $scope.editedData = res.data;
@@ -28,7 +28,13 @@ app.controller('edit_xml', function($scope, $http, $window, $location) {
     return $scope.$parent.dataList;
   }
   $scope.cancelFunction = function() {
+    $scope.$parent.dataList = [];
     $window.alert("All Changes Made were Unsaved.");
     $location.path('public/show_updates');
+  }
+
+  $scope.trimKey = function(key) {
+    console.log('here');
+    return key.replace('n_', '');
   }
 });

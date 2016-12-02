@@ -1,114 +1,109 @@
 <html lang="en">
+
 <head>
-	<title>Edit Information</title>
+    <title>Edit Information</title>
 </head>
 <style>
-	body {
-		background-image: url("public/images/spacebackground.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-		background-attachment: fixed;
-		text-align: center;
-		font-family: Helvetica;
-	}
+body {
+    background-image: url("public/images/spacebackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    text-align: center;
+    font-family: Helvetica;
+}
 
-	h1 {
-		margin-top: 100px;
-		color: #e5e5e5;
-		font-size: 36pt;
-	}
+h1 {
+    margin-top: 100px;
+    color: #e5e5e5;
+    font-size: 36pt;
+}
 
-	h3 {
-		color: white;
-	}
+h3 {
+    color: white;
+}
 
-	h4 {
-		color: black;
-	}
+h4 {
+    color: black;
+}
 
-	input {
-		width: 100%;
-	}
+.xml {
+    border: none;
+    margin-bottom: 30px;
+}
 
-	.xml {
-		border: none;
-		margin-bottom: 30px;
-	}
-  .container {
-		text-align: center;
-		width: 100%;
-		vertical-align: top;
-	}
-	.editNasaBox {
-		background: white;
-		color: black;
-		display: inline-block;
-		float: none;
-		width: 100%;
+.editNasaBox {
+    background: white;
+    color: black;
+    display: inline-block;
+    float: none;
+    width: 100%;
     overflow: auto;
-		text-align: left;
-		padding-left: 20px;
-		padding-right: 20px;
-		border-style: solid;
-		border-width: medium;
-	}
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-style: solid;
+    border-width: medium;
+}
 
-	.editOpenBox {
-		background: white;
-		color: black;
-		display: inline-block;
-		float: none;
-		width: 100%;
+.editOpenBox {
+    background: white;
+    color: black;
+    display: inline-block;
+    float: none;
+    width: 100%;
     overflow: auto;
-		text-align: left;
-		padding-left: 20px;
-		padding-right: 20px;
-		border-style: solid;
-		border-width: medium;
-	}
-
-	button {
-		margin: 20px;
-		bottom: 0;
-	}
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-style: solid;
+    border-width: medium;
+}
 </style>
+
 <body>
-	<div class="container" ng-app="show_updates">
-
-	<h1>Exoplanet Name</h1>
-	<div class="col-sm-6">
-	<div class="EditNasa" ng-init="getInfo()">
-	<h3>NASA Database</h3>
-	<div class="editNasaBox">
-
-		<div ng-repeat="(key, value) in $parent.dataList[0].nasa">
-		<div ng-if="!!value">
-			<h4>{{key}}:<input ng-model="$parent.dataList[0].nasa[key]"></h4>
-		</div>
-		</div>
-		</div>
-	</div>
-	</div>
-	</div>
-
-
-<div class="col-sm-6">
-	<div class="EditOpen" ng-init="getInfo()">
-		<h3>Our Database (Open)</h3>
-		<div class="editOpenBox">
-			<div ng-repeat="data in dataList">
-			<div ng-repeat="(key, value) in data.open">
-			<div ng-if="!!value">
-				<h4>{{key}}:<input value="{{value}}"></h4>
-			</div>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
-	<button ng-click="submitFunction()">Save</button></a>
-	<button ng-click="cancelFunction()">Cancel</button></a>
-</div>
+    <div class="container" ng-app="show_updates">
+        <div class="row">
+            <h1>Exoplanet Name</h1>
+            <div class="col-sm-6">
+                <div class="EditNasa" ng-init="getInfo()">
+                    <h3>NASA Database</h3>
+                    <div class="well">
+                        <div ng-repeat="(key, value) in $parent.dataList[0].nasa">
+                            <div ng-if="!!value">
+                                <div class="input-group">
+                                    <span class="lead input-group-addon">{{ trimKey(key) }}:</span>
+                                    <input class="form-control" ng-model="$parent.dataList[0].nasa[key]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="EditOpen" ng-init="getInfo()">
+                    <h3>Our Database (Open)</h3>
+                    <div class="well">
+                        <div ng-repeat="data in dataList">
+                            <div ng-repeat="(key, value) in data.open">
+                                <div ng-if="!!value">
+                                    <div class="input-group">
+                                        <span class="lead input-group-addon">{{key}}:</span>
+                                        <input class="form-control" value="{{value}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="btn-primary btn-lg" ng-click="submitFunction()">Save</button>
+            <button class="btn-primary btn-lg" ng-click="cancelFunction()">Cancel</button>
+        </div>
+    </div>
 </body>
+
 </html>
