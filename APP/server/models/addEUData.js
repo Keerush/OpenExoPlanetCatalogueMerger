@@ -176,7 +176,7 @@ module.exports = () => {
 		console.log('Getting data from exoplanet.eu');
 		converter.on("record_parsed", function(item) {
 			for (var currKey in item) {
-				// inconsistent values found in eu 
+				// inconsistent values found in eu
 				if (item[currKey] == "" || item[currKey] == 'nan' || item[currKey] == 'inf') {
 					delete item[currKey];
 				}

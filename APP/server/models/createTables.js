@@ -15,7 +15,7 @@ module.exports = () => {
 		var tNames = 'Names(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +
 			'otherName VARCHAR(255) NOT NULL' +
-			')';
+			')' ;
 
 		var tSystem = 'System(' +
 			'name VARCHAR(255) PRIMARY KEY NOT NULL,' +

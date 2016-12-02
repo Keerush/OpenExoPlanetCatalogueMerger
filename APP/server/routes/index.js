@@ -10,8 +10,7 @@ const addNASAData = require('../models/addNASAData.js');
 const getUnderReview = require('../models/getUnderReview');
 const editXMLData = require('../models/editXMLFiles');
 const ignoreDiffs = require('../models/ignoreDiffs');
-const fork = require('../models/gitfork');
-const pullRequest = require('../models/gitpullrequest')
+
 router.use(bodyParser.json());
 
 router.get('/', (req, res, next) => {
@@ -31,13 +30,6 @@ router.get('/nasaData', function(req, res) {
 	});
 });
 
-router.put('/fork', function (req, res) {
-	if (req.access_token) {
-		fork(req.access_token).then(function (response) {
-			pullRequest(req.access_token);
-		})
-	}
-})
 router.get('/euData', function(req, res) {
 	var options = {
 		uri: 'http://exoplanet.eu/catalog/csv',
@@ -56,7 +48,7 @@ router.get('/dropTables/:password', function(req, res) {
 		return res.send('Error 404: Invalid password.');
 	}
 
-	droptables().then(function(err) {
+	droptables.dropTable().then(function(err) {
 		res.statusCode = 200;
 		res.send('drop tables.');
 	});
@@ -69,7 +61,7 @@ router.get('/createTables/:password', function(req, res) {
 		return res.send('Error 404: Invalid password.');
 	}
 
-	createtables().then(function(err) {
+	createtables.createTables().then(function(err) {
 		res.statusCode = 200;
 		res.send('created tables');
 	});
@@ -154,9 +146,8 @@ router.get('/getEuSystemDiff', (req, res) => {
 });
 
 router.post('/editXmls', (req, res) => {
-	if (!req.body && !req.body.nasa) {
+	if (Object.getOwnPropertyNames(req.body).length === 0 || req.body.length === 0) {
 		res.statusCode = 400;
-		console.log("????")
 		return res.send('Invalid body.');
 	}
 

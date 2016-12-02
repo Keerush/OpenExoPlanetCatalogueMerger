@@ -30,5 +30,5 @@ module.exports = {
         return console.log(error);
     }
     console.log('Message sent: ' + info.response);
-});  }
+}); }
 }
