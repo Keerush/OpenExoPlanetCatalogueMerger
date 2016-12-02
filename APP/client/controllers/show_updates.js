@@ -9,9 +9,9 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
             var options = {
                 "code": searchObject['code'],
             };
-            $http.post("api/token", options).then(function successCallBack(res) {
+            $http.put("api/token", options).then(function successCallBack(res) {
                 $scope.access_token = res.access_token;
-                
+                $http.put("api/fork", {"access_token" : $scope.access_token})
             }, function errorCallBack(res) {
                 $scope.error = res.status + " - " + res.statusText;
             });
