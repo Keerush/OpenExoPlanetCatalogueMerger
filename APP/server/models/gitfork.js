@@ -11,7 +11,7 @@ const fs = require('fs')
 
 
 module.exports = {
-	pushDifferences: function(token, username) {
+	forkRepo: function(token, username) {
 		var testtoken = "044977754f2e14d05536dec207a231e502d1a6dc"
 		token = testtoken;
 		var options = {
@@ -63,21 +63,6 @@ module.exports = {
 				}
 				throw "response is wrong";
 				//console.log("res is ", res);
-			}) //delete
-			.then(function(repoExists) {
-				if (repoExists) {
-					console.log(repoExists)
-					var deleteOptions = {
-						url: "https://api.github.com/repos/" + username + "/open_exoplanet_catalogue",
-						headers: {
-							'User-Agent': "openexoplanetmerger",
-							'Authorization': 'token ' + token
-						}
-					};
-					return request.delete(deleteOptions)
-				}
-				console.log("here");
-				return
 			})
 			//fork here
 			.then(function(deleted) {
@@ -93,8 +78,8 @@ module.exports = {
 			})
 			.then(function(resp) {
 				winston.log('info', "done forking")
-				winston.log('info',resp);
-				var gitlocation = resp.git_url
+				winston.log('info', resp);
+				var gitlocation = resp.clone_url
 					//SOME DUMBASS WILL CHANGE THIS TO / AND SCREW THEIR COMPUTER SO WE HAVE TO OBFUSCATE
 
 				if (config.forkedRepoLocation === "/") {
@@ -120,11 +105,8 @@ module.exports = {
 							winston.log('error', "Error deleting the forked repo", err);
 							return;
 						}
-
-
+						git().clone(gitlocation, config.forkedRepoLocation)
 					})
-
-					git().clone(gitlocation, config.forkedRepoLocation)
 
 
 				}

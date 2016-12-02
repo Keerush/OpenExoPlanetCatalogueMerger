@@ -1,21 +1,24 @@
-var app = angular.module('mainApp', ['ngRoute', 'ui.bootstrap']);
+var app = angular.module('mainApp', ['ngRoute']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
-	.when('/', {
-		templateUrl: 'views/frontend1.html',
+	.when('/public', {
+		templateUrl: 'public/views/frontend1.html'
 	})
-	.when('/edit_xml', {
-		templateUrl: 'views/edit_xml.html',
+	.when('/public/edit_xml', {
+		templateUrl: 'public/views/edit_xml.html',
+		controller: 'edit_xml'
 	})
-	.when('/register_email', {
-		templateUrl: 'views/register_email.html',
+	.when('/public/register_email', {
+		templateUrl: 'public/views/register_email.html',
+		controller: 'register_email'
 	})
-	.when('/show_updates', {
-		templateUrl: 'views/show_updates.html',
+	.when('/public/show_updates', {
+		templateUrl: 'public/views/show_updates.html',
+		controller: 'show_updates'
 	})
-	.otherwise({ 
-		redirectTo: '/' 
+	.otherwise({
+		redirectTo: '/public'
 	});
 
 	$locationProvider.html5Mode(true);

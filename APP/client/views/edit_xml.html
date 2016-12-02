@@ -4,7 +4,7 @@
 </head>
 <style>
 	body {
-		background-image: url("../../images/spacebackground.jpg");
+		background-image: url("public/images/spacebackground.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
@@ -25,16 +25,14 @@
 	}
 </style>
 <body>
+	<div ng-app="show_updates">
+
 	<h1>Exoplanet Name</h1>
-	<textarea class="xml">
+	<textarea class="xml" ng-init="getInfo()"></textarea>
 	</textarea>
 	<br>
-	<a href="show_updates"><button ng-click="submit()">Save</button></a>
-	<a href="show_updates"><button ng-click="cancel()">Cancel</button></a>
-
-
+	<a href="public/show_updates"><button ng-click="submitFunction()">Save</button></a>
+	<a href="public/show_updates"><button ng-click="cancelFunction()">Cancel</button></a>
+</div>
 </body>
 </html>
-<!-- 
-
-http://jsfiddle.net/y9fqf/1/ -->
