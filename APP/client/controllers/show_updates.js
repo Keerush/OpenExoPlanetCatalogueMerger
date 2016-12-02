@@ -3,18 +3,14 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     $scope.gitURL = "https://github.com/login/oauth/authorize?client_id=976efe23b3dbd42727fc&scope=public_repo&callback_url=cmsvm35.utsc.utoronto.ca/public/show_update"
     checkGit = function() {
         var searchObject = $location.search();
+        console.log("SEARCHOBJECT IS: ", searchObject);
         if (searchObject['code']) {
             var options = {
-                "client_id": "976efe23b3dbd42727fc",
-                "client_secret": "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
                 "code": searchObject['code'],
-                "state": "ILOVENISEKOI"
             };
             $http.post("https://github.com/login/oauth/access_token", options).then(function successCallBack(res) {
                 console.log(res);
-                $http.put('/api/fork', {
-                    access_token: res.access_token
-                });
+                
             }, function errorCallBack(res) {
                 $scope.error = res.status + " - " + res.statusText;
             });
