@@ -4,11 +4,11 @@ module.exports = {
 	"masterRepoLocation" : __dirname + "/repos/master/",
 	"forkedRepoLocation" : __dirname + "/repos/fork/",
 	"mysql": {
-		"host": "127.0.0.1",
-		"username": "root",
+		"host": "cmsvm35.utsc.utoronto.ca",
+		"username": "student",
 		"port": "3306",
-		"password": "",
-		"database": "cscc01db"
+		"password": "password",
+		"database": "NASA"
 	},
 	"exoplanet": {
 		"url": "http://exoplanet.eu/catalog/csv"
