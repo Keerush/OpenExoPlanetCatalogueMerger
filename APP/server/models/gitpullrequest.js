@@ -9,7 +9,23 @@ var S = require('string');
 
 module.exports = {
 	generatePullRequest: function(database, token) {
-		git.diffSummary(function(error, result) {
+		var options = {
+			url: "https://api.github.com/user",
+			headers: {
+				json: true,
+				'User-Agent': "openexoplanetmerger",
+				'Authorization': 'token ' + token
+			},
+			transform: function(body, response, resolveWithFullResponse) {
+				return response;
+			}
+		}
+		return request.get(options).then(function (result) {
+			var body = JSON.parse(result.body)
+			git.addConfig('user.name', body.login)
+			git.addConfig('user.email',body.email)
+
+			git.diffSummary(function(error, result) {
 			var string = "There are differences between " + database + " and the open-exoplanet catalogue in the files"
 			var index
 			for (index in result.files) {
@@ -59,6 +75,7 @@ module.exports = {
 					})
 				})
 			})
+		})
 		})
 
 	}
