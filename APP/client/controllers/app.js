@@ -3,7 +3,13 @@ var app = angular.module('mainApp', ['ngRoute']);
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/public', {
-		templateUrl: 'public/views/frontend1.html'
+		var searchObject = $location.search();
+        if (searchObject['code']) {
+            templateUrl: 'public/views/show_updates'
+        }
+		else {
+			templateUrl: 'public/views/frontend1.html'
+		}
 	})
 	.when('/public/edit_xml', {
 		templateUrl: 'public/views/edit_xml.html',
