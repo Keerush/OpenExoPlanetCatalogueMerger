@@ -9,7 +9,7 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
             var options = {
                 "code": searchObject['code'],
             };
-            $http.post("https://github.com/login/oauth/access_token", options).then(function successCallBack(res) {
+            $http.post("api/token", options).then(function successCallBack(res) {
                 console.log(res);
                 
             }, function errorCallBack(res) {

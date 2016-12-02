@@ -20,18 +20,23 @@ router.get('/', (req, res, next) => {
 });
 
 router.put('/token', (req, res, next) => {
-	var options = {
-		"client_id": "976efe23b3dbd42727fc",
-		"client_secret": "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
-		"code": req['code'],
-		"state": "ILOVENISEKOI"
-	};
-	$http.post("https://github.com/login/oauth/access_token", options).then(function(res) {
-		console.log(res);
+	if (req.body) {
+		var options = {
+			client_id: "976efe23b3dbd42727fc",
+			client_secret: "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
+			code: req.body.code: state: "ILOVENISEKOI"
+		};
+		http.post("https://github.com/login/oauth/access_token", options).then(function(res) {
+			console.log(res);
 
-	}).catch(function(err) {
-		console.log(err);
-	})
+		}).catch(function(err) {
+			console.log(err);
+		})
+
+	} else {
+		res.statusCode = 400
+		res.send("invalid request")
+	}
 })
 
 router.get('/nasaData', function(req, res) {
