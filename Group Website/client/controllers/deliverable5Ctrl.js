@@ -6,39 +6,39 @@ app.controller('deliverable5Ctrl', function($scope) {
 		codeLink: "https://github.com/CSCC01-Fall2016/team20-Project/blob/master/APP/server/models/createTables.js",
 		author: "Kent Chow, Keerysanth Sribaskaran",
 		dateOfReview: "Thursday, December 1, 2016",
-		bugs: "Returns error for existing tables. We should check that the tables exist before adding them.",
-		poorCodeLogic: "We should store server information into some sort of config file so that we can access it in our other scripts.",
-		poorCodeStyle: "Should not perform string manipulation on query. Using ‘?’ for the values and then stating the value as a list of inputs will be safer.",
-		missingDocumentation: "No documentation found in file. The query function needs to be documented since it can get tricky to read and understand.",
+		bugs: "All bugs have been fixed since the last code check.",
+		poorCodeLogic: "None",
+		poorCodeStyle: "None, declaring the variables for the database was styled well to make it easy to read [Line 37-129]",
+		missingDocumentation: "No documentation, large functions Promise need to have commenting to understand what is going on. [Line 37-129]",
 		unreadableCode: "Nothing else, apart from the code mentioned above in missing documentation.",
-		vulnerabilities: "Error values are not checked for, when using promises with the database queries that create and drop the tables.",
-		poorTesting: "No tests written for any functions."
+		vulnerabilities: "None",
+		poorTesting: "There is 1 test, needs more thorough testing."
 	}, {
 		reviewerName: "Brandon Ramoudith",
-		codeName: "addNasaData.js",
-		codeLink: "https://github.com/CSCC01-Fall2016/team20-Project/commit/cf62249265b6c0cb7e034af2fdb15b233c423904",
-		author: "Keerush",
+		codeName: "show_updates.html",
+		codeLink: "https://github.com/CSCC01-Fall2016/team20-Project/blob/master/APP/client/views/show_updates.html",
+		author: "Simon",
 		dateOfReview: "Thursday, December 1, 2016.",
-		bugs: "None.",
-		poorCodeLogic: "In line 15, it’s better to get a library that will wrap the database pooling into a promise, as opposed to manually doing it this way.\nIn line 39, Using string manipulations on the object is very inefficient, the mysql driver can take objects as an input and is designed as such.",
-		poorCodeStyle: "Bad naming for lines 39-45.",
+		bugs: "None",
+		poorCodeLogic: "None",
+		poorCodeStyle: "Not all of the <div> tags are indented properly, Should have external stylesheet",
 		missingDocumentation: "Missing documentation for all of the code. In general no comments at all.",
-		unreadableCode: "None.",
-		vulnerabilities: "In line 6, Password / Names / Database URLs are hardcoded as opposed to using variables.\nIn lines 58-63, manually inserting strings instead of using a variable allows for SQL injection.",
-		poorTesting: "There are no tests."
+		unreadableCode: "The poor indenting makes it hard to see what content is contained in certain div tags. The code is messy.",
+		vulnerabilities: "None",
+		poorTesting: "There are no test cases. Local tests were performed which ran perfectly."
 	}, {
 		reviewerName: "Simon Wong",
-		codeName: "dropTables.js",
-		codeLink: "https://github.com/CSCC01-Fall2016/team20-Project/blob/master/APP/server/models/dropTables.js",
+		codeName: "getUnderReview.js",
+		codeLink: "https://github.com/CSCC01-Fall2016/team20-Project/blob/master/APP/server/models/getUnderReview.js",
 		author: "Keerush",
 		dateOfReview: "Thursday, December 1, 2016",
-		bugs: "None that I could find, the code works fine",
-		poorCodeLogic: "None.",
-		poorCodeStyle: "The username and password are hard coded into the script. They should be stored in a separate text file for security purposes and read/accessed from dropTables.\nSome of the variable names are too similar to each other such as Promises (Line 17) and Promise (Line 18). This increases the chance of accidentally writing the incorrect variable name as they are so similar.",
-		missingDocumentation: "The main function (Line 47 – 68) could use a little bit of commenting to explain quickly its purpose. Though the function is quite self-explanatory.",
-		unreadableCode: "Some of the variables could have been done in one line such as Sources (Line 22- 26),creating lots of unnecessary white space",
-		vulnerabilities: "As mentioned earlier, hard coding the database login information is a serious security issue. The login credentials should be placed in a textfile and read in.",
-		poorTesting: "Could be more thorough with testing, currently there is only 1 test."
+		bugs: "When tested locally, the code worked and returned the expected output.",
+		poorCodeLogic: "None. The code seems efficient will little redundancy",
+		poorCodeStyle: "Parts of the code were commented because it might not be implemented. If we know for sure it won't be used, it should be deleted to make the code look cleaner. Otherwise the code is indented properly & easy to read. Some bad variable name declarations such as 'promise' vs. 'promises' [Line 30, 31]",
+		missingDocumentation: "There are some comments explaining what functions do.",
+		unreadableCode: "The Queries in line 87, 91, 95 could split into multiple lines to make it easier to read. ",
+		vulnerabilities: "None, the login credentials are stored in an external file which are not made public on github.",
+		poorTesting: "Needs formal testing"
 	}, {
 		reviewerName: "Kent Chow",
 		codeName: "addOpenData.js",
@@ -48,10 +48,10 @@ app.controller('deliverable5Ctrl', function($scope) {
 		bugs: "None",
 		poorCodeLogic: "None",
 		poorCodeStyle: "Server data should be stored separate instead of hardcoded.",
-		missingDocumentation: "No documentations",
-		unreadableCode: "None",
+		missingDocumentation: "Next to no commenting, needs more.",
+		unreadableCode: "None, the code is indented and styled properly, easy to read.",
 		vulnerabilities: "None",
-		poorTesting: "No tests made yet"
+		poorTesting: "No tests"
 	}];
 
 	$scope.systemDesign = {
