@@ -14,6 +14,11 @@ app.controller('edit_xml', function($scope, $http, $window) {
     });
   }
 
+  $scope.getInfo = function() {
+    console.log($scope.$parent.dataList);
+    return $scope.$parent.dataList;
+  }
+
   $scope.cancelFunction = function() {
     $window.alert("All Changes Made were Unsaved.");
   }

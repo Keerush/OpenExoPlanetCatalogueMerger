@@ -1,4 +1,4 @@
-app.controller('show_updates', function($scope, $http, $window) {
+app.controller('show_updates', function($scope, $http, $window, $location) {
 
   $scope.nasaStarData = '';
   $scope.nasaPlanetData = '';
@@ -7,6 +7,8 @@ app.controller('show_updates', function($scope, $http, $window) {
   $scope.euPlanetData = '';
   $scope.euSystemData = '';
   $scope.editedData = '';
+
+  $scope.dataList=[];
 
   $scope.getNasaPlanetDiff = function() {
     $http({
@@ -89,39 +91,14 @@ app.controller('show_updates', function($scope, $http, $window) {
     $window.alert("All Changes Made were Unsaved.");
   }
 
+
   $scope.addInfo = function(obj) {
-    var $scope.$parent.dataList = [];
-    dataList.push(obj);
-    // $location.path("public/edit_xml");
-    console.log(dataList);
+    $scope.$parent.dataList = [];
+    $scope.$parent.dataList.push(obj);
+    $location.path('/public/edit_xml')
   }
 
   $scope.getInfo = function() {
-    return dataList;
+    return $scope.$parent.dataList;
   }
-  console.log("initiating this controller");
 });
-
-//
-// app.service('addXml', function()) {
-//   var nameList = [];
-//
-//   var addInfo = function(obj) {
-//     nameList.push(obj);
-//   };
-//
-//   var getInfo = function() {
-//    return nameList;
-//   };
-//
-//   return {
-//     addInfo: addInfo,
-//     getInfo: getInfo
-//   };
-// }
-//
-// app.controller('transferXml', function($scope, show_updates) {
-//   $scope.callToAddToInfo = function(obj) {
-//     show.addInfo(obj);
-//   };
-// });
