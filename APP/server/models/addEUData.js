@@ -5,15 +5,157 @@ var request = require('request');
 var Q = require('q');
 var fs = require('fs');
 
-module.exports = () => {
+var pool = mysql.createPool({
+	host: config.mysql.host,
+	user: config.mysql.username,
+	password: config.mysql.password,
+	database: config.mysql.database
+});
+
+function runQueries(queries) {
 	var promise = new Promise(function(resolve, reject) {
-		var pool = mysql.createPool({
-			host: config.mysql.host,
-			user: config.mysql.username,
-			password: config.mysql.password,
-			database: config.mysql.database
+		var promises = [];
+		queries.forEach(function(item, index) {
+			var promiseQ = pool.getConnection()
+				.then(function(connection) {
+					return connection.query(item[0], [item[1]])
+						.then(function(response) {
+							pool.releaseConnection(connection);
+						}).catch(function(err) {
+							console.log(err);
+							return (Q.reject(err));
+						});
+				});
+			promises.push(promiseQ);
 		});
 
+		Q.all(promises).then(function(data) {
+			return resolve('Done!');
+		}).catch(function(err) {
+			console.log(err);
+			console.log("error somewhere");
+			return resolve('Done with errors!');
+		});
+
+	});
+
+	return promise;
+}
+
+function pushDiffs(updateInput, tableName) {
+	var promise = new Promise(function(resolve, reject) {
+		console.log('checking if open is different from Eu' + tableName + '.');
+		var diffQuery = 'SELECT a.name FROM ((SELECT * from Eu' + tableName + ' WHERE name in ?) a JOIN (SELECT * from Open' + tableName + ' WHERE name in ?) b ON a.name = b.name AND (SELECT * from Eu' + tableName + ' where name = a.name) <> (SELECT * from Open' + tableName + ' where name = b.name));',
+			insertQuery = 'INSERT IGNORE INTO UnderReview (keyName, tableName) VALUES ?';
+		var input = Array.from(new Set(updateInput));
+		let diffs = [];
+
+		Q.fcall(() => {
+			var promise = pool.getConnection()
+				.then(function(connection) {
+					return connection.query(diffQuery, [
+							[input],
+							[input]
+						])
+						.then(function(rows) {
+							diffs = rows.map((row) => {
+								return [row.name, 'Eu' + tableName];
+							});
+							pool.releaseConnection(connection);
+						}).catch(function(err) {
+							console.log(err);
+							return (Q.reject(err));
+						});
+				});
+			return promise;
+		}).then(() => {
+			var promise = pool.getConnection()
+				.then(function(connection) {
+					return connection.query(insertQuery, [diffs])
+						.then(function() {
+							pool.releaseConnection(connection);
+						}).catch(function(err) {
+							console.log(err);
+							return (Q.reject(err));
+						});
+				});
+			return promise;
+		}).then(() => {
+			resolve('DONE');
+		}).done();
+	});
+	return promise;
+}
+
+function checkUpdates(updatesInfo) {
+	var promise = new Promise(function(resolve, reject) {
+		var promises = [];
+		updatesInfo.forEach((item) => {
+			var promiseU = pool.getConnection()
+				.then(function(connection) {
+					console.log('Checking for new updates.');
+					return connection.query(item[1], [
+							[item[2].map(x => x[0])]
+						])
+						.then(function(rows) {
+							rows.forEach((row) => {
+								if (row.name in item[0] && item[0][row.name] == row.lastupdate) {
+									delete item[0][row.name];
+								}
+							});
+
+							pool.releaseConnection(connection);
+						}).catch(function(err) {
+							console.log(err);
+							return (Q.reject(err));
+						});
+				});
+			promises.push(promiseU);
+		});
+
+		Q.all(promises).then(function(data) {
+			return resolve(updatesInfo.map(x => x[0]));
+		}).catch(function(err) {
+			console.log(err);
+			console.log("error somewhere");
+			return resolve('Done with errors!');
+		});
+	});
+
+	return promise;
+}
+
+function runUpdates(updateSystemInput, updateStarInput, updatePlanetInput) {
+	var promise = new Promise(function(resolve, reject) {
+		var promises = [],
+			systemKeys = Object.getOwnPropertyNames(updateSystemInput),
+			starKeys = Object.getOwnPropertyNames(updateStarInput),
+			planetKeys = Object.getOwnPropertyNames(updatePlanetInput);
+
+		if (systemKeys.length != 0) {
+			promises.push(pushDiffs(systemKeys, 'System'));
+		}
+		if (starKeys.length != 0) {
+			promises.push(pushDiffs(starKeys, 'Star'));
+		}
+		if (planetKeys.length != 0) {
+			promises.push(pushDiffs(planetKeys, 'Planet'));
+		}
+
+		Q.all(promises).then(function(data) {
+			return resolve('Done!');
+		}).catch(function(err) {
+			console.log(err);
+			console.log("error somewhere");
+			return resolve('Done with errors!');
+		});
+	});
+
+	return promise;
+}
+
+module.exports = () => {
+	var promise = new Promise(function(resolve, reject) {
 		var url = config.exoplanet.url;
 		var converter = new Converter({
 			constructResult: false,
@@ -27,7 +169,9 @@ module.exports = () => {
 			nameInput = [],
 			starSystemInput = [],
 			planetStarInput = [],
-			updateInput = [];
+			updateStarInput = {},
+			updateSystemInput = {},
+			updatePlanetInput = {};
 
 		console.log('Getting data from exoplanet.eu');
 		converter.on("record_parsed", function(item) {
@@ -46,7 +190,10 @@ module.exports = () => {
 			}
 			starSystemInput.push([item.star_name, item.star_name]);
 			planetStarInput.push([item["# name"], item.star_name]);
-			updateInput.push(item["# name"]);
+
+			updateSystemInput[item.star_name] = item.rowupdate;
+			updateStarInput[item.star_name] = item.rowupdate;
+			updatePlanetInput[item["# name"]] = item.rowupdate;
 		});
 
 		converter.on("end_parsed", function() {
@@ -58,7 +205,10 @@ module.exports = () => {
 				starQuery = 'REPLACE INTO EuStar (name, mass, massplus, massminus, radius, radiusplus, radiusminus, temperature, temperatureplus, temperatureminus, age, ageplus, ageminus, metallicity, metallicityplus, metallicityminus, spectraltype, magB, magBplus, magBminus, magV, magVplus, magVminus, magR, magRplus, magRminus, magI, magIplus, magIminus, magJ, magJplus, magJminus, magH, magHplus, magHminus, magK, magKplus, magKminus, lastupdate) VALUES ?',
 				nameQuery = 'REPLACE INTO EuNames (name, otherName) VALUES ?',
 				starSystemQuery = 'REPLACE INTO EuStarSystem(starName, systemName) VALUES ?',
-				planetStarQuery = 'REPLACE INTO EuPlanetStar(planetName, starName) VALUES ?';
+				planetStarQuery = 'REPLACE INTO EuPlanetStar(planetName, starName) VALUES ?',
+				updateSystemQuery = 'SELECT name, lastupdate FROM EuSystem WHERE name IN ?',
+				updateStarQuery = 'SELECT name, lastupdate FROM EuStar WHERE name IN ?',
+				updatePlanetQuery = 'SELECT name, lastupdate FROM EuPlanet WHERE name IN ?';;
 
 			var queries = [
 					[systemQuery, systemInput],
@@ -69,20 +219,24 @@ module.exports = () => {
 					[planetStarQuery, planetStarInput]
 				],
 				promises = [];
+			// check last row update.
+			var updatesInfo = [
+				[updateSystemInput, updateSystemQuery, systemInput],
+				[updateStarInput, updateStarQuery, starInput],
+				[updatePlanetInput, updatePlanetQuery, planetInput]
+			];
 
-			queries.forEach(function(item, index) {
-				var promise = pool.getConnection()
-					.then(function(connection) {
-						return connection.query(item[0], [item[1]])
-							.then(function(response) {
-								pool.releaseConnection(connection);
-							}).catch(function(err) {
-								console.log(err);
-								return (Q.reject(err));
-							});
+
+
+			var promise = checkUpdates(updatesInfo)
+				.then((res) => {
+					return runQueries(queries).then(() => {
+						// check for differences from the newly imported data.
+						return runUpdates(res[0], res[1], res[2]);
 					});
-				promises.push(promise);
-			});
+				});
+			promises.push(promise);
+
 
 			Q.all(promises).then(function(data) {
 				console.log('ending pool');
