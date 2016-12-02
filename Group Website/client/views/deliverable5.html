@@ -63,10 +63,32 @@
             <hr>
         </uib-tab>
         <uib-tab index="4" heading="Changes">
+        <h4>We did not make many changes compared to the last deliverable during our sprints. The only change we made is the ordering of the priorities of some of our user stories in our product backlog. We shifted the user stories that used to be in priorities 13-15 to 16-18 in our recent sprints. The reason we made this was because we felt that these user stories weren't as important as the later user stories, thus we decided to complete them on a later date.</h4>
+        <h4>We also made minor changes to our release plans and taskboards during our sprints. Because we moved the priorities of some of our user stories, such changes were needed. We readjusted our release plan and taskboards to reflect shifting these user stories. We also shortened the list of user stories to be released in our seventh sprint. The reason we did this was because we believe that based on our project velocity, we won't be able to complete all the user stories that we had previously thought we would.</h4>
         </uib-tab>
-        <uib-tab index="5" heading="Code Review Video/System Validations">
+        <uib-tab index="5" heading="Code Inspection Report">
+            <div class="row" ng-repeat="review in codeReviews">
+                <hr>
+                <div class="col-md-3">
+                    <p><b>Reviewer:</b> {{review.reviewerName}}</p>
+                    <p><b>Code under review:</b> <a target="_blank" href="{{review.codeLink}}">{{review.codeName}}</a></p>
+                    <p><b>Author:</b> {{review.author}}</p>
+                    <p><b>Date of review:</b> {{review.dateOfReview}}</p>
+                </div>
+                <div class="col-md-9">
+                    <p><b>Bugs:</b> {{review.bugs}}</p>
+                    <p><b>Poor Code Logic:</b> {{review.poorCodeLogic}}</p>
+                    <p><b>Poor Code Style:</b> {{review.poorCodeStyle}}</p>
+                    <p><b>Missing Documentation:</b> {{review.missingDocumentation}}</p>
+                    <p><b>Unreadable Code:</b> {{review.unreadableCode}}</p>
+                    <p><b>Vulnerabilities:</b> {{review.vulnerabilities}}</p>
+                    <p><b>Poor Testing:</b> {{review.poorTesting}}</p>
+                </div>
+            </div>
         </uib-tab>
-        <uib-tab index="6" heading="Overview of Project Saga">
+        <uib-tab index="6" heading="Code Review Video/System Validations">
+        </uib-tab>
+        <uib-tab index="7" heading="Overview of Project Saga">
         </uib-tab>
     </uib-tabset>
 </div>
