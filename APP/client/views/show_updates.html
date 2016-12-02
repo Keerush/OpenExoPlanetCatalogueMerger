@@ -104,7 +104,7 @@ button {
                     <div class="Nasa_Star" ng-init="getNasaStarDiff()">
                         <h3>Stars</h3>
                         <div ng-repeat="star in nasaStarData">
-                            <a href="public/edit_xml" ng-click="addInfo(star)">{{"Star Name: " + star.nasa.n_name + ", Last Updated: " + star.nasa.n_lastupdate}}</a>
+                            <a ng-click="addInfo(star)">{{"Star Name: " + star.nasa.n_name + ", Last Updated: " + star.nasa.n_lastupdate}}</a>
                         </div>
                     </div>
                     <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
@@ -117,7 +117,7 @@ button {
                     <div class="Nasa_System" ng-init="getNasaSystemDiff()">
                         <h3>Systems</h3>
                         <div ng-repeat="system in nasaSystemData">
-                            <a href="public/edit_xml" ng-click="addInfo(system)">{{"System Name: " + system.nasa.n_name + ", Last Updated: " + system.nasa.n_lastupdate}}</a>
+                            <a ng-click="addInfo(system)">{{"System Name: " + system.nasa.n_name + ", Last Updated: " + system.nasa.n_lastupdate}}</a>
                         </div>
                     </div>
                 </div>
