@@ -76,4 +76,11 @@ app.controller('deliverable5Ctrl', function($scope) {
 		'The back end of our system consists of addNasaData, addEuData, addOpenData, createTables, dropTables, editXMLFile, git and getUnderReview scripts. The addNasaData, addEuData, and addOpenData inserts the data from Nasa archive, exoplanet.eu, and Open exoplanet respectively, and pushing the changes between themselves to the under review table. Create and drop tables creates and deletes the tables that are needed to store to above data. The getUnderReview script contains the methods that deal with getting the differences in the underreview table and returning a json format to the frontend to display. The editXMLFile.js takes the finalize outputs of differences from the user and edits the corresponding files. The git script contains methods that fork the OEC repository so that the editXMLFile script can edit them as well as creating pull requests of the finalized differences. The front end communicates to the back end of our system through api calls, as well as the backend with the database and github.'
 		]
 	};
+
+	$scope.systemValidationDesc = [
+		'Our system validation was to run tests to verify if our apis in the back-end worked as intended, so that we knew our user interface would receive the data it needed for each request. The evidence for this is found in our tests folder in APP.',
+		'Another system validation we performed was to manually perform the tasks as the client Hano, so that we could see if the user interface worked as intended and the steps for the user were minimal. We also manually tested the outputs of the backend methods to verify that the errors and outputs were human-readable. These manual tests were done by each member and evidence of this is from the code review reports handed in for deliverable 5.'
+	];
+
+	$scope.groupVid = 'https://youtu.be/9eBmIvP3UzU';
 });

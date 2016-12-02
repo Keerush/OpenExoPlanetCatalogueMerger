@@ -87,6 +87,13 @@
             </div>
         </uib-tab>
         <uib-tab index="6" heading="Code Review Video/System Validations">
+            <h3>Sneak-peek at our code review...</h3>
+            <ng-youtube-embed url="groupVid" width="100%" gaming="false"></ng-youtube-embed>
+            <hr>
+            <h3>System Validations</h3>
+            <div class="well">
+                <h4 ng-repeat='desc in systemValidationDesc'>{{desc}}</h4>
+            </div>
         </uib-tab>
         <uib-tab index="7" heading="Overview of Project Saga">
             <h4>Throughout our entire project, we were able to gather user requirements, create user stories, create sprint plans, organize our tasks using a taskboard, implement our features using a version control system, and finally test our implementations. During deliverables 3 and 4, we were able to implement several of our user stories. We also faced the issue of having to re-plan several of our sprints and having to re-order which user stories to implement first. We experienced what it was like to test our implementations and then improve on them after code reviews. During deliverable 5, most of our planning were refined and we managed to smoothly progress according to our sprint plans. In the end we managed to implement the user stories that we believed were of highest priority, leaving behind several features that we weren't as important, but would have been nice to implement when given more time. </h4>
