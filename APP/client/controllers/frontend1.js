@@ -1,6 +1,3 @@
-app.controller('frontend1', function($scope) {
-  $scope.frontend =
-  {
-
-  }
+app.controller('frontend', function($scope, $routeParams) {
+  console.log($routeParams);
 });
