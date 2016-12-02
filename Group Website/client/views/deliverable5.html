@@ -1,0 +1,105 @@
+<div class="container">
+    <uib-tabset active="activeForm">
+        <uib-tab index="0" heading="Product Backlog">
+            <img src="images/d5_images/d5_backlog1.png" class="bioPic">
+            <img src="images/d5_images/d5_backlog2.png" class="bioPic">
+            <img src="images/d5_images/d5_backlog3.png" class="bioPic">
+            <img src="images/d5_images/d5_backlog4.png" class="bioPic">    
+            <hr>
+        </uib-tab>
+        <uib-tab index="1" heading="Release Plan">
+            <img src="images/d5_images/d5_release1.png" class="bioPic">
+            <img src="images/d5_images/d5_release2.png" class="bioPic">
+            <img src="images/d5_images/d5_release3.png" class="bioPic">
+            <hr>
+        </uib-tab>
+        <uib-tab index="2" heading="Sprint Plans">
+            <h4>Sprint 5 Taskboard Start/End</h4>
+            <img src="images/d5_images/sprint5/sprint5_taskboard_start.png" class="bioPic">
+            <img src="images/d5_images/sprint5/sprint5_taskboard_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 5 Backlog</h4>
+            <img src="images/d5_images/sprint5/sprint5_1.png" class="bioPic">
+            <img src="images/d5_images/sprint5/sprint5_2.png" class="bioPic">
+            <img src="images/d5_images/sprint5/sprint5_3.png" class="bioPic">
+            <hr>
+            <h4>Sprint 5 Burndown Chart Start/End</h4>
+            <img src="images/d5_images/sprint5/sprint5_burndown_start.png" class="bioPic">
+            <img src="images/d5_images/sprint5/sprint5_burndown_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 6 Taskboard Start/End</h4>
+            <img src="images/d5_images/sprint6/sprint6_taskboard_start.png" class="bioPic">
+            <img src="images/d5_images/sprint6/sprint6_taskboard_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 6 Backlog</h4>
+            <img src="images/d5_images/sprint6/sprint6_1.png" class="bioPic">
+            <img src="images/d5_images/sprint6/sprint6_2.png" class="bioPic">
+            <img src="images/d5_images/sprint6/sprint6_3.png" class="bioPic">
+            <hr>
+            <h4>Sprint 6 Burndown Chart Start/End</h4>
+            <img src="images/d5_images/sprint6/sprint6_burndown_start.png" class="bioPic">
+            <img src="images/d5_images/sprint6/sprint6_burndown_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 7 Taskboard Start/End</h4>
+            <img src="images/d5_images/sprint7/sprint7_taskboard_start.png" class="bioPic">
+            <img src="images/d5_images/sprint7/sprint7_taskboard_end.png" class="bioPic">
+            <hr>
+            <h4>Sprint 7 Backlog</h4>
+            <img src="images/d5_images/sprint7/sprint7_1.png" class="bioPic">
+            <img src="images/d5_images/sprint7/sprint7_2.png" class="bioPic">
+            <hr>
+            <h4>Sprint 7 Burndown Chart Start/End</h4>
+            <img src="images/d5_images/sprint7/sprint7_burndown_start.png" class="bioPic">
+            <img src="images/d5_images/sprint7/sprint7_burndown_end.png" class="bioPic">
+            <hr>
+        </uib-tab>
+        <uib-tab index="3" heading="System Design">
+            <h3>System Design</h3>
+            <img src="{{systemDesign.image}}" class="biopic">
+            <hr>
+            <div class="well">
+                <h4 ng-repeat='des in systemDesign.description'>{{des}}</h4>
+            </div>
+            <hr>
+        </uib-tab>
+        <uib-tab index="4" heading="Changes">
+        <h4>We did not make many changes compared to the last deliverable during our sprints. The only change we made is the ordering of the priorities of some of our user stories in our product backlog. We shifted the user stories that used to be in priorities 13-15 to 16-18 in our recent sprints. The reason we made this was because we felt that these user stories weren't as important as the later user stories, thus we decided to complete them on a later date.</h4>
+        <h4>We also made minor changes to our release plans and taskboards during our sprints. Because we moved the priorities of some of our user stories, such changes were needed. We readjusted our release plan and taskboards to reflect shifting these user stories. We also shortened the list of user stories to be released in our seventh sprint. The reason we did this was because we believe that based on our project velocity, we won't be able to complete all the user stories that we had previously thought we would.</h4>
+        </uib-tab>
+        <uib-tab index="5" heading="Code Inspection Report">
+            <div class="row" ng-repeat="review in codeReviews">
+                <hr>
+                <div class="col-md-3">
+                    <p><b>Reviewer:</b> {{review.reviewerName}}</p>
+                    <p><b>Code under review:</b> <a target="_blank" href="{{review.codeLink}}">{{review.codeName}}</a></p>
+                    <p><b>Author:</b> {{review.author}}</p>
+                    <p><b>Date of review:</b> {{review.dateOfReview}}</p>
+                </div>
+                <div class="col-md-9">
+                    <p><b>Bugs:</b> {{review.bugs}}</p>
+                    <p><b>Poor Code Logic:</b> {{review.poorCodeLogic}}</p>
+                    <p><b>Poor Code Style:</b> {{review.poorCodeStyle}}</p>
+                    <p><b>Missing Documentation:</b> {{review.missingDocumentation}}</p>
+                    <p><b>Unreadable Code:</b> {{review.unreadableCode}}</p>
+                    <p><b>Vulnerabilities:</b> {{review.vulnerabilities}}</p>
+                    <p><b>Poor Testing:</b> {{review.poorTesting}}</p>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="6" heading="Code Review Video/System Validations">
+            <h3>Sneak-peek at our code review...</h3>
+            <ng-youtube-embed url="groupVid" width="100%" gaming="false"></ng-youtube-embed>
+            <hr>
+            <h3>System Validations</h3>
+            <div class="well">
+                <h4 ng-repeat='desc in systemValidationDesc'>{{desc}}</h4>
+            </div>
+        </uib-tab>
+        <uib-tab index="7" heading="Overview of Project Saga">
+            <h4>Throughout our entire project, we were able to gather user requirements, create user stories, create sprint plans, organize our tasks using a taskboard, implement our features using a version control system, and finally test our implementations. During deliverables 3 and 4, we were able to implement several of our user stories. We also faced the issue of having to re-plan several of our sprints and having to re-order which user stories to implement first. We experienced what it was like to test our implementations and then improve on them after code reviews. During deliverable 5, most of our planning were refined and we managed to smoothly progress according to our sprint plans. In the end we managed to implement the user stories that we believed were of highest priority, leaving behind several features that we weren't as important, but would have been nice to implement when given more time. </h4>
+            <h4>For sprint 5, our estimated project velocity was 36. Our actual was 32. For sprint 6, our estimated was 22. Our actual was 22. For sprint 7, our estimated was 22. Our actual was 16.</h4>
+            <h4>Overall, we felt that in this deliverable we were able to follow most of our plans. Other than the minor changes we made in our product backlog, no other re-plans were made during our sprints. Judging from our project velocity, we were effective with our time except for our seventh sprint where there were days when we weren't able to commit to our plans.</h4>
+            <h4>Overall, the main difference between deliverable 5 and all our other deliverables was that the progress we made was a lot smoother. We believe this is the case because as we progressed further with our sprints, most of the necessary re-planning has already been made during our earlier sprints. As a result, most of the features we planned on releasing during deliverable 5 were met, whereas we weren't able to release several features during the previous deliverables.</h4>
+        </uib-tab>
+    </uib-tabset>
+</div>
