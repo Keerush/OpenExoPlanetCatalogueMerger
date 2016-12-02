@@ -42,10 +42,10 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     });
   }
 
-  $scope.getEUStarDiff = function() {
+  $scope.getEuStarDiff = function() {
     $http({
       method: 'GET',
-      url: '/api/getEUStardiff?limit=1&offset=0'
+      url: '/api/getEuStarDiff?limit=5&offset=0'
     }).then(function successCallBack(res) {
       $scope.euStarData = res.data;
     }, function errorCallBack(res) {
@@ -53,10 +53,10 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     });
   }
 
-  $scope.getEUPlanetDiff = function() {
+  $scope.getEuPlanetDiff = function() {
     $http({
       method: 'GET',
-      url: '/api/getEUPlanetDiff?limit=1&offset=0'
+      url: '/api/getEuPlanetDiff?limit=5&offset=0'
     }).then(function successCallBack(res) {
       $scope.euPlanetData = res.data;
     }, function errorCallBack(res) {
@@ -64,10 +64,10 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
     });
   }
 
-  $scope.getEUSystemDiff = function() {
+  $scope.getEuSystemDiff = function() {
     $http({
       method: 'GET',
-      url: '/api/getEUSystemDiff?limit=1&offset=0'
+      url: '/api/getEuSystemDiff?limit=5&offset=0'
     }).then(function successCallBack(res) {
       $scope.euSystemData = res.data;
     }, function errorCallBack(res) {
