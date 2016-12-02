@@ -3,13 +3,18 @@ app.controller('edit_xml', function($scope, $http, $window, $location) {
 
   $scope.submitFunction = function() {
     var change = {};
+    console.log($scope.$parent.dataList[0].nasa);
     change['filename'] = $scope.$parent.dataList[0].open.fileName;
-    change['tableName'] = $scope.$parent.dataList[0].nasa.tableName;
+    change['tableName'] = $scope.$parent.dataList[0].open.tableName;
     for (var currKey in $scope.$parent.dataList[0].nasa) {
-      change[currKey] = $scope.$parent.dataList[0].nasa[currKey];
+      if ($scope.$parent.dataList[0].nasa[currKey] !== null) {
+        change[currKey.replace('n_', '')] = $scope.$parent.dataList[0].nasa[currKey];
+      }
     }
-
-    $http.post("api/editXmls", [change])
+    var body = [];
+    body.push(change);
+    console.log(body);
+    $http.post("api/editXmls", body)
       .then(function successCallBack(res) {
         $scope.editedData = res.data;
         $window.alert("Your Changes have been saved but not yet pushed to the database.\n" +
