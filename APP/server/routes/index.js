@@ -52,7 +52,7 @@ router.put('/fork', function (req, res) {
 	if (req.body.access_token) {
 		fork.forkRepo(req.body.access_token).then(function (response) {
 			console.log("GENERATE PULL REQUEST");
-			pullRequest.generatePullRequest(req.body.access_token)
+			pullRequest.generatePullRequest("NASA",req.body.access_token)
 		})
 	}
 	else {

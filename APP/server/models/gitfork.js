@@ -63,7 +63,7 @@ module.exports = {
 			.then(function(deleted) {
 				var forkOptions = {
 					json: true,
-					url: "https://api.github.com/repos/keerush/open_exoplanet_catalogue/forks",
+					url: "https://api.github.com/repos/openexoplanetcatalogue/open_exoplanet_catalogue/forks",
 					headers: {
 						'User-Agent': "openexoplanetmerger",
 						'Authorization': 'token ' + token
@@ -74,7 +74,7 @@ module.exports = {
 			.then(function(resp) {
 				winston.log('info', "done forking")
 				winston.log('info', resp);
-				var gitlocation = resp.clone_url
+				var gitlocation = resp.git_url
 					//SOME DUMBASS WILL CHANGE THIS TO / AND SCREW THEIR COMPUTER SO WE HAVE TO OBFUSCATE
 
 				if (config.forkedRepoLocation === "/") {
