@@ -40,7 +40,7 @@
 		width: 100%;
 		vertical-align: top;
 	}
-	.editNasaBox {
+	.editEuBox {
 		background: white;
 		color: black;
 		display: inline-block;
@@ -48,10 +48,10 @@
 		width: 100%;
     overflow: auto;
 		text-align: left;
-		padding-left: 20px;
-		padding-right: 20px;
 		border-style: solid;
 		border-width: medium;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 
 	.editOpenBox {
@@ -62,15 +62,15 @@
 		width: 100%;
     overflow: auto;
 		text-align: left;
-		padding-left: 20px;
-		padding-right: 20px;
 		border-style: solid;
 		border-width: medium;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
+
 
 	button {
 		margin: 20px;
-		bottom: 0;
 	}
 </style>
 <body>
@@ -79,12 +79,12 @@
 	<h1>Exoplanet Name</h1>
 	<div class="col-sm-6">
 	<div class="EditNasa" ng-init="getInfo()">
-	<h3>NASA Database</h3>
-	<div class="editNasaBox">
-
-		<div ng-repeat="(key, value) in $parent.dataList[0].nasa">
+	<h3>EU Database</h3>
+	<div class="editEuBox">
+		<div ng-repeat="data in dataList">
+		<div ng-repeat="(key, value) in data.eu">
 		<div ng-if="!!value">
-			<h4>{{key}}:<input ng-model="$parent.dataList[0].nasa[key]"></h4>
+			<h4>{{key}}:<input value="{{value}}"></h4>
 		</div>
 		</div>
 		</div>
@@ -107,8 +107,8 @@
 		</div>
 	</div>
 </div>
-	<button ng-click="submitFunction()">Save</button></a>
-	<button ng-click="cancelFunction()">Cancel</button></a>
+	<a href="public/show_updates"><button ng-click="submitFunction()">Save</button></a>
+	<a href="public/show_updates"><button ng-click="cancelFunction()">Cancel</button></a>
 </div>
 </body>
 </html>

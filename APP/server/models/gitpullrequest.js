@@ -3,10 +3,7 @@ var exec = require('child_process').exec;
 var request = require('request-promise');
 var git = require('simple-git')(config.forkedRepoLocation);
 var winston = require('winston');
-winston.add(winston.transports.File, {
-	filename: config.logLocation
-})
-winston.remove(winston.transports.console);
+
 const fs = require('fs')
 var S = require('string');
 

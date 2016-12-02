@@ -23,7 +23,7 @@ function getOldVal(oldVal) {
 
 function editValue(oldVal, newVal, type, unit) {
 	var val = getOldVal(oldVal);
-	if (typeof val === 'string') {
+	if (typeof val === 'string' || typeof val === 'number') {
 		return [newVal];
 	} else {
 		var editVal = val;
@@ -42,7 +42,7 @@ function editPlus(oldVal, newVal, type, unit) {
 	var editVal = {};
 	var val = getOldVal(oldVal);
 
-	if (typeof val === 'string') {
+	if (typeof val === 'string' || typeof val === 'number') {
 		editVal['_'] = val;
 		editVal['$'] = {
 			'errorminus': '',
@@ -65,8 +65,8 @@ function editPlus(oldVal, newVal, type, unit) {
 function editMinus(oldVal, newVal, type, unit) {
 	var editVal = {};
 	var val = getOldVal(oldVal);
-
-	if (typeof val === 'string') {
+	
+	if (typeof val === 'string' || typeof val === 'number') {
 		editVal['_'] = val;
 		editVal['$'] = {
 			'errorminus': newVal,
@@ -154,9 +154,8 @@ module.exports = (editData) => {
 		// go through each entry, and read the files.
 		editData.forEach((data) => {
 			// convert to js object.
-			var fileLoc = config.forkedRepoLocation + '/systems/' + data.filename;
+			var fileLoc = config.forkedRepoLocation + 'systems/' + data.filename;
 			var filedata = fs.readFileSync(fileLoc);
-
 			parser.parseString(filedata, function(err, result) {
 				var editObj = {};
 				if (data.tableName.includes('System')) {

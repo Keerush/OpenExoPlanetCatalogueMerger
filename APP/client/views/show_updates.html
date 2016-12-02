@@ -1,117 +1,137 @@
 <html lang="en">
+
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title>Show New Updates</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Show New Updates</title>
 </head>
 <style>
-	body {
-		background-image: url("public/images/spacebackground.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-		background-attachment: fixed;
-		font-family: sans-serif;
-		color: #e5e5e5;
-		text-align: center;
-	}
-	h1 {
-		margin-top: 100px;
-		color: #e5e5e5;
-		font-size: 36pt;
-	}
+body {
+    background-image: url("public/images/spacebackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    font-family: Helvetica;
+    color: #e5e5e5;
+    text-align: center;
+}
 
-	h2 {
-		border-bottom: 5px solid black;
-	}
+h1 {
+    margin-top: 100px;
+    color: #e5e5e5;
+    font-size: 36pt;
+}
 
-	h3 {
-		text-decoration: underline;
-	}
+h2 {
+    border-bottom: 5px solid black;
+}
 
-	.container {
-		text-align: center;
-		width: 100%;
-		vertical-align: top;
-	}
+h3 {
+    text-decoration: underline;
+}
 
-	a {
-		text-decoration: none;
-	}
+.container {
+    text-align: center;
+    width: 100%;
+    vertical-align: top;
+}
 
-	.Exoplanet {
-		background: white;
-		color: black;
-		display: inline-block;
-		float: none;
-		width: 100%;
-	}
+a {
+    text-decoration: none;
+}
 
-	.Nasa {
-		background: white;
-		color: black;
-		display: inline-block;
-		float:none;
-		width:100%;
+.Exoplanet {
+    background: white;
+    color: black;
+    display: inline-block;
+    float: none;
+    width: 100%;
     overflow: auto;
-	}
+    border-style: solid;
+    border-width: medium;
+    padding-bottom: 20px;
+}
 
+.Nasa {
+    background: white;
+    color: black;
+    display: inline-block;
+    float: none;
+    width: 100%;
+    overflow: auto;
+    border-style: solid;
+    border-width: medium;
+    padding-bottom: 20px;
+}
 
+button {
+    margin: 20px;
+}
 </style>
-<body>
-	<div class="container">
-		<h1>New Updates from Other Databases</h1>
-		<div class="row">
-			<div class="col-sm-6">
-			  <div class="Exoplanet">
-				<h2>Exoplanet.eu</h2>
 
-        <div class="Eu_Star" ng-init="getEUStardiff()">
-				<h3>Stars</h3>
-        {{euStarData}}
+<body ng-app="show_updates">
+    <div class="container">
+        <h1>New Updates from Other Databases</h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="Exoplanet">
+                    <h2>Exoplanet.eu</h2>
+                    <div class="Eu_Star" ng-init="getEuStarDiff()">
+                        <h3>Stars</h3>
+                        <div ng-repeat="star in euStarData">
+                            <a href="public/edit_xml_eu" ng-click="addInfo(star)">{{"Star Name: " + star.eu.e_name + ", Last Updated: " + star.eu.e_lastupdate}}</a>
+                        </div>
+                    </div>
+                    <div class="Eu_Planet" ng-init="getEuPlanetDiff()">
+                        <h3>Planets</h3>
+                        <div ng-repeat="planet in euPlanetData">
+                            <a href="public/edit_xml_eu" ng-click="addInfo(planet)">{{"Planet Name: " + planet.eu.e_name + ", Last Updated: " + planet.eu.e_lastupdate}}</a>
+                        </div>
+                    </div>
+                    <div class="Eu_System" ng-init="getEuSystemDiff()">
+                        <h3>Systems</h3>
+                        <div ng-repeat="system in euSystemData">
+                            <a href="public/edit_xml_eu" ng-click="addInfo(system)">{{"System Name: " + system.eu.e_name + ", Last Updated: " + system.eu.e_lastupdate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="Nasa">
+                    <h2>NASA Exoplanet Archive</h2>
+                    <div class="Nasa_Star" ng-init="getNasaStarDiff()">
+                        <h3>Stars</h3>
+                        <div ng-repeat="star in nasaStarData">
+                            <a href="public/edit_xml" ng-click="addInfo(star)">{{"Star Name: " + star.nasa.n_name + ", Last Updated: " + star.nasa.n_lastupdate}}</a>
+                        </div>
+                    </div>
+                    <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
+                        <h3>Planets</h3>
+                        <div ng-repeat="planet in nasaPlanetData">
+                            <a ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name + ", Last Updated: " + planet.nasa.n_lastupdate}}</a>
+                            <!-- <a ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name}}</a> -->
+                        </div>
+                    </div>
+                    <div class="Nasa_System" ng-init="getNasaSystemDiff()">
+                        <h3>Systems</h3>
+                        <div ng-repeat="system in nasaSystemData">
+                            <a href="public/edit_xml" ng-click="addInfo(system)">{{"System Name: " + system.nasa.n_name + ", Last Updated: " + system.nasa.n_lastupdate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="Eu-Planet" ng-init="getEUPlanetDiff()">
-				<h3>Planets</h3>
-        {{euPlanetData}}
-        </div>
-
-        <div class="Eu-System" ng-init="getEUSystemDiff()">
-				<h3>Systems</h3>
-        {{euSystemData}}
-        </div>
-
-			  </div>
-			</div>
-				<div class="col-sm-6">
-				<div class="Nasa">
-				<h2>NASA Exoplanet Archive</h2>
-        <div class="Nasa_Star" ng-init="getNasaStarDiff()">
-				  <h3>Stars</h3>
-          <div ng-repeat="star in nasaStarData">
-            <a href="public/edit_xml">{{star.nasa.n_name + ": Last Updated " + star.nasa.n_lastupdate}}</a>
-          </div>
-        </div>
-        <div class="Nasa_Planet" ng-init="getNasaPlanetDiff()">
-				  <h3>Planets</h3>
-          <div ng-repeat="planet in nasaPlanetData">
-            <a href="public/edit_xml">{{planet.nasa.n_name + ": Last Updated " + planet.nasa.n_lastupdate}}</a>
-          </div>
-        </div>
-
-        <div class="Nasa_System" ng-init="getNasaSystemDiff()">
-				  <h3>Systems</h3>
-          <div ng-repeat="system in nasaSystemData">
-            <a href="public/edit_xml">{{system.nasa.n_name + ": Last Updated " + system.nasa.n_lastupdate}}</a>
-          </div>
-        </div>
-			</div>
-			</div>
-		</div>
-		<br><br>
-		<a href="public/frontend1"><button ng-click="submitFunction()">Add to Database</button></a>
-		<a href="public/frontend1"><button ng-click="cancelFunction()">Cancel</button></a>
-	</div>
+        <br>
+        <br>
+        <a ng-href='{{gitURL}}'>
+            <button>Add to Database</button>
+        </a>
+        <a href="public/frontend1">
+            <button ng-click="cancelFunction()">Cancel</button>
+        </a>
+    </div>
 </body>
+
 </html>
