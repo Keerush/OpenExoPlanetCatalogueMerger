@@ -8,7 +8,7 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         client_secret = "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
         code = searchObject['code'],
         state = "ILOVENISEKOI"
-      }
+      };
       $http.post("https://github.com/login/oauth/access_token",options).then(function successCallBack(res) {
         console.log(res);
         $http.put('/api/fork',{
@@ -18,7 +18,7 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
         $scope.error = res.status + " - " + res.statusText;
       });
 
-      })
+      }
     }
   }
   $scope.nasaStarData = '';
