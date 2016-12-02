@@ -23,6 +23,9 @@
 		color: white;
 	}
 
+	h4 {
+		color: white;
+	}
 	.xml {
 		border: none;
 		margin-bottom: 30px;
@@ -73,7 +76,15 @@
 	<div class="col-sm-6">
 	<div class="EditNasa" ng-init="getInfo()">
 		<h3>NASA DATABSE</h3>
-		<textarea ng-repeat="data in dataList">{{data.nasa}}</textarea>
+		<div ng-repeat="data in dataList">
+		<div ng-repeat="(key, value) in data.nasa">
+		<div ng-if="!!value">
+			<h4>{{key}}:
+			<font color="black"><input value="{{value}}"></font>
+			</h4>
+		</div>
+		</div>
+		</div>
 	</div>
 </div>
 <div class="col-sm-6">
