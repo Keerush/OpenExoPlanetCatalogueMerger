@@ -10,7 +10,8 @@ const addNASAData = require('../models/addNASAData.js');
 const getUnderReview = require('../models/getUnderReview');
 const editXMLData = require('../models/editXMLFiles');
 const ignoreDiffs = require('../models/ignoreDiffs');
-
+const fork = require("../models/gitfork")
+const pullRequest = require('../models/gitpullrequest')
 router.use(bodyParser.json());
 
 router.get('/', (req, res, next) => {
@@ -18,6 +19,46 @@ router.get('/', (req, res, next) => {
 	res.statusCode = 200
 	res.send("API: Running!");
 });
+
+router.put('/token', (req, res, next) => {
+	if (req.body) {
+		var options = {
+			uri: "https://github.com/login/oauth/access_token",
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			json: true,
+			body: {
+				client_id: "976efe23b3dbd42727fc",
+				client_secret: "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
+				code: req.body.code,
+				state: "ILOVENISEKOI",
+			}
+		};
+		http(options).then(function(res) {
+			res.send(res);
+
+		}).catch(function(err) {
+			console.log(err);
+		})
+
+	} else {
+		res.statusCode = 400
+		res.send("invalid request")
+	}
+})
+router.put('/fork', function (req, res) {
+	if (req.access_token) {
+		fork(req.access_token).then(function (response) {
+			pullRequest(req.access_token)
+		})
+	}
+	else {
+		res.statusCode = 400
+		res.send('invalid request')
+	}
+})
 
 router.get('/nasaData', function(req, res) {
 	var options = {
