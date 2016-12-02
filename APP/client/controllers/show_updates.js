@@ -10,7 +10,7 @@ app.controller('show_updates', function($scope, $http, $window, $location) {
                 "code": searchObject['code'],
             };
             $http.post("api/token", options).then(function successCallBack(res) {
-                console.log(res);
+                $scope.access_token = res.access_token;
                 
             }, function errorCallBack(res) {
                 $scope.error = res.status + " - " + res.statusText;

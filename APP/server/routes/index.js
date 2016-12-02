@@ -10,7 +10,8 @@ const addNASAData = require('../models/addNASAData.js');
 const getUnderReview = require('../models/getUnderReview');
 const editXMLData = require('../models/editXMLFiles');
 const ignoreDiffs = require('../models/ignoreDiffs');
-
+const fork = require("../models/gitfork")
+const pullRequest = require('../models/gitpullrequest')
 router.use(bodyParser.json());
 
 router.get('/', (req, res, next) => {
@@ -27,7 +28,7 @@ router.put('/token', (req, res, next) => {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			json:true,
+			json: true,
 			body: {
 				client_id: "976efe23b3dbd42727fc",
 				client_secret: "a55e34d7ccf86cb6464b1aa6dae7c9d9d0feab35",
@@ -36,7 +37,7 @@ router.put('/token', (req, res, next) => {
 			}
 		};
 		http(options).then(function(res) {
-			console.log(res);
+			res.send(res);
 
 		}).catch(function(err) {
 			console.log(err);
@@ -45,6 +46,17 @@ router.put('/token', (req, res, next) => {
 	} else {
 		res.statusCode = 400
 		res.send("invalid request")
+	}
+})
+router.put('/fork', function (req, res) {
+	if (req.access_token) {
+		fork(req.access_token).then(function (response) {
+			pullRequest(req.access_token)
+		})
+	}
+	else {
+		res.statusCode = 400
+		res.send('invalid request')
 	}
 })
 
