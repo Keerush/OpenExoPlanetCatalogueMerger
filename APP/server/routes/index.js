@@ -36,8 +36,8 @@ router.put('/token', (req, res, next) => {
 				state: "ILOVENISEKOI",
 			}
 		};
-		http(options).then(function(res) {
-			res.send(res);
+		http(options).then(function(result) {
+			res.send(result);
 
 		}).catch(function(err) {
 			console.log(err);
