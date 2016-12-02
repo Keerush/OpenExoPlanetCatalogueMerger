@@ -12,7 +12,7 @@
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
-		font-family: sans-serif;
+		font-family: Helvetica;
 		color: #e5e5e5;
 		text-align: center;
 	}
@@ -47,7 +47,11 @@
 		float: none;
 		width: 100%;
     overflow: auto;
-	}
+    border-style: solid;
+    border-width: medium;
+    padding-bottom: 20px;
+  }
+
 
 	.Nasa {
 		background: white;
@@ -56,8 +60,15 @@
 		float:none;
 		width:100%;
     overflow: auto;
-	}
+    border-style: solid;
+    border-width: medium;
+    padding-bottom: 20px;
+  }
 
+
+  button {
+    margin: 20px;
+  }
 
 </style>
 <body ng-app = "show_updates">
@@ -68,24 +79,24 @@
 			  <div class="Exoplanet">
 				<h2>Exoplanet.eu</h2>
 
-        <div class="Eu_Star" ng-init="getEUStardiff()">
+        <div class="Eu_Star" ng-init="getEuStarDiff()">
 				<h3>Stars</h3>
         <div ng-repeat="star in euStarData">
-          <a href="public/edit_xml_eu" ng-click="addInfo(star)">{{"Star Name: " + star.nasa.n_name + ", Last Updated: " + star.nasa.n_lastupdate}}</a>
+          <a href="public/edit_xml_eu" ng-click="addInfo(star)">{{"Star Name: " + star.eu.e_name + ", Last Updated: " + star.eu.e_lastupdate}}</a>
         </div>
         </div>
 
-        <div class="Eu-Planet" ng-init="getEUPlanetDiff()">
+        <div class="Eu_Planet" ng-init="getEuPlanetDiff()">
 				<h3>Planets</h3>
         <div ng-repeat="planet in euPlanetData">
-          <a href="public/edit_xml_eu" ng-click="addInfo(planet)">{{"Planet Name: " + planet.nasa.n_name + ", Last Updated: " + planet.nasa.n_lastupdate}}</a>
+          <a href="public/edit_xml_eu" ng-click="addInfo(planet)">{{"Planet Name: " + planet.eu.e_name + ", Last Updated: " + planet.eu.e_lastupdate}}</a>
         </div>
         </div>
 
-        <div class="Eu-System" ng-init="getEUSystemDiff()">
+        <div class="Eu_System" ng-init="getEuSystemDiff()">
 				<h3>Systems</h3>
         <div ng-repeat="system in euSystemData">
-          <a href="public/edit_xml_eu" ng-click="addInfo(system)">{{"System Name: " + system.nasa.n_name + ", Last Updated: " + system.nasa.n_lastupdate}}</a>
+          <a href="public/edit_xml_eu" ng-click="addInfo(system)">{{"System Name: " + system.eu.e_name + ", Last Updated: " + system.eu.e_lastupdate}}</a>
         </div>
         </div>
 			  </div>

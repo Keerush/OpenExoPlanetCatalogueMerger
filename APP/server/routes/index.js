@@ -56,7 +56,7 @@ router.get('/dropTables/:password', function(req, res) {
 		return res.send('Error 404: Invalid password.');
 	}
 
-	droptables.dropTable().then(function(err) {
+	droptables().then(function(err) {
 		res.statusCode = 200;
 		res.send('drop tables.');
 	});
@@ -69,7 +69,7 @@ router.get('/createTables/:password', function(req, res) {
 		return res.send('Error 404: Invalid password.');
 	}
 
-	createtables.createTables().then(function(err) {
+	createtables().then(function(err) {
 		res.statusCode = 200;
 		res.send('created tables');
 	});

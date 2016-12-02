@@ -20,5 +20,6 @@ app.controller('edit_xml', function($scope, $http, $window, $location) {
   }
   $scope.cancelFunction = function() {
     $window.alert("All Changes Made were Unsaved.");
+    $location.path('public/show_updates');
   }
 });
