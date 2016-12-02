@@ -35,6 +35,6 @@ app.controller('edit_xml', function($scope, $http, $window, $location) {
 
   $scope.trimKey = function(key) {
     console.log('here');
-    return key.replace('n_', '');
+    return key.replace('n_', '').replace('e_', '');
   }
 });
